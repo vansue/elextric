@@ -66,3 +66,55 @@ a {text-decoration: none;}
 #pagination {padding-top: 10px; margin: 5px; text-align: center; float: left;}
 #pagination a.active, #pagination a:hover, #pagination a:active {background: url(../images/pag_bg_a.gif) no-repeat top center; color: #ad1614;}
 #pagination a {display: block; width: 22px; height: 22px; float: left; margin-right: 5px; line-height: 23px; text-align: center; background: url(../images/pag_bg.gif) no-repeat top center; color: #9d8b8b;}
+
+/****** NAV MENU ******/
+#nav-menu {width: 100%; height: 50px;}
+#nav-menu img {display: block; width: 9px; height: 100%; float: left;}
+#nav-menu ul {width: 982px; float: left; background: url(../images/menu_bg.gif) repeat-x;}
+#nav-menu ul li {display: inline; font-size: 11px; font-weight: bold; line-height: 50px;}
+#nav-menu ul li form {display: inline;}
+#nav-menu ul li img {width: 2px; height: 100%;}
+#nav-menu ul li a, #nav-menu ul li a:visited {display: block; float: left;padding: 0 8px 0 22px; margin:0 14px; height: 100%; color: #676d77;}
+#nav-menu ul li a:active, #nav-menu ul li a:hover {color: #333;}
+#nav-home {background: url(../images/home.png) no-repeat left;}
+#nav-pro {background: url(../images/services.png) no-repeat left;}
+#nav-spe {background: url(../images/favs.png) no-repeat left;}
+#nav-acc, #nav-sig {background: url(../images/user_add.png) no-repeat left;}
+#nav-shipping {background: url(../images/car.png) no-repeat left;}
+#nav-con {background: url(../images/contact-new.png) no-repeat left;}
+#nav-cur {width: 180px; float: left; padding: 0 0 0 15px; color: #676d77;}
+
+/****** NAVIGATION ******/
+#navigation {width: 970px; height: 15px; padding: 10px 10px 0 20px; color: #333; background: url(../images/navbullet.png) no-repeat top left; background-position: 5px 11px;}
+.current {color: #0fa0dd;}
+
+/****** FIRST SIDEBAR ******/
+#content {width: 100%; overflow: hidden;}
+#first-sidebar {width: 196px; float: left;}
+.typical {margin-top: 10px;}
+.typical h3 {width: 100%; height: 30px; background: url(../images/menu_title_bg.gif) no-repeat center; text-align: center;font-size: 13px; font-weight: bold; color: #fff; line-height: 30px;}
+.typical ul li a {display: block; width: 166px; height: 25px; background: url(../images/checked.png) no-repeat left; color: #504b4b; line-height: 25px; background-position: 5px; padding: 0 0 0 30px;}
+.typical ul li a.old {background-color: #dad0d0;}
+.typical ul li a.even {background-color: #eee6e6;}
+.typical ul li a:hover {background-color: #7bbcc7; color: #fff;}
+.box {width: 194px; height: auto; text-align: center; border: 1px solid #6da6b1;}
+.box h4 a {display: block; color: #ea2222; padding: 5px 0; font-weight: bold;}
+.box h4 a:hover {color: #064e5a;}
+.box img {padding: 5px 0;}
+.box p {padding: 5px 0; color: #ea2222;}
+.box p span {text-decoration: line-through; color: #999;}
+#txtnewsletter {width: 160px; height: 16px; border: 1px solid #dd9d91; font-size: 12px; color: #999; margin: 10px 0 5px 0; padding: 3px;}
+.box form a {display: block; width: 57px; margin: 5px 0 5px 100px; padding: 0 0 0 20px; color: #1c4a52; background: url(../images/blue-add.png) no-repeat left;}
+.banner-adds a {display: block; width: 194px; text-align: center; padding: 10px 0;}
+
+/****** MAIN CONTENT ******/
+#main-content {width: 585px; float: left; padding: 10px 10px;}
+
+/****** SECOND SIDEBAR ******/
+#second-sidebar {width: 196px; float: right; padding: 10px 0 0 0;}
+#shopping-cart {width: 195px; height: 84px; text-align: center; background: url(../images/cart_bg.gif) no-repeat center;}
+#shopping-cart h2 {font-size: 12px; color: #847676; font-weight: bold; padding-top: 8px;}
+#cart-details {width: 115px; float: left; text-align: left; padding: 5px 0 0 15px;}
+#shopping-cart a {display: block; float: left; padding: 5px 0 0 15px;}
+#border-cart {width: 100px; height: 1px; margin: 3px 0; border-top: 1px dashed #999;}
+#cart-details p span {color: #ea2222;}
