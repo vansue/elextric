@@ -44,6 +44,7 @@ a {text-decoration: none;}
 /****** TOP ******/
 #wrapper {margin: 0px auto; width: 1000px;}
 #top {width: 100%; height: 38px; background-color: #4a4a4a; overflow: hidden;}
+#top p a {display: block; float: left; text-transform: uppercase; font-weight: bold; color: #b3adad; font-size: 14px; padding: 8px;}
 #language {float: right; width: 150px; padding-top: 8px; overflow: hidden;}
 #language h3 {float: left; color: #b3adad; padding: 0 5px 0 0;}
 #language a {display: block; float: left; padding: 0 5px;}
@@ -71,10 +72,12 @@ a {text-decoration: none;}
 #nav-menu {width: 100%; height: 50px;}
 #nav-menu img {display: block; width: 9px; height: 100%; float: left;}
 #nav-menu ul {width: 982px; float: left; background: url(../images/menu_bg.gif) repeat-x;}
+body.admin #nav-menu ul {width: 982px;}
 #nav-menu ul li {display: inline; font-size: 11px; font-weight: bold; line-height: 50px;}
 #nav-menu ul li form {display: inline;}
 #nav-menu ul li img {width: 2px; height: 100%;}
 #nav-menu ul li a, #nav-menu ul li a:visited {display: block; float: left;padding: 0 8px 0 22px; margin:0 14px; height: 100%; color: #676d77;}
+body.admin #nav-menu ul li a, body.admin #nav-menu ul li a:visited {padding: 0 8px 0 20px}
 #nav-menu ul li a:active, #nav-menu ul li a:hover {color: #333;}
 #nav-home {background: url(../images/home.png) no-repeat left;}
 #nav-pro {background: url(../images/services.png) no-repeat left;}
@@ -83,6 +86,13 @@ a {text-decoration: none;}
 #nav-shipping {background: url(../images/car.png) no-repeat left;}
 #nav-con {background: url(../images/contact-new.png) no-repeat left;}
 #nav-cur {width: 180px; float: left; padding: 0 0 0 15px; color: #676d77;}
+#nav-pro-cat {background: url(../images/a_pro_cat.png) no-repeat left;}
+#nav-a-pro {background: url(../images/a_pro.png) no-repeat left;}
+#nav-new-cat {background: url(../images/a_news_cat.png) no-repeat left;}
+#nav-new {background: url(../images/a_news.png) no-repeat left;}
+#nav-ord {background: url(../images/a_ord.png) no-repeat left;}
+#nav-user {background: url(../images/a_user.png) no-repeat left;}
+#nav-comm {background: url(../images/a_comm.png) no-repeat left;}
 
 /****** NAVIGATION ******/
 #navigation {width: 970px; height: 15px; padding: 10px 10px 0 20px; color: #333; background: url(../images/navbullet.png) no-repeat top left; background-position: 5px 11px;}
@@ -109,8 +119,10 @@ p.price span {text-decoration: line-through; color: #999;}
 
 /****** MAIN CONTENT ******/
 #main-content {width: 585px; float: left; padding: 10px 10px; overflow: hidden;}
+body.admin #main-content  {width: 781px; padding: 0px;}
 .title-content {width: 520px; height: 33px; float: left; background: url(../images/bar_bg.gif) no-repeat center; padding-left: 40px; line-height: 33px; margin-left: 12px; font-weight: bold; color: #847676;}
 .product-box {width: 173px; height: auto; float: left; padding: 10px 10px 10px 11px; text-align: center; overflow: hidden;}
+body.admin .product-box {padding: 10px 22px 10px 0px;}
 .top-prod-box {width: 100%; height: 12px; float: left;}
 .bot-prod-box {width: 100%; height: 12px; float: left;}
 .cen-prod-box {width: 100%; height: auto; float: left; background: url(../images/product_box_center.gif) repeat-y;}
@@ -125,18 +137,23 @@ p.price span {text-decoration: line-through; color: #999;}
 #second-sidebar {width: 196px; float: right; padding: 10px 0 0 0;}
 #shopping-cart {width: 195px; height: 84px; background: url(../images/cart_bg.gif) no-repeat center;}
 #shopping-cart h2 a {display:block;  font-size: 12px; color: #847676; font-weight: bold; padding: 8px 0 0 60px;}
+body.admin #shopping-cart h2 a {padding-top: 6px;}
 #cart-details {width: 115px; float: left; text-align: left; padding: 5px 0 0 15px;}
+body.admin #cart-details {padding: 0 0 0 5px;}
+body.admin #cart-details a {color: #504b4b;}
+body.admin #cart-details a:hover {color: #ea2222; text-decoration: underline;}
 #shopping-cart a {display: block; float: left; padding: 5px 0 0 15px;}
 #border-cart {width: 100px; height: 1px; margin: 3px 0; border-top: 1px dashed #999;}
 #cart-details p span {color: #ea2222;}
 #boxnews p {text-align: left; color: #504b4b;}
 #boxnews p.date {text-decoration: underline; color: #676d77; text-align: right; font-size: 11px;}
 #boxnews h4 a {text-align: left;}
-#newstitle {text-align: left;}
+.newstitle {text-align: left;}
 .news {margin-top: 5px; border-top: 1px solid #6da6b1; padding-top: 5px;}
 
 /****** FOOTER ******/
-#footer {width: 100%; height: 65px; background: url(../images/footer_bg.gif) repeat-x top;}
+#footer {width: 1000px; height: 65px; background: url(../images/footer_bg.gif) repeat-x top;}
+body.admin #footer {margin-top: 15px;}
 #left-footer a {display: block; float: left; width: 300px; padding: 5px 0 0 10px; background: url(../images/footer_logo.png) no-repeat left; height: 55px; margin-left: 10px; text-indent: -999999px;}
 #center-footer {float: left; width: 225px; text-align: center; color: #666; padding: 10px 0 0 50px;}
 #right-footer {float: right; padding: 15px 30px 0 0;}
