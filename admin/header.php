@@ -65,7 +65,7 @@
 		<div id="nav-menu" class="group">
 			<img src="../images/menu_left.gif" alt="left-menu" />
 			<ul>
-				<li><a href="index.html" id="nav-home">Trang chủ</a></li>
+				<li><a href="index.php" id="nav-home">Trang chủ</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-pro-cat">Danh mục sản phẩm</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
@@ -73,7 +73,7 @@
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-ord">Đơn hàng</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-new-cat">Danh mục bài viết</a></li>
+				<li><a href="add-n-categories.php" id="nav-new-cat">Danh mục bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-new">Bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
