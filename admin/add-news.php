@@ -14,7 +14,7 @@
 		}
 
 		if(isset($_POST['n-category']) && filter_var($_POST['n-category'], FILTER_VALIDATE_INT, array('min_range' => 1))) {//Kiểm tra giá trị nhập vào
-			$category = $_POST['n-category'];
+			$cat_id = $_POST['n-category'];
 		} else {
 			$errors[] = "category";
 		}
@@ -33,13 +33,13 @@
 		}
 
 		if(empty($errors)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
-			$q = "INSERT INTO n_categories (user_id, cat_name, position) ";
-			$q .= " VALUES (1, '{$n_cat_name}', $position)";
+			$q = "INSERT INTO pages (user_id, cat_id, page_name, content, position, post_on) ";
+			$q .= " VALUES (1, $cat_id, '{$page_name}', '{$content}', $position, now())";
 			$r = mysqli_query($dbc, $q) or die("Cau truy van: $q \n<br /> Loi MySQL: ".mysqli_error($dbc));
 			if (mysqli_affected_rows($dbc) == 1) {
-				$messages = "<p class='notice'>Thêm mới danh mục thành công.</p>";
+				$messages = "<p class='notice'>Thêm mới bai viet thành công.</p>";
 			} else {
-				$messages = "<p class='notice'>Không thể thêm danh mục vào CSDL do lỗi hệ thống.</p>";
+				$messages = "<p class='notice'>Không thể thêm bai viet vào CSDL do lỗi hệ thống.</p>";
 			}
 		} else {
 			$messages = "<p class='notice'>Điền đầy đủ dữ liệu cho các trường.</p>";
@@ -58,26 +58,76 @@
 			<fieldset>
 				<legend>Add a Page</legend>
 				<div>
-					<label for="page">Page name: <span class="required">*</span></label>
-					<input type="text" name="page-name" id="page-name" value="" size="20" maxlength="100" tabindex="1" />
+					<label for="page">Page name: <span class="required">*</span>
+						<?php
+						if(isset($errors) && in_array('page-name', $errors)) {
+							echo "<p class='warning'>Điền tên bai viet.</p>";
+						}
+					?>
+					</label>
+					<input type="text" name="page-name" id="page-name" value="<?php if (isset($_POST['page-name'])) {
+						echo strip_tags($_POST['page-name']);
+					} ?>" size="20" maxlength="100" tabindex="1" />
 				</div>
 
 				<div>
-					<label for="n-category">All categories: <span class="required">*</span></label>
+					<label for="n-category">All categories: <span class="required">*</span>
+						<?php
+						if(isset($errors) && in_array('category', $errors)) {
+							echo "<p class='warning'>Chon danh mục.</p>";
+						}
+					?>
+					</label>
 					<select name="n-category">
-						<option>Select Category</option>
+						<option>Chon danh muc</option>
+						<?php
+							$q = "SELECT cat_id, cat_name FROM n_categories ORDER BY position ASC";
+							$r = mysqli_query($dbc, $q) or die("Cau truy van: $q \n<br /> Loi MySQL: ".mysqli_error($dbc));
+							if(mysqli_num_rows($r) >= 1) {
+								while ($cats = mysqli_fetch_array($r, MYSQLI_NUM)) {
+									echo "<option value='{$cats[0]}' ";
+									if (isset($_POST['n-category']) && ($_POST['n-category'] == $cats[0])) {
+										echo "selected = 'selected'";
+									}
+									echo ">".$cats[1]."</option>";
+								}
+							}
+						?>
 					</select>
 				</div>
 
 				<div>
-					<label for="position">Position: <span class="required">*</span></label>
+					<label for="position">Position: <span class="required">*</span>
+						<?php
+						if(isset($errors) && in_array('position', $errors)) {
+							echo "<p class='warning'>Chon vi tri bai viet.</p>";
+						}
+					?>
+					</label>
 					<select name="position">
-						<option>Select position</option>
+						<?php
+						$q = "SELECT count(page_id) AS count FROM pages";
+						$r = mysqli_query($dbc, $q) or die("Cau truy van: $q \n<br /> Loi MySQL: ".mysqli_error($dbc));
+						if(mysqli_num_rows($r) == 1) {
+							list($num) = mysqli_fetch_array($r, MYSQLI_NUM);
+							for ($i=1; $i <= $num+1; $i++) {//Tạo vòng for để tạo ra option, cộng thêm một giá trị cho position
+								echo "<option value='{$i}'";
+									if(isset($_POST['position']) && $_POST['position'] == $i) echo "selected='selected'";
+								echo ">".$i."</option>";
+							}
+						}
+					?>
 					</select>
 				</div>
 
 				<div>
-					<label for="page-content">Page Content: <span class="required">*</span></label>
+					<label for="page-content">Page Content: <span class="required">*</span>
+						<?php
+						if(isset($errors) && in_array('content', $errors)) {
+							echo "<p class='warning'>Nhap noi dung bai viet.</p>";
+						}
+					?>
+					</label>
 					<textarea name="content" cols="50" rows="20"></textarea>
 				</div>
 
