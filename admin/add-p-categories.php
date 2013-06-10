@@ -7,10 +7,10 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
 		//Kiểm tra các trường của form
 		$errors = array();//Biến bắt lỗi
-		if (empty($_POST['n-category'])) {
+		if (empty($_POST['category'])) {
 			$errors[] = "category";
 		} else {
-			$n_cat_name = mysqli_real_escape_string($dbc, strip_tags($_POST['n-category']));
+			$n_cat_name = mysqli_real_escape_string($dbc, strip_tags($_POST['p-category']));
 		}
 
 		if (isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {//Kiểm tra giá trị nhập vào
@@ -35,23 +35,23 @@
 ?>
 <div id="main-content">
 	<div class="title-content">
-		<p>Thêm mới danh mục bài viết</p>
+		<p>Thêm mới danh mục sản phẩm</p>
 	</div>
 	<?php
 		if (!empty($messages)) echo $messages;
 	?>
-	<div>
-		<form action="" method="POST" id="add-n-cat" class="add-form">
+	<div class="add-form">
+		<form action="" method="post" id="add-n-cat">
 			<fieldset>
-				<legend>Thêm mới danh mục bài viết</legend>
-				<label for="n-category">Tên danh mục: <span class="required">*</span>
+				<legend>Thêm mới danh mục sản phẩm</legend>
+				<label for="p-category">Tên danh mục: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('category', $errors)) {
 							echo "<p class='warning'>Điền tên danh mục.</p>";
 						}
 					?>
 				</label>
-				<input type="text" name="n-category" id="n-category" value="<?php if(isset($_POST['n-category'])) echo strip_tags($_POST['n-category']) ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="text" name="p-category" id="p-category" value="<?php if(isset($_POST['category'])) echo strip_tags($_POST['category']) ?>" size="20" maxlength="100" tabindex="1" />
 				<label for="position">Vị trí: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('position', $errors)) {
@@ -79,7 +79,7 @@
 	</div>
 
 	<div class="title-content">
-		<p>Danh mục bài viết</p>
+		<p>Danh mục sản phẩm</p>
 	</div>
 	<table>
     	<thead>

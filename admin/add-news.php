@@ -4,19 +4,32 @@
 	include('first-sidebar.php');
 ?>
 <?php
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
 		//Kiểm tra các trường của form
 		$errors = array();//Biến bắt lỗi
-		if (empty($_POST['n-category'])) {
-			$errors[] = "category";
+		if(empty($_POST['page-name'])) {
+			$errors[] = "page-name";
 		} else {
-			$n_cat_name = mysqli_real_escape_string($dbc, strip_tags($_POST['n-category']));
+			$page_name = mysqli_real_escape_string($dbc, strip_tags($_POST['page-name']));
 		}
 
-		if (isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {//Kiểm tra giá trị nhập vào
+		if(isset($_POST['n-category']) && filter_var($_POST['n-category'], FILTER_VALIDATE_INT, array('min_range' => 1))) {//Kiểm tra giá trị nhập vào
+			$category = $_POST['n-category'];
+		} else {
+			$errors[] = "category";
+		}
+
+
+		if(isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {//Kiểm tra giá trị nhập vào
 			$position = $_POST['position'];
 		} else {
 			$errors[] = "position";
+		}
+
+		if(empty($_POST['content'])) {
+			$errors[] = "content";
+		} else {
+			$content = mysqli_real_escape_string($dbc, $_POST['content']);
 		}
 
 		if(empty($errors)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
@@ -41,39 +54,34 @@
 		if (!empty($messages)) echo $messages;
 	?>
 	<div>
-		<form action="" method="POST" id="add-n-cat" class="add-form">
+		<form id="add-news" action="" method="post" class="add-form">
 			<fieldset>
-				<legend>Thêm mới danh mục bài viết</legend>
-				<label for="n-category">Tên danh mục: <span class="required">*</span>
-					<?php
-						if(isset($errors) && in_array('category', $errors)) {
-							echo "<p class='warning'>Điền tên danh mục.</p>";
-						}
-					?>
-				</label>
-				<input type="text" name="n-category" id="n-category" value="<?php if(isset($_POST['n-category'])) echo strip_tags($_POST['n-category']) ?>" size="20" maxlength="100" tabindex="1" />
-				<label for="position">Vị trí: <span class="required">*</span>
-					<?php
-						if(isset($errors) && in_array('position', $errors)) {
-							echo "<p class='warning'>Chọn vị trí danh mục.</p>";
-						}
-					?>
-				</label>
-				<select name="position" tabindex="2">
-					<?php
-						$q = "SELECT count(cat_id) AS count FROM n_categories";
-						$r = mysqli_query($dbc, $q) or die("Cau truy van: $q \n<br /> Loi MySQL: ".mysqli_error($dbc));
-						if(mysqli_num_rows($r) == 1) {
-							list($num) = mysqli_fetch_array($r, MYSQLI_NUM);
-							for ($i=1; $i <= $num+1; $i++) {//Tạo vòng for để tạo ra option, cộng thêm một giá trị cho position
-								echo "<option value='{$i}'";
-									if(isset($_POST['position']) && $_POST['position'] == $i) echo "selected='selected'";
-								echo ">".$i."</option>";
-							}
-						}
-					?>
-				</select>
-				<p><input type="submit" name="submit" value="Thêm danh mục" /></p>
+				<legend>Add a Page</legend>
+				<div>
+					<label for="page">Page name: <span class="required">*</span></label>
+					<input type="text" name="page-name" id="page-name" value="" size="20" maxlength="100" tabindex="1" />
+				</div>
+
+				<div>
+					<label for="n-category">All categories: <span class="required">*</span></label>
+					<select name="n-category">
+						<option>Select Category</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="position">Position: <span class="required">*</span></label>
+					<select name="position">
+						<option>Select position</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="page-content">Page Content: <span class="required">*</span></label>
+					<textarea name="content" cols="50" rows="20"></textarea>
+				</div>
+
+				<p><input type="submit" name="submit" value="Thêm mới bài viết" /></p>
 			</fieldset>
 		</form>
 	</div>

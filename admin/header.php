@@ -10,13 +10,14 @@
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 	<script type="text/javascript" src='../js/tooltip.js'></script>
+	<script type="text/javascript" src='../js/clock.js'></script>
 </head>
 
-<body class="admin">
+<body class="admin" onload="showTimeSec();">
 	<div id="wrapper">
 		<!--===== TOP =====-->
 		<div id="top">
-			<p><a href="#">Administrator Site</a></p>
+			<p><a href="#">Administration Site</a></p>
 			<div id="language">
 				<h3>Languages: </h3>
 				<a href="#"><img src="../images/vi.gif" alt="VI" /></a>
