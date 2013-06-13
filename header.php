@@ -70,7 +70,7 @@
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-spe">Specials</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-acc">My Acount</a></li>
+				<li><a href="register.php" id="nav-acc">Đăng ký</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-sig">Đăng nhập</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>

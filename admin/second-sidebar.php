@@ -10,7 +10,7 @@
 		</div>
 
 		<div class='typical'>
-			<h3><a href="#">Electronix's News</a></h3>
+			<h3><a href="#">Bình luận mới</a></h3>
 			<div class="box" id="boxnews">
 				<div>
 					<p class='date'>August 20, 2012</p>

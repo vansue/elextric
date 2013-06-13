@@ -38,8 +38,8 @@
 		<div class="product-box">
 			<img src="../images/product_box_top.gif" alt="" class="top-prod-box" />
 			<div class="cen-prod-box">
-				<a href="add-n-categories.php"><img src="../images/ab_news_cat.png" alt=""></a>
-				<h4><a href="add-n-categories.php">Danh mục bài viết</a></h4>
+				<a href="n-categories.php"><img src="../images/ab_news_cat.png" alt=""></a>
+				<h4><a href="n-categories.php">Danh mục bài viết</a></h4>
 			</div>
 			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
 		</div><!--end .product-box-->

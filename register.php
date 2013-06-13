@@ -1,0 +1,140 @@
+<?php
+	include('header.php');
+	include('inc/functions.php');
+	include('inc/mysqli_connect.php');
+	include('first-sidebar.php');
+?>
+<div id="main-content" class="register">
+	<?php
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
+			$errors = array();
+			//Mặc định cho các trường nhập liệu là FALSE
+			$fn = $ln = $e = $p = FALSE;
+			if (preg_match('/^[\w\'.-]{2,20}$/i', trim($_POST['first-name']))) {
+				$fn = mysqli_real_escape_string($dbc, trim($_POST['first-name']));
+			} else {
+				$errors[] = 'first name';
+			}
+
+			if (preg_match('/^[\w\'.-]{4,20}$/', trim($_POST['last-name']))) {
+				$ln = mysqli_real_escape_string($dbc, trim($_POST['last-name']));
+			} else {
+				$errors[] = 'last name';
+			}
+
+			if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+				$e = mysqli_real_escape_string($dbc, $_POST['email']);
+			} else {
+				$errors[] = 'email';
+			}
+
+			if (preg_match('/^[\w\'.-]{4,20}$/', trim($_POST['password1']))) {
+				if ($_POST['password1'] == $_POST['password2']) {
+					$p = mysqli_real_escape_string($dbc, trim($_POST['password1']));
+				} else {
+					$errors[] = "password dif";
+				}
+			} else {
+				$errors[] = "password";
+			}
+
+			if ($fn && $ln && $e && $p) {
+				//Nếu các biến đều có giá trị, truy vấn CSDL
+				$q = "SELECT user_id FROM users WHERE email = '{$e}'";
+				$r = mysqli_query($dbc, $q);
+					confirm_query($r, $q);
+				if (mysqli_num_rows($r) == 0) {
+					//Email vẫn còn trống, cho phép người dùng đăng ký
+					//Tạo ra một chuỗi Activation Key
+					$a = md5(uniqid(rand(), true));
+
+					//Chèn giá trị vào CSDL
+					$q = "INSERT INTO users(first_name, last_name, email, pass, active, registration_date) ";
+					$q .= " VALUES ('{$fn}', '{$ln}', '{e}', SHA1('$p'), '{$a}', NOW())";
+					$r = mysqli_query($dbc, $q);
+						confirm_query($r, $q);
+					if (mysqli_affected_rows($dbc) == 1) {
+						//Nếu điền thông tin thành công, thì gửi email kích hoạt cho người dùng
+						$body = "Cảm ơn bạn đã đăng ký ở trang Elextronic. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. Phiền bạn click vào đường link để kích hoạt tài khoản \n\n";
+						$body .= BASE_URL."admin/activate.php?x=".urldecode($e)."&y=".$a;
+						if(mail($_POST['email'], 'Kích hoạt tài khoản tại Elextronic', $body, 'FROM: localhost')) {
+							$mesage = "<p class='notice'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
+						} else {
+							$mesage = "<p class='notice'>Không thể gửi mail cho bạn. Xin lỗi vì sự bất tiện này.</p>";
+						}
+					} else {
+						$mesage = "<p class='notice'>Xin lỗi, đăng ký của bạn không thể thực hiện được do lỗi hệ thống.</p>";
+					}
+				} else {
+					//Email đã tồn tại, phải đăng ký bằng email khác
+					$mesage = "<p class='notice'>Email đã được sử dụng. Làm ơn sử dụng email khác để đăng ký.</p>";
+				}
+			} else {
+				//Nếu một trong các biến không có giá trị
+				$mesage = "<p class='notice'>Điền đầy đủ dữ liệu cho các trường.</p>";
+			}
+		} //end if submit form
+	?>
+	<div class="title-content">
+		<p>Đăng ký</p>
+	</div>
+
+	<div>
+		<?php if(!empty($mesage)) echo $mesage; ?>
+		<form action="" method="POST" id="add-n-cat" class="add-form">
+			<fieldset>
+				<legend>Đăng ký</legend>
+				<label for="first-name">Họ: <span class="required">*</span>
+					<?php
+						if(isset($errors) && in_array('first name', $errors)) {
+							echo "<p class='warning'>Điền họ của bạn.</p>";
+						}
+					?>
+				</label>
+				<input type="text" name="first-name" id="first-name" value="<?php if(isset($_POST['first-name'])) echo $_POST['first-name']; ?>" size="20" maxlength="100" tabindex="1" />
+
+				<label for="last-name">Tên: <span class="required">*</span>
+					<?php
+						if(isset($errors) && in_array('last name', $errors)) {
+							echo "<p class='warning'>Điền tên của bạn.</p>";
+						}
+					?>
+				</label>
+				<input type="text" name="last-name" id="last-name" value="<?php if(isset($_POST['last-name'])) echo $_POST['last-name']; ?>" size="20" maxlength="100" tabindex="1" />
+
+				<label for="email">Email: <span class="required">*</span>
+					<?php
+						if(isset($errors) && in_array('email', $errors)) {
+							echo "<p class='warning'>Điền email hợp lệ.</p>";
+						}
+					?>
+				</label>
+				<input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo htmlentities($_POST['email'], ENT_COMPAT, 'UTF-8'); ?>" size="20" maxlength="100" tabindex="1" />
+
+				<label for="password1">Mật khẩu: <span class="required">*</span>
+					<?php
+						if(isset($errors) && in_array('password', $errors)) {
+							echo "<p class='warning'>Nhập mật khẩu của bạn.</p>";
+						}
+					?>
+				</label>
+				<input type="password" name="password1" id="password1" value="<?php if(isset($_POST['password1'])) echo $_POST['password1']; ?>" size="20" maxlength="100" tabindex="1" />
+
+				<label for="password2">Nhập lại mật khẩu: <span class="required">*</span>
+					<?php
+						if(isset($errors) && in_array('password dif', $errors)) {
+							echo "<p class='warning'>Mật khẩu không trùng nhau.</p>";
+						}
+					?>
+				</label>
+				<input type="password" name="password2" id="password2" value="<?php if(isset($_POST['password2'])) echo $_POST['password2']; ?>" size="20" maxlength="100" tabindex="1" />
+
+				<p><input type="submit" name="submit" value="Đăng ký" /></p>
+			</fieldset>
+		</form>
+	</div>
+</div><!--end #main-content-->
+<?php
+	include('second-sidebar.php');
+	include('footer.php');
+?>

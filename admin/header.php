@@ -74,9 +74,9 @@
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-ord">Đơn hàng</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="add-n-categories.php" id="nav-new-cat">Danh mục bài viết</a></li>
+				<li><a href="n-categories.php" id="nav-new-cat">Danh mục bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-new">Bài viết</a></li>
+				<li><a href="news.php" id="nav-new">Bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="contact.html" id="nav-user">Thành viên</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>

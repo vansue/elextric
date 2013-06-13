@@ -12,10 +12,10 @@
 
 			<div id="right-footer">
 				<ul>
-					<li><a href="#">Trang chủ</a></li>
 					<li><a href="#">Giới thiệu</a></li>
-					<li><a href="#">Sitemap</a></li>
-					<li><a href="#">Rss</a></li>
+					<li><a href="#">Tư vấn</a></li>
+					<li><a href="#">Đối tác</a></li>
+					<li><a href="#">Tuyển dụng</a></li>
 					<li><a href="contact.html">Liên hệ</a></li>
 				</ul>
 			</div>
