@@ -1,4 +1,5 @@
 <?php
+	$title = "Danh mục bài viết | Elextronic";
 	include('header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');

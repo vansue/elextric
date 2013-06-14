@@ -12,11 +12,44 @@
 
 			<div id="right-footer">
 				<ul>
-					<li><a href="#">Giới thiệu</a></li>
-					<li><a href="#">Tư vấn</a></li>
-					<li><a href="#">Đối tác</a></li>
-					<li><a href="#">Tuyển dụng</a></li>
-					<li><a href="contact.html">Liên hệ</a></li>
+					<?php
+					if (isset($_SESSION['user_level'])) {
+						//Nếu có SESSION
+						switch ($_SESSION['user_level']) {
+							case 0://Khách hàng
+								echo "
+									<li><a href='profile.php'>User Profile</a></li>
+									<li><a href='change_password.php'>Change Password</a></li>
+									<li><a href='logout.php'>Đăng xuất</a></li>
+								";
+								break;
+
+							case 2://Admin
+								echo "
+									<li><a href='profile.php'>User Profile</a></li>
+									<li><a href='change_password.php'>Change Password</a></li>
+									<li><a href='admin/index.php'>Admin CP</a></li>
+									<li><a href='logout.php'>Đăng xuất</a></li>
+								";
+								break;
+
+							default:
+								echo "
+									<li><a href='register.php'>Đăng ký</a></li>
+									<li><a href='login.php'>Đăng nhập</a></li>
+								";
+								break;
+						}
+					} else {
+						//Nếu không có SESSION
+						echo "
+							<li><a href='index.php'>Trang chủ</a></li>
+							<li><a href='register.php'>Đăng ký</a></li>
+							<li><a href='login.php'>Đăng nhập</a></li>
+						";
+					}
+		
+					?>
 				</ul>
 			</div>
 		</div><!--end #footer-->

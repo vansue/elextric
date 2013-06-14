@@ -4,7 +4,7 @@
 <head>
 	<meta charset='UTF-8' />
 
-	<title>Elextronic</title>
+	<title><?php echo (isset($title)) ? $title : "Administration Site | Elextronic"; ?></title>
 
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 

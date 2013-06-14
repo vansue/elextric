@@ -1,5 +1,7 @@
 <?php
-	include('header.php');
+	ob_start();
+    $title = "Danh mục bài viết | Elextronic";
+    include('header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');
 	include('first-sidebar.php');
@@ -8,6 +10,14 @@
 <?php
 	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
 		$ncid = $_GET['ncid'];
+        $q = "SELECT cat_name FROM n_categories WHERE cat_id={$ncid}";
+        $r = mysqli_query($dbc, $q);
+            confirm_query($r, $q);
+        if(mysqli_num_rows($r) == 1) {
+            list($cat_name) = mysqli_fetch_array($r, MYSQLI_NUM);
+        } else {
+            redirect_to();
+        }
 	} else {
 		redirect_to('admin/index.php');
 	}
@@ -15,7 +25,7 @@
 
 <div id="main-content">
 	<div class="title-content">
-		<p>Thêm mới bài viết</p>
+		<p>Danh mục bài viết: <?php if(isset($cat_name)) echo $cat_name; ?></p>
 	</div>
 <?php
     if(isset($_GET['msg'])) {

@@ -2,7 +2,7 @@
 <div id="content">
 	<div id="first-sidebar">
 		<div class="typical">
-			<h3>Main Menu</h3>
+			<h3>Danh mục sản phẩm</h3>
 			<ul>
 				<li><a href="#" class="old">Máy tính để bàn</a></li>
 				<li><a href="#" class="even">Laptop</a></li>

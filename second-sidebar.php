@@ -1,6 +1,9 @@
 	<div id="second-sidebar">
+		<?php
+			if(isset($_SESSION['last_name'])) :
+		?>
 		<div id="shopping-cart" class="group">
-			<h2><a href="#">Shopping cart</a></h2>
+			<h2><a href="#">Xin chào <?php echo $_SESSION['last_name']; ?> </a></h2>
 			<div id="cart-details">
 				<p>3 items</p>
 				<div id="border-cart"></div>
@@ -8,6 +11,8 @@
 			</div>
 			<a href="#" data-tooltip="Checkout" class="tool"><img src="images/shoppingcart.png" alt="Checkout" /></a>
 		</div>
+
+		<?php endif; ?>
 
 		<div class="typical">
 			<h3><a href="#">Sản phẩm mới</a></h3>

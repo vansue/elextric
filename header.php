@@ -1,10 +1,11 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset='UTF-8' />
 
-	<title>Elextronic</title>
+	<title><?php echo (isset($title)) ? $title : "Elextronic"; ?></title>
 
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -33,7 +34,7 @@
 
 		<!--===== HEADER =====-->
 		<div id="header">
-			<h1 id="logo"><a href="index.html">Electronix</a></h1>
+			<h1 id="logo"><a href="index.php">Electronix</a></h1>
 			<div id="slider">
 				<img src="images/slide_divider.png" alt="" class="slide-divider" />
 				<div id="slide-content">
@@ -64,7 +65,7 @@
 		<div id="nav-menu" class="group">
 			<img src="images/menu_left.gif" alt="left-menu" />
 			<ul>
-				<li><a href="index.html" id="nav-home">Trang chủ</a></li>
+				<li><a href="index.php" id="nav-home">Trang chủ</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-pro">Sản phẩm</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
@@ -72,7 +73,7 @@
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="register.php" id="nav-acc">Đăng ký</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-sig">Đăng nhập</a></li>
+				<li><a href="login.php" id="nav-sig">Đăng nhập</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-shipping">Shipping</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>

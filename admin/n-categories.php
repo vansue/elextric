@@ -1,5 +1,6 @@
 <?php
 	ob_start();
+    $title = "Thêm mới, chỉnh sửa danh mục bài viết | Elextronic";
 	include('header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');

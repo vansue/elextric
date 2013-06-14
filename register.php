@@ -4,7 +4,7 @@
 	include('inc/mysqli_connect.php');
 	include('first-sidebar.php');
 ?>
-<div id="main-content" class="register">
+<div id="main-content">
 	<?php
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
 			$errors = array();
@@ -50,17 +50,46 @@
 
 					//Chèn giá trị vào CSDL
 					$q = "INSERT INTO users(first_name, last_name, email, pass, active, registration_date) ";
-					$q .= " VALUES ('{$fn}', '{$ln}', '{e}', SHA1('$p'), '{$a}', NOW())";
+					$q .= " VALUES ('{$fn}', '{$ln}', '{$e}', SHA1('$p'), '{$a}', NOW())";
 					$r = mysqli_query($dbc, $q);
 						confirm_query($r, $q);
 					if (mysqli_affected_rows($dbc) == 1) {
-						//Nếu điền thông tin thành công, thì gửi email kích hoạt cho người dùng
-						$body = "Cảm ơn bạn đã đăng ký ở trang Elextronic. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. Phiền bạn click vào đường link để kích hoạt tài khoản \n\n";
-						$body .= BASE_URL."admin/activate.php?x=".urldecode($e)."&y=".$a;
-						if(mail($_POST['email'], 'Kích hoạt tài khoản tại Elextronic', $body, 'FROM: localhost')) {
-							$mesage = "<p class='notice'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
+						// Khai báo thư viện phpmailer
+						require "lib/class.phpmailer.php";
+
+						// Khai báo tạo PHPMailer
+						$mail = new PHPMailer();
+						//Khai báo gửi mail bằng SMTP
+						$mail->IsSMTP();
+						//Tắt mở kiểm tra lỗi trả về, chấp nhận các giá trị 0 1 2
+						// 0 = off không thông báo bất kì gì, tốt nhất nên dùng khi đã hoàn thành.
+						// 1 = Thông báo lỗi ở client
+						// 2 = Thông báo lỗi cả client và lỗi ở server
+						$mail->SMTPDebug  = 0;
+
+						$mail->Debugoutput = "html"; // Lỗi trả về hiển thị với cấu trúc HTML
+						$mail->Host       = "smtp.gmail.com"; //host smtp để gửi mail
+						$mail->Port       = 587; // cổng để gửi mail
+						$mail->SMTPSecure = "tls"; //Phương thức mã hóa thư - ssl hoặc tls
+						$mail->SMTPAuth   = true; //Xác thực SMTP
+						$mail->Username   = "trongnghiahp85@gmail.com"; // Tên đăng nhập tài khoản Gmail
+						$mail->Password   = "huong@83279"; //Mật khẩu của gmail
+						$mail->SetFrom("elextronic@gmail.com", "Elextronic"); // Thông tin người gửi
+						$mail->AddReplyTo("trongnghiahp85@gmail.com","Test Reply");// Ấn định email sẽ nhận khi người dùng reply lại.
+						$mail->AddAddress("{$e}", "{$fn}"." "."{$ln}");//Email của người nhận
+						$mail->Subject = "Kích hoạt tài khoản tại Elextronic"; //Tiêu đề của thư
+						$mail->CharSet = "utf-8";
+						$mail->MsgHTML("Cảm ơn bạn đã đăng ký ở trang Elextronic. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. Phiền bạn click vào đường link để kích hoạt tài khoản: ".BASE_URL."admin/activate.php?x=".urldecode($e)."&y=".$a); //Nội dung của bức thư.
+						// $mail->MsgHTML(file_get_contents("email-template.html"), dirname(__FILE__));
+						// Gửi thư với tập tin html
+						$mail->AltBody = "This is a plain-text message body";//Nội dung rút gọn hiển thị bên ngoài thư mục thư.
+						//$mail->AddAttachment("images/attact-tui.gif");//Tập tin cần attach
+
+						//Tiến hành gửi email và kiểm tra lỗi
+						if(!$mail->Send()) {
+						  	$mesage = "Có lỗi khi gửi mail: " . $mail->ErrorInfo;
 						} else {
-							$mesage = "<p class='notice'>Không thể gửi mail cho bạn. Xin lỗi vì sự bất tiện này.</p>";
+						  	$mesage = "<p class='notice'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
 						}
 					} else {
 						$mesage = "<p class='notice'>Xin lỗi, đăng ký của bạn không thể thực hiện được do lỗi hệ thống.</p>";
@@ -91,7 +120,7 @@
 						}
 					?>
 				</label>
-				<input type="text" name="first-name" id="first-name" value="<?php if(isset($_POST['first-name'])) echo $_POST['first-name']; ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="text" name="first-name" id="first-name" value="<?php if(isset($_POST['first-name'])) echo $_POST['first-name']; ?>" size="20" maxlength="40" tabindex="1" />
 
 				<label for="last-name">Tên: <span class="required">*</span>
 					<?php
@@ -100,7 +129,7 @@
 						}
 					?>
 				</label>
-				<input type="text" name="last-name" id="last-name" value="<?php if(isset($_POST['last-name'])) echo $_POST['last-name']; ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="text" name="last-name" id="last-name" value="<?php if(isset($_POST['last-name'])) echo $_POST['last-name']; ?>" size="20" maxlength="40" tabindex="2" />
 
 				<label for="email">Email: <span class="required">*</span>
 					<?php
@@ -109,7 +138,7 @@
 						}
 					?>
 				</label>
-				<input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo htmlentities($_POST['email'], ENT_COMPAT, 'UTF-8'); ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo htmlentities($_POST['email'], ENT_COMPAT, 'UTF-8'); ?>" size="60" maxlength="40" tabindex="3" />
 
 				<label for="password1">Mật khẩu: <span class="required">*</span>
 					<?php
@@ -118,7 +147,7 @@
 						}
 					?>
 				</label>
-				<input type="password" name="password1" id="password1" value="<?php if(isset($_POST['password1'])) echo $_POST['password1']; ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="password" name="password1" id="password1" value="<?php if(isset($_POST['password1'])) echo $_POST['password1']; ?>" size="20" maxlength="40" tabindex="4" />
 
 				<label for="password2">Nhập lại mật khẩu: <span class="required">*</span>
 					<?php
@@ -127,7 +156,7 @@
 						}
 					?>
 				</label>
-				<input type="password" name="password2" id="password2" value="<?php if(isset($_POST['password2'])) echo $_POST['password2']; ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="password" name="password2" id="password2" value="<?php if(isset($_POST['password2'])) echo $_POST['password2']; ?>" size="20" maxlength="40" tabindex="5" />
 
 				<p><input type="submit" name="submit" value="Đăng ký" /></p>
 			</fieldset>
