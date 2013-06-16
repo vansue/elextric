@@ -4,14 +4,20 @@
 		<div class="typical">
 			<h3>Danh mục sản phẩm</h3>
 			<ul>
-				<li><a href="#" class="old">Máy tính để bàn</a></li>
-				<li><a href="#" class="even">Laptop</a></li>
-				<li><a href="#" class="old">Máy tính bảng</a></li>
-				<li><a href="#" class="even">Phụ kiện máy tính</a></li>
-				<li><a href="#" class="old">Máy chiếu</a></li>
-				<li><a href="#" class="even">Máy in & Máy Scan</a></li>
-				<li><a href="#" class="old">Thiết bị mạng</a></li>
-				<li><a href="#" class="even">Phần mềm</a></li>
+				<?php
+					$q = "SELECT cat_id, cat_name FROM p_categories";
+					$r = mysqli_query($dbc, $q);
+						confirm_query($r, $q);
+						$i = 0;
+					while($pcats = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+						$i++;
+						if ($i%2 == 0) {
+							echo "<li><a href='products.php?pcid=".$pcats['cat_id']."' class='old'>".$pcats['cat_name']."</a></li>";
+						} else {
+							echo "<li><a href='products.php?pcid=".$pcats['cat_id']."' class='even'>".$pcats['cat_name']."</a></li>";
+						}
+					}
+				?>
 			</ul>
 		</div>
 

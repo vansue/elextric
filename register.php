@@ -87,7 +87,7 @@
 
 						//Tiến hành gửi email và kiểm tra lỗi
 						if(!$mail->Send()) {
-						  	$mesage = "Có lỗi khi gửi mail: " . $mail->ErrorInfo;
+						  	$mesage = "<p class='notice'>Có lỗi khi gửi mail: " . $mail->ErrorInfo."</p>";
 						} else {
 						  	$mesage = "<p class='notice'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
 						}

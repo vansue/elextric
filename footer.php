@@ -19,7 +19,7 @@
 							case 0://Khách hàng
 								echo "
 									<li><a href='profile.php'>User Profile</a></li>
-									<li><a href='change_password.php'>Change Password</a></li>
+									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
 									<li><a href='logout.php'>Đăng xuất</a></li>
 								";
 								break;
@@ -27,7 +27,7 @@
 							case 2://Admin
 								echo "
 									<li><a href='profile.php'>User Profile</a></li>
-									<li><a href='change_password.php'>Change Password</a></li>
+									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
 									<li><a href='admin/index.php'>Admin CP</a></li>
 									<li><a href='logout.php'>Đăng xuất</a></li>
 								";

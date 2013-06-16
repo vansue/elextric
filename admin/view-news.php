@@ -5,6 +5,7 @@
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');
 	include('first-sidebar.php');
+    admin_success();
 ?>
 <!-- VALIDATE BIẾN $_GET -->
 <?php

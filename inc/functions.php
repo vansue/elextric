@@ -10,9 +10,38 @@
 		}
 	}
 
+	//Kiểm tra xem người dùng đã đăng nhập hay chưa
+	function is_logged_in() {
+		if (!isset($_SESSION['uid'])) {
+			redirect_to('login.php');
+		}
+	}
+
+	//Tái định hướng người dùng về trang mặc định là elextric/index.php
 	function redirect_to($page = 'index.php') {
 		$url = BASE_URL.$page;
 		header("Location: $url");
 		exit();
+	}
+
+	//Hàm này để thông báo lỗi
+	function report_error($mesg) {
+		if(!empty($mesg)) {
+			foreach ($mesg as $m) {
+				echo $m;
+			}
+		}
+	}
+
+	//Hàm kiểm tra xem có phải admin hay không
+	function is_admin() {
+		return isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 2);
+	}
+
+	//Kiểm tra xem người dùng có thể vào trang admin hay không
+	function admin_success() {
+		if(!is_admin()) {
+			redirect_to();
+		}
 	}
 ?>

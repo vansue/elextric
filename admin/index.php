@@ -1,7 +1,10 @@
 <?php
+	ob_start();
 	include('header.php');
+	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');
 	include('first-sidebar.php');
+	admin_success();
 ?>
 
 	<div id="main-content">
@@ -12,8 +15,8 @@
 		<div class="product-box">
 			<img src="../images/product_box_top.gif" alt="" class="top-prod-box" />
 			<div class="cen-prod-box">
-				<a href="add-p-categories.php"><img src="../images/ab_pro_cat.png" alt=""></a>
-				<h4><a href="add-p-categories.php">Danh mục sản phẩm</a></h4>
+				<a href="p-categories.php"><img src="../images/ab_pro_cat.png" alt=""></a>
+				<h4><a href="p-categories.php">Danh mục sản phẩm</a></h4>
 			</div>
 			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
 		</div><!--end .product-box-->

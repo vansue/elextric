@@ -1,5 +1,8 @@
 <?php
+	ob_start();
 	include('header.php');
+	include('inc/functions.php');
+	include('inc/mysqli_connect.php');
 	include('first-sidebar.php');
 ?>
 <div id="main-content">

@@ -74,7 +74,7 @@
 				</label>
 				<input type="password" name="pass" id="pass" value="" size="20" maxlength="20" tabindex="2" />
 
-				<p id="qmk"><a href="retrieve_password.php">Quên mật khẩu?</a></p>
+				<p id="qmk"><a href="retrieve-pass.php">Quên mật khẩu?</a></p>
 				<p><input type="submit" name="submit" value="Đăng nhập" /></p>
 
 			</fieldset>
