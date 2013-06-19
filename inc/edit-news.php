@@ -84,7 +84,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 					<select name="position">
 						<?php
 						$q = "SELECT count(page_id) AS count FROM pages";
-						$r = mysqli_query($dbc, $q) or die("Cau truy van: $q \n<br /> Loi MySQL: ".mysqli_error($dbc));
+						$r = mysqli_query($dbc, $q);
+							confirm_query($r, $q);
 						if(mysqli_num_rows($r) == 1) {
 							list($num) = mysqli_fetch_array($r, MYSQLI_NUM);
 							for ($i=1; $i <= $num+1; $i++) {//Tạo vòng for để tạo ra option, cộng thêm một giá trị cho position
@@ -101,7 +102,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 					<label for="page-content">Nội dung bài viết: <span class="required">*</span>
 						<?php
 						if(isset($errors) && in_array('content', $errors)) {
-							echo "<p class='warning'>Nhap noi dung bai viet.</p>";
+							echo "<p class='warning'>Nhập nội dung bài viết.</p>";
 						}
 					?>
 					</label>

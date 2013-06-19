@@ -9,4 +9,3 @@
 		//Nếu kết nối thành công. Đặt phương thức kết nối là UTF-8
 		mysqli_set_charset($dbc, 'utf-8');
 	}
-?>

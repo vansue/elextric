@@ -22,7 +22,7 @@
     <div class="title-content">
         <p>Đăng xuất</p>
     </div>
-    <p class='notice'>Bạn đã đăng xuất thành công. Trở về <a href="index.php">trang chủ</a></p>
+    <p class='notice success'>Bạn đã đăng xuất thành công. Trở về <a href="index.php">trang chủ</a></p>
 </div><!--end #main-content-->
 <?php endif; ?>
 <?php

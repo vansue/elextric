@@ -1,4 +1,5 @@
 <?php
+	ob_start();
 	include('header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');

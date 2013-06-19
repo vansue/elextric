@@ -18,7 +18,7 @@
         $r = mysqli_query($dbc, $q);
             confirm_query($r, $q);
         if (mysqli_affected_rows($dbc) == 1) {
-            echo "<p class='notice'>Tài khoản của bạn đã được kích hoạt thành công. Bạn có thể <a href='".BASE_URL."login.php'>đăng nhập</a> bây giờ.</p>";
+            echo "<p class='notice success'>Tài khoản của bạn đã được kích hoạt thành công. Bạn có thể <a href='".BASE_URL."login.php'>đăng nhập</a> bây giờ.</p>";
         } else {
             echo "<p class='notice'>Tài khoản của bạn không thể kích hoạt. Làm ơn kích hoạt lại sau.</p>";
         }

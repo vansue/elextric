@@ -89,7 +89,7 @@
 						if(!$mail->Send()) {
 						  	$mesage = "<p class='notice'>Có lỗi khi gửi mail: " . $mail->ErrorInfo."</p>";
 						} else {
-						  	$mesage = "<p class='notice'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
+						  	$mesage = "<p class='notice success'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
 						}
 					} else {
 						$mesage = "<p class='notice'>Xin lỗi, đăng ký của bạn không thể thực hiện được do lỗi hệ thống.</p>";
@@ -139,6 +139,7 @@
 					?>
 				</label>
 				<input type="text" name="email" id="email" value="<?php if(isset($_POST['email'])) echo htmlentities($_POST['email'], ENT_COMPAT, 'UTF-8'); ?>" size="60" maxlength="40" tabindex="3" />
+				<span id="available"></span>
 
 				<label for="password1">Mật khẩu: <span class="required">*</span>
 					<?php

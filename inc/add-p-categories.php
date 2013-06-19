@@ -25,7 +25,7 @@
 				$r = mysqli_query($dbc, $q);
 					confirm_query($r, $q);
 				if (mysqli_affected_rows($dbc) == 1) {
-					$messages = "<p class='notice'>Thêm mới danh mục thành công.</p>";
+					$messages = "<p class='notice success'>Thêm mới danh mục thành công.</p>";
 				} else {
 					$messages = "<p class='notice'>Không thể thêm danh mục vào CSDL do lỗi hệ thống.</p>";
 				}
@@ -50,10 +50,10 @@
 								echo "<p class='notice'>Danh mục không tồn tại.</p>";
 								break;
 							case '2':
-								echo "<p class='notice'>Sửa danh mục thành công.</p>";
+								echo "<p class='notice success'>Sửa danh mục thành công.</p>";
 								break;
 							case '3':
-								echo "<p class='notice'>Xóa danh mục thành công.</p>";
+								echo "<p class='notice success'>Xóa danh mục thành công.</p>";
 								break;
 							default:
 								redirect_to('admin/index.php');

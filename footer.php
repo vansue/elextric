@@ -18,7 +18,7 @@
 						switch ($_SESSION['user_level']) {
 							case 0://Khách hàng
 								echo "
-									<li><a href='profile.php'>User Profile</a></li>
+									<li><a href='profile.php'>Thông tin người dùng</a></li>
 									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
 									<li><a href='logout.php'>Đăng xuất</a></li>
 								";
@@ -26,7 +26,7 @@
 
 							case 2://Admin
 								echo "
-									<li><a href='profile.php'>User Profile</a></li>
+									<li><a href='profile.php'>Thông tin người dùng</a></li>
 									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
 									<li><a href='admin/index.php'>Admin CP</a></li>
 									<li><a href='logout.php'>Đăng xuất</a></li>

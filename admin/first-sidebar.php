@@ -13,7 +13,7 @@
 		<div class="typical">
 			<h3>Quick link</h3>
 			<div class="box">
-				<a href="<?php echo BASE_URL."index.php" ?>"><img src="../images/quick_link.png" alt="quick link"></a>
+				<a href="<?php echo BASE_URL."index.php" ?>" target="bank"><img src="../images/quick_link.png" alt="quick link"></a>
 			</div>
 		</div>
 

@@ -33,16 +33,16 @@
         $msg = $_GET['msg'];
         switch ($msg) {
             case '1':
-                echo "<p class='notice'>Xóa bài viết thành công.</p>";
+                echo "<p class='notice success'>Xóa bài viết thành công.</p>";
                 break;
             case '2':
                 echo "<p class='notice'>Bài viết không tồn tại.</p>";
                 break;
             case '3':
-                echo "<p class='notice'>Thêm mới bài viết thành công.</p>";
+                echo "<p class='notice success'>Thêm mới bài viết thành công.</p>";
                 break;
             case '4':
-                echo "<p class='notice'>Chỉnh sửa bài viết thành công.</p>";
+                echo "<p class='notice success'>Chỉnh sửa bài viết thành công.</p>";
                 break;
             default:
                 redirect_to('admin/index.php');

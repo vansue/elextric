@@ -66,7 +66,7 @@
 						if(!$mail->Send()) {
 						  	$mesage = "<p class='notice'>Có lỗi khi gửi mail: ".$mail->ErrorInfo."</p>";
 						} else {
-						  	$mesage = "<p class='notice'>Mật khẩu mới đã được gửi vào email của bạn. Sử dụng mật khẩu mới này để đăng nhập.</p>";
+						  	$mesage = "<p class='notice success'>Mật khẩu mới đã được gửi vào email của bạn. Sử dụng mật khẩu mới này để đăng nhập.</p>";
 						}
 					} else {
 						$mesage = "<p class='notice'>Không đổi được mật khẩu do lỗi hệ thống.</p>";

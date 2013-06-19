@@ -35,7 +35,7 @@
 							//Kiểm tra xem có update thành công hay không
 							if (mysqli_affected_rows($dbc) == 1) {
 								//Nếu upadte thành công
-								$errors[] = "<p class='notice'>Đổi mật khẩu thành công.</p>";
+								$errors[] = "<p class='notice success'>Đổi mật khẩu thành công.</p>";
 							} else {
 								//Nếu update không thành công
 								$errors[] = "<p class='notice'>Không thể đổi mật khẩu do lỗi hệ thống.</p>";
