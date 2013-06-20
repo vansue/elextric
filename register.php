@@ -1,8 +1,8 @@
 <?php
-	include('header.php');
+	include('inc/header.php');
 	include('inc/functions.php');
 	include('inc/mysqli_connect.php');
-	include('first-sidebar.php');
+	include('inc/first-sidebar.php');
 ?>
 <div id="main-content">
 	<?php
@@ -79,7 +79,7 @@
 						$mail->AddAddress("{$e}", "{$fn}"." "."{$ln}");//Email của người nhận
 						$mail->Subject = "Kích hoạt tài khoản tại Elextronic"; //Tiêu đề của thư
 						$mail->CharSet = "utf-8";
-						$mail->MsgHTML("Cảm ơn bạn đã đăng ký ở trang Elextronic. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. Phiền bạn click vào đường link để kích hoạt tài khoản: ".BASE_URL."admin/activate.php?x=".urldecode($e)."&y=".$a); //Nội dung của bức thư.
+						$mail->MsgHTML("Cảm ơn bạn đã đăng ký ở trang Elextronic. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. Phiền bạn click vào đường link để kích hoạt tài khoản: ".BASE_URL."activate.php?x=".urldecode($e)."&y=".$a); //Nội dung của bức thư.
 						// $mail->MsgHTML(file_get_contents("email-template.html"), dirname(__FILE__));
 						// Gửi thư với tập tin html
 						$mail->AltBody = "This is a plain-text message body";//Nội dung rút gọn hiển thị bên ngoài thư mục thư.
@@ -165,6 +165,6 @@
 	</div>
 </div><!--end #main-content-->
 <?php
-	include('second-sidebar.php');
-	include('footer.php');
+	include('inc/second-sidebar.php');
+	include('inc/footer.php');
 ?>

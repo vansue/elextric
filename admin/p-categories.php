@@ -1,10 +1,10 @@
 <?php
 	ob_start();
     $title = "Thêm mới, chỉnh sửa danh mục sản phẩm | Elextronic";
-	include('header.php');
+	include('inc/header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');
-	include('first-sidebar.php');
+	include('inc/first-sidebar.php');
     admin_success();
 ?>
 
@@ -12,18 +12,18 @@
 <?php
 	if (isset($_GET['ecid'])) {
 		if(filter_var($_GET['ecid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
-			include('../inc/edit-p-categories.php');
+			include('inc/edit-p-categories.php');
 		} else {
 			redirect_to('admin/index.php');
 		}
 	} elseif(isset($_GET['dcid'])) {
 		if(filter_var($_GET['dcid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
-			include('../inc/delete-p-categories.php');
+			include('inc/delete-p-categories.php');
 		} else {
 			redirect_to('admin/index.php');
 		}
 	} else {
-		include('../inc/add-p-categories.php');
+		include('inc/add-p-categories.php');
 	}
 ?>
 
@@ -83,6 +83,6 @@
     </table>
 </div><!--end #main-content-->
 <?php
-	include('second-sidebar.php');
-	include('footer.php');
+	include('inc/second-sidebar.php');
+	include('inc/footer.php');
 ?>

@@ -1,9 +1,9 @@
 <?php
 	ob_start();
-	include('header.php');
+	include('inc/header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');
-	include('first-sidebar.php');
+	include('inc/first-sidebar.php');
 
 	/*** VALIDATE BIẾN $_GET['ncid'] ***/
 
@@ -27,20 +27,20 @@
 
 	if (isset($_GET['epid'])) {
 		if(filter_var($_GET['epid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
-			include('../inc/edit-news.php');
+			include('inc/edit-news.php');
 		} else {
 			redirect_to('admin/index.php');
 		}
 	} elseif(isset($_GET['dpid'])) {
 		if(filter_var($_GET['dpid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
-			include('../inc/delete-news.php');
+			include('inc/delete-news.php');
 		} else {
 			redirect_to('admin/index.php');
 		}
 	} else {
-		include('../inc/add-news.php');
+		include('inc/add-news.php');
 	}
 
-	include('second-sidebar.php');
-	include('footer.php');
+	include('inc/second-sidebar.php');
+	include('inc/footer.php');
 ?>

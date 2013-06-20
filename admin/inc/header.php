@@ -9,7 +9,7 @@
 
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src='../js/tooltip.js'></script>
 	<script type="text/javascript" src='../js/clock.js'></script>
 	<script type="text/javascript" src="../js/tinymce/tiny_mce.js"></script>
@@ -35,7 +35,7 @@
 	<div id="wrapper">
 		<!--===== TOP =====-->
 		<div id="top">
-			<p><a href="#">Administration Site</a></p>
+			<p><a href="index.php">Administration Site</a></p>
 			<div id="language">
 				<h3>Languages: </h3>
 				<a href="#"><img src="../images/vi.gif" alt="VI" /></a>
@@ -84,7 +84,7 @@
 		<div id="nav-menu" class="group">
 			<img src="../images/menu_left.gif" alt="left-menu" />
 			<ul>
-				<li><a href="index.php" id="nav-home">Trang chủ</a></li>
+				<li><a href="index.php" id="nav-home">Admin CP</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="p-categories.php" id="nav-pro-cat">Danh mục sản phẩm</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>

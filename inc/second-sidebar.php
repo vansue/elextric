@@ -5,9 +5,9 @@
 		<div id="shopping-cart" class="group">
 			<h2><a href="#">Xin chào <?php echo $_SESSION['last_name']; ?> </a></h2>
 			<div id="cart-details">
-				<p>3 items</p>
+				<p>3 sản phẩm</p>
 				<div id="border-cart"></div>
-				<p>Total: <span>350$</span></p>
+				<p>Tổng cộng: <span>350$</span></p>
 			</div>
 			<a href="#" data-tooltip="Checkout" class="tool"><img src="images/shoppingcart.png" alt="Checkout" /></a>
 		</div>

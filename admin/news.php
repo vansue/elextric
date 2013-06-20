@@ -1,9 +1,10 @@
 <?php
 	$title = "Danh mục bài viết | Elextronic";
-	include('header.php');
+	ob_start();
+	include('inc/header.php');
 	include('../inc/functions.php');
 	include('../inc/mysqli_connect.php');
-	include('first-sidebar.php');
+	include('inc/first-sidebar.php');
 	admin_success();
 ?>
 
@@ -35,6 +36,6 @@
 
 	</div><!--end #main-content-->
 <?php
-	include('second-sidebar.php');
-	include('footer.php');
+	include('inc/second-sidebar.php');
+	include('inc/footer.php');
 ?>

@@ -41,6 +41,21 @@
 	//Kiểm tra xem người dùng có thể vào trang admin hay không
 	function admin_success() {
 		if(!is_admin()) {
-			redirect_to();
+			redirect_to('admin/login.php');
 		}
 	}
+
+	//Hàm dùng để truy xuất dữ liệu của người dùng
+	function fetch_user($user_id) {
+		global $dbc;
+		$q = "SELECT * FROM users WHERE user_id = {$user_id}";
+		$r = mysqli_query($dbc, $q);
+			confirm_query($r, $q);
+		if (mysqli_num_rows($r) > 0) {
+			//Nếu có kết quả trả về
+			return $result_set = mysqli_fetch_array($r, MYSQLI_ASSOC);
+		} else {
+			//Nếu không có kết quả trả về
+			return FALSE;
+		}
+	} //end fetch_user

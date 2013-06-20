@@ -1,7 +1,7 @@
 		<!--===== FOOTER =====-->
 		<div id="footer" class="group">
 			<div id="left-footer">
-				<a href="index.html">Electronix</a>
+				<a href="../index.php">Electronix</a>
 			</div>
 
 			<div id="center-footer">
@@ -12,11 +12,10 @@
 
 			<div id="right-footer">
 				<ul>
-					<li><a href="#">Trang chủ</a></li>
-					<li><a href="#">Giới thiệu</a></li>
-					<li><a href="#">Sitemap</a></li>
-					<li><a href="#">Rss</a></li>
-					<li><a href="contact.html">Liên hệ</a></li>
+					<li><a href='index.php'>Admin CP</a></li><li>
+					<a href='../edit-profile.php'>Thông tin người dùng</a></li>
+					<li><a href='../change-pass.php'>Đổi mật khẩu</a></li>
+					<li><a href='../logout.php'>Đăng xuất</a></li>
 				</ul>
 			</div>
 		</div><!--end #footer-->

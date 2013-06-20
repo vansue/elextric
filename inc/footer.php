@@ -1,7 +1,7 @@
 		<!--===== FOOTER =====-->
 		<div id="footer" class="group">
 			<div id="left-footer">
-				<a href="index.html">Electronix</a>
+				<a href="index.php">Electronix</a>
 			</div>
 
 			<div id="center-footer">
@@ -18,7 +18,7 @@
 						switch ($_SESSION['user_level']) {
 							case 0://Khách hàng
 								echo "
-									<li><a href='profile.php'>Thông tin người dùng</a></li>
+									<li><a href='edit-profile.php'>Thông tin người dùng</a></li>
 									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
 									<li><a href='logout.php'>Đăng xuất</a></li>
 								";
@@ -26,9 +26,9 @@
 
 							case 2://Admin
 								echo "
-									<li><a href='profile.php'>Thông tin người dùng</a></li>
+									<li><a href='edit-profile.php'>Thông tin người dùng</a></li>
 									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
-									<li><a href='admin/index.php'>Admin CP</a></li>
+									<li><a href='admin/index.php' target='bank'>Admin CP</a></li>
 									<li><a href='logout.php'>Đăng xuất</a></li>
 								";
 								break;
@@ -44,11 +44,12 @@
 						//Nếu không có SESSION
 						echo "
 							<li><a href='index.php'>Trang chủ</a></li>
+							<li><a href='index.php'>Giới thiệu</a></li>
 							<li><a href='register.php'>Đăng ký</a></li>
 							<li><a href='login.php'>Đăng nhập</a></li>
 						";
 					}
-		
+
 					?>
 				</ul>
 			</div>

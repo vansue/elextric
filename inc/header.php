@@ -12,6 +12,22 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src='js/tooltip.js'></script>
 	<script type="text/javascript" src='js/check-ajax.js'></script>
+	<script type="text/javascript" src="js/tinymce/tiny_mce.js"></script>
+	<script type="text/javascript">
+	tinyMCE.init({
+        mode : "textareas",
+        theme : "advanced",
+        plugins : "emotions,spellchecker,advhr,insertdatetime,preview",
+        // Theme options - button# indicated the row# only
+        theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect",
+        theme_advanced_buttons2 : "cut,copy,paste,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,|,code,preview,|,forecolor,backcolor",
+        theme_advanced_buttons3 : "insertdate,inserttime,|,spellchecker,advhr,,removeformat,|,sub,sup,|,charmap,emotions",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        theme_advanced_resizing : true
+        });
+	</script>
 </head>
 
 <body>
@@ -70,13 +86,13 @@
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="#" id="nav-pro">Sản phẩm</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-spe">Specials</a></li>
+				<li><a href="#" id="nav-spe">Khuyến mại</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="register.php" id="nav-acc">Đăng ký</a></li>
+				<li><a href="register.php" id="nav-acc">Tư vấn</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="login.php" id="nav-sig">Đăng nhập</a></li>
+				<li><a href="login.php" id="nav-sig">Đối tác</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-shipping">Shipping</a></li>
+				<li><a href="#" id="nav-shipping">Tuyển dụng</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="contact.html" id="nav-con">Liên hệ</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>

@@ -2,9 +2,8 @@
 		<div id="shopping-cart" class="group">
 			<h2><a href="#">Xin chào Admin!</a></h2>
 			<div id="cart-details">
-				<a href="#">Sign out</a>
-				<a href="#">Đổi mật khẩu</a>
 				<a href="#" id="red">3 đơn hàng mới</a>
+				<a href="#">2 bình luận mới</a>
 			</div>
 			<a href="#" data-tooltip="Admin" class="tool"><img src="../images/a_avatar.png" alt="Checkout" /></a>
 		</div>
