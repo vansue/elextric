@@ -1,15 +1,14 @@
 <?php
-	$title = "Danh mục sản phẩm | Elextronic";
+	$title = "Quản lý sản phẩm | Elextronic";
 	include('inc/header.php');
-	include('../inc/functions.php');
-	include('../inc/mysqli_connect.php');
+	require_once('../inc/functions.php');
+	require_once('../inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
-	admin_success();
 ?>
 
 	<div id="main-content">
 		<div class="title-content">
-			<p>Sản phẩm</p>
+			<p>Quản lý sản phẩm</p>
 		</div>
 
 		<?php

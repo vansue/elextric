@@ -78,13 +78,13 @@ body.admin #nav-menu ul {width: 982px;}
 #nav-menu ul li img {width: 2px; height: 100%;}
 #nav-menu ul li a, #nav-menu ul li a:visited {display: block; float: left;padding: 0 8px 0 20px; margin:0 14px; height: 100%; color: #676d77;}
 #nav-menu ul li a:active, #nav-menu ul li a:hover {color: #333;}
-#nav-home {background: url(../images/home.png) no-repeat left;}
+/*#nav-home {background: url(../images/home.png) no-repeat left;}
 #nav-pro {background: url(../images/services.png) no-repeat left;}
 #nav-spe {background: url(../images/favs.png) no-repeat left;}
 #nav-acc, #nav-sig {background: url(../images/user_add.png) no-repeat left;}
 #nav-sig {background: url(../images/sig.png) no-repeat left;}
 #nav-shipping {background: url(../images/car.png) no-repeat left;}
-#nav-con {background: url(../images/contact-new.png) no-repeat left;}
+#nav-con {background: url(../images/contact-new.png) no-repeat left;}*/
 #nav-cur {width: 180px; float: left; padding: 0 0 0 15px; color: #676d77;}
 #nav-pro-cat {background: url(../images/a_pro_cat.png) no-repeat left;}
 #nav-a-pro {background: url(../images/a_pro.png) no-repeat left;}

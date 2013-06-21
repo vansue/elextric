@@ -57,7 +57,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 					<label for="page">Tên bài viết: <span class="required">*</span>
 						<?php
 						if(isset($errors) && in_array('page-name', $errors)) {
-							echo "<p class='warning'>Điền tên bài viết.</p>";
+							echo "<p class='notice'>Điền tên bài viết.</p>";
 						}
 					?>
 					</label>
@@ -68,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 					<label for="position">Vị trí: <span class="required">*</span>
 						<?php
 						if(isset($errors) && in_array('position', $errors)) {
-							echo "<p class='warning'>Chọn vị trí bài viết.</p>";
+							echo "<p class='notice'>Chọn vị trí bài viết.</p>";
 						}
 					?>
 					</label>
@@ -93,7 +93,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 					<label for="page-content">Nội dung bài viết: <span class="required">*</span>
 						<?php
 						if(isset($errors) && in_array('content', $errors)) {
-							echo "<p class='warning'>Nhập nội dung bài viết.</p>";
+							echo "<p class='notice'>Nhập nội dung bài viết.</p>";
 						}
 					?>
 					</label>

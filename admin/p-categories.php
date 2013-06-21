@@ -1,11 +1,9 @@
 <?php
-	ob_start();
-    $title = "Thêm mới, chỉnh sửa danh mục sản phẩm | Elextronic";
+    $title = "Quản lý danh mục sản phẩm | Elextronic";
 	include('inc/header.php');
-	include('../inc/functions.php');
-	include('../inc/mysqli_connect.php');
+	require_once('../inc/functions.php');
+	require_once('../inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
-    admin_success();
 ?>
 
 <!-- VALIDATE BIẾN $_GET -->
@@ -35,8 +33,8 @@
     	<thead>
     		<tr>
     			<th><a href="p-categories.php?sort=cat">Tên danh mục</a></th>
-    			<th><a href="p-categories.php?sort=pos">Vị trí</th>
-    			<th><a href="p-categories.php?sort=by">Người tạo</th>
+    			<th><a href="p-categories.php?sort=pos">Vị trí</a></th>
+    			<th><a href="p-categories.php?sort=by">Người tạo</a></th>
                 <th>Edit</th>
                 <th>Delete</th>
     		</tr>

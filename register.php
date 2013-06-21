@@ -1,7 +1,8 @@
 <?php
+	$title = "Đăng ký tài khoản | Elextronic";
 	include('inc/header.php');
-	include('inc/functions.php');
-	include('inc/mysqli_connect.php');
+	require_once('inc/functions.php');
+	require_once('inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
 ?>
 <div id="main-content">
@@ -16,14 +17,14 @@
 				$errors[] = 'first name';
 			}
 
-			if (preg_match('/^[\w\'.-]{4,20}$/', trim($_POST['last-name']))) {
+			if (preg_match('/^[\w\'.-]{2,20}$/', trim($_POST['last-name']))) {
 				$ln = mysqli_real_escape_string($dbc, trim($_POST['last-name']));
 			} else {
 				$errors[] = 'last name';
 			}
 
 			if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-				$e = mysqli_real_escape_string($dbc, $_POST['email']);
+				$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
 			} else {
 				$errors[] = 'email';
 			}
@@ -38,6 +39,41 @@
 				$errors[] = "password";
 			}
 
+			// Check for address (not required)
+			if (isset($_POST['address'])) {
+				$add = mysqli_real_escape_string($dbc, strip_tags($_POST['address']));
+			} else {
+				$add = NULL;
+			}
+
+	        // Check for phone (not required)
+	        if (isset($_POST['phone'])) {
+				$phone = mysqli_real_escape_string($dbc, strip_tags($_POST['phone']));
+			} else {
+				$phone = NULL;
+			}
+
+	        // Check for website (not required)
+	        if (isset($_POST['web'])) {
+				$web = mysqli_real_escape_string($dbc, strip_tags($_POST['web']));
+			} else {
+				$web = NULL;
+			}
+
+	        // Check for yahoo (not required)
+	        if (isset($_POST['yahoo'])) {
+				$yahoo = mysqli_real_escape_string($dbc, strip_tags($_POST['yahoo']));
+			} else {
+				$yahoo = NULL;
+			}
+
+	        // Check for website (not required)
+	        if (isset($_POST['bio'])) {
+				$bio = mysqli_real_escape_string($dbc, htmlentities($_POST['bio']));
+			} else {
+				$bio = NULL;
+			}
+
 			if ($fn && $ln && $e && $p) {
 				//Nếu các biến đều có giá trị, truy vấn CSDL
 				$q = "SELECT user_id FROM users WHERE email = '{$e}'";
@@ -49,8 +85,8 @@
 					$a = md5(uniqid(rand(), true));
 
 					//Chèn giá trị vào CSDL
-					$q = "INSERT INTO users(first_name, last_name, email, pass, active, registration_date) ";
-					$q .= " VALUES ('{$fn}', '{$ln}', '{$e}', SHA1('$p'), '{$a}', NOW())";
+					$q = "INSERT INTO users(first_name, last_name, email, pass, active, registration_date, address, phone, website, yahoo, bio, user_level) ";
+					$q .= " VALUES ('{$fn}', '{$ln}', '{$e}', SHA1('$p'), '{$a}', NOW(), '{$add}', '{$phone}', '{$web}', '{$yahoo}', '{$bio}', 1)";
 					$r = mysqli_query($dbc, $q);
 						confirm_query($r, $q);
 					if (mysqli_affected_rows($dbc) == 1) {
@@ -100,12 +136,12 @@
 				}
 			} else {
 				//Nếu một trong các biến không có giá trị
-				$mesage = "<p class='notice'>Điền đầy đủ dữ liệu cho các trường.</p>";
+				$mesage = "<p class='notice'>Điền đầy đủ dữ liệu cho các trường yêu cầu.</p>";
 			}
 		} //end if submit form
 	?>
 	<div class="title-content">
-		<p>Đăng ký</p>
+		<p>Đăng ký tài khoản</p>
 	</div>
 
 	<div>
@@ -116,7 +152,7 @@
 				<label for="first-name">Họ: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('first name', $errors)) {
-							echo "<p class='warning'>Điền họ của bạn.</p>";
+							echo "<p class='notice'>Điền họ của bạn.</p>";
 						}
 					?>
 				</label>
@@ -125,7 +161,7 @@
 				<label for="last-name">Tên: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('last name', $errors)) {
-							echo "<p class='warning'>Điền tên của bạn.</p>";
+							echo "<p class='notice'>Điền tên của bạn.</p>";
 						}
 					?>
 				</label>
@@ -134,7 +170,7 @@
 				<label for="email">Email: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('email', $errors)) {
-							echo "<p class='warning'>Điền email hợp lệ.</p>";
+							echo "<p class='notice'>Điền email hợp lệ.</p>";
 						}
 					?>
 				</label>
@@ -144,7 +180,7 @@
 				<label for="password1">Mật khẩu: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('password', $errors)) {
-							echo "<p class='warning'>Nhập mật khẩu của bạn.</p>";
+							echo "<p class='notice'>Nhập mật khẩu của bạn.</p>";
 						}
 					?>
 				</label>
@@ -153,11 +189,26 @@
 				<label for="password2">Nhập lại mật khẩu: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('password dif', $errors)) {
-							echo "<p class='warning'>Mật khẩu không trùng nhau.</p>";
+							echo "<p class='notice'>Mật khẩu không trùng nhau.</p>";
 						}
 					?>
 				</label>
 				<input type="password" name="password2" id="password2" value="<?php if(isset($_POST['password2'])) echo $_POST['password2']; ?>" size="20" maxlength="40" tabindex="5" />
+
+				<label for="address">Địa chỉ:</label>
+				<input type="text" name="address" id="address" value="<?php if(isset($_POST['address'])) echo htmlentities($_POST['address'], ENT_COMPAT, 'UTF-8'); ?>" size="60" maxlength="40" tabindex="3" />
+
+				<label for="phone">Điện thoại:</label>
+				<input type="text" name="phone" id="phone" value="<?php if(isset($_POST['phone'])) echo htmlentities($_POST['phone'], ENT_COMPAT, 'UTF-8'); ?>" size="60" maxlength="40" tabindex="3" />
+
+				<label for="web">Website:</label>
+				<input type="text" name="web" id="web" value="<?php if(isset($_POST['web'])) echo htmlentities($_POST['web'], ENT_COMPAT, 'UTF-8'); ?>" size="60" maxlength="40" tabindex="3" />
+
+				<label for="yahoo">Yahoo:</label>
+				<input type="text" name="yahoo" id="yahoo" value="<?php if(isset($_POST['yahoo'])) echo htmlentities($_POST['yahoo'], ENT_COMPAT, 'UTF-8'); ?>" size="60" maxlength="40" tabindex="3" />
+
+				<label for="bio">Giới thiệu:</label>
+				<textarea cols="50" rows="20" name="bio"><?php if(isset($_POST['bio'])) echo htmlentities($_POST['bio'], ENT_COMPAT, 'UTF-8'); ?></textarea>
 
 				<p><input type="submit" name="submit" value="Đăng ký" /></p>
 			</fieldset>

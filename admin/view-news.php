@@ -1,11 +1,9 @@
 <?php
-	ob_start();
     $title = "Danh mục bài viết | Elextronic";
     include('inc/header.php');
-	include('../inc/functions.php');
-	include('../inc/mysqli_connect.php');
+	require_once('../inc/functions.php');
+	require_once('../inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
-    admin_success();
 ?>
 <!-- VALIDATE BIẾN $_GET -->
 <?php
@@ -66,9 +64,9 @@
     	<thead>
     		<tr>
     			<th><a href="m-news.php?sort=page">Tên bài viết</a></th>
-                <th><a href="m-news.php?sort=pos">Vị trí</th>
-    			<th><a href="m-news.php?sort=date">Ngày tạo</th>
-    			<th><a href="m-news.php?sort=by">Người tạo</th>
+                <th><a href="m-news.php?sort=pos">Vị trí</a></th>
+    			<th><a href="m-news.php?sort=date">Ngày tạo</a></th>
+    			<th><a href="m-news.php?sort=by">Người tạo</a></th>
                 <th>Edit</th>
                 <th>Delete</th>
     		</tr>

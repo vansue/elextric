@@ -1,6 +1,6 @@
 	<div id="second-sidebar">
 		<div id="shopping-cart" class="group">
-			<h2><a href="#">Xin chào Admin!</a></h2>
+			<h2><a href="#">Xin chào <?php echo $_SESSION['last_name'];?>!</a></h2>
 			<div id="cart-details">
 				<a href="#" id="red">3 đơn hàng mới</a>
 				<a href="#">2 bình luận mới</a>

@@ -1,5 +1,5 @@
-<?php include('inc/functions.php');?>
-<?php include('inc/mysqli_connect.php');?>
+<?php require_once('inc/functions.php');?>
+<?php require_once('inc/mysqli_connect.php');?>
 <?php
 	if (isset($_GET['email']) && filter_var($_GET['email'], FILTER_VALIDATE_EMAIL)) {
 		$e = mysqli_real_escape_string($dbc, $_GET['email']);

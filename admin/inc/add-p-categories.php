@@ -37,7 +37,7 @@
 		<!--FORM-->
 		<div id="main-content">
 			<div class="title-content">
-				<p>Thêm mới, chỉnh sửa thông tin danh mục sản phẩm</p>
+				<p>Quản lý danh mục sản phẩm</p>
 			</div>
 			<?php
 				if (!empty($messages)) {
@@ -69,7 +69,7 @@
 						<label for="p-category">Tên danh mục: <span class="required">*</span>
 							<?php
 								if(isset($errors) && in_array('category', $errors)) {
-									echo "<p class='warning'>Điền tên danh mục.</p>";
+									echo "<p class='notice'>Điền tên danh mục.</p>";
 								}
 							?>
 						</label>
@@ -77,7 +77,7 @@
 						<label for="position">Vị trí: <span class="required">*</span>
 							<?php
 								if(isset($errors) && in_array('position', $errors)) {
-									echo "<p class='warning'>Chọn vị trí danh mục.</p>";
+									echo "<p class='notice'>Chọn vị trí danh mục.</p>";
 								}
 							?>
 						</label>

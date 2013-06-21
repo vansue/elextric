@@ -2,8 +2,8 @@
 	ob_start();
 	$title = "Thông tin người dùng | Elextronic";
 	include('inc/header.php');
-	include('inc/functions.php');
-	include('inc/mysqli_connect.php');
+	require_once('inc/functions.php');
+	require_once('inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
 	//Kiểm tra xem người dùng đã login chưa?
 	is_logged_in();
@@ -32,6 +32,13 @@
         } else {
             $errors[] = "email";
         }
+
+        // Check for address (not required)
+        $add = (!empty($trimmed['address'])) ? $trimmed['address'] : NULL;
+
+        // Check for phone (not required)
+        $phone = (!empty($trimmed['phone'])) ? $trimmed['phone'] : NULL;
+
         // Check for website (not required)
         $web = (!empty($trimmed['website'])) ? $trimmed['website'] : NULL;
 
@@ -43,11 +50,11 @@
 
         if(empty($errors)) {
             $q = "UPDATE users SET
-                first_name = ?, last_name = ?, email = ?, website = ?, yahoo = ?, bio = ?
+                first_name = ?, last_name = ?, email = ?, address = ?, phone = ?, website = ?, yahoo = ?, bio = ?
                 WHERE user_id = ?
                 LIMIT 1";
             $stmt = mysqli_prepare($dbc, $q);
-            mysqli_stmt_bind_param($stmt, 'ssssssi', $fn, $ln, $e, $web, $yahoo, $bio, $_SESSION['uid']);
+            mysqli_stmt_bind_param($stmt, 'ssssssssi', $fn, $ln, $e, $add, $phone, $web, $yahoo, $bio, $_SESSION['uid']);
             mysqli_stmt_execute($stmt) or die("MySQL Error: $q" . mysqli_stmt_error($stmt));
 
             if(mysqli_stmt_affected_rows($stmt) > 0) {
@@ -89,14 +96,14 @@
         <fieldset class="in-form">
             <legend>Họ tên</legend>
             <div>
-                <label for="first-name">Họ:
+                <label for="first-name">Họ: <span class="required">*</span>
                     <?php if(isset($errors) && in_array('first_name',$errors)) echo "<p class='notice'>Điền họ của bạn.</p>";?>
                 </label>
                 <input type="text" name="first_name" value="<?php if(isset($user['first_name'])) echo strip_tags($user['first_name']); ?>" size="20" maxlength="40" tabindex='1' />
             </div>
 
             <div>
-                <label for="last-name">Tên:
+                <label for="last-name">Tên: <span class="required">*</span>
                     <?php if(isset($errors) && in_array('last name',$errors)) echo "<p class='notice'>Điền tên của bạn.</p>";?>
                 </label>
                 <input type="text" name="last_name" value="<?php if(isset($user['last_name'])) echo strip_tags($user['last_name']); ?>" size="20" maxlength="40" tabindex='1' />
@@ -105,10 +112,20 @@
         <fieldset class="in-form">
             <legend>Liên hệ</legend>
             <div>
-                <label for="email">Email:
+                <label for="email">Email: <span class="required">*</span>
                 <?php if(isset($errors) && in_array('email',$errors)) echo "<p class='notice'>Điền email hợp lệ.</p>";?>
                 </label>
                 <input type="text" name="email" value="<?php if(isset($user['email'])) echo $user['email']; ?>" size="20" maxlength="40" tabindex='3' />
+            </div>
+
+            <div>
+                <label for="address">Địa chỉ:</label>
+                <input type="text" name="address" value="<?php echo (is_null($user['address'])) ? '' : strip_tags($user['address']); ?>" size="20" maxlength="40" tabindex='4' />
+            </div>
+
+            <div>
+                <label for="phone">Điện thoại:</label>
+                <input type="text" name="phone" value="<?php echo (is_null($user['phone'])) ? '' : strip_tags($user['phone']); ?>" size="20" maxlength="40" tabindex='4' />
             </div>
 
             <div>

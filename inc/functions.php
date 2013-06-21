@@ -33,6 +33,18 @@
 		}
 	}
 
+	// Cắt chữ để hiển thị thành đoạn văn ngắn
+    function the_excerpt($text, $string = 400) {
+        $sanitized = htmlentities($text, ENT_COMPAT, 'UTF-8');
+        if(strlen($sanitized) > $string) {
+            $cutString = substr($sanitized,0,$string);
+            $words = substr($sanitized, 0, strrpos($cutString, ' '));
+            return $words;
+        } else {
+            return $sanitized;
+        }
+    } // End the_excerpt
+
 	//Hàm kiểm tra xem có phải admin hay không
 	function is_admin() {
 		return isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 2);
@@ -45,7 +57,7 @@
 		}
 	}
 
-	//Hàm dùng để truy xuất dữ liệu của người dùng
+	//Hàm dùng để truy xuất dữ liệu của người dùng theo id
 	function fetch_user($user_id) {
 		global $dbc;
 		$q = "SELECT * FROM users WHERE user_id = {$user_id}";
@@ -59,3 +71,20 @@
 			return FALSE;
 		}
 	} //end fetch_user
+
+	//Hàm dùng để truy xuất dữ liệu của người dùng được sắp xếp
+	function fetch_users($order) {
+		global $dbc;
+		$q = "SELECT *, CONCAT_WS(' ', first_name, last_name) AS name FROM users ORDER BY {$order} ASC";
+		$r = mysqli_query($dbc, $q);
+    		confirm_query($r, $q);
+    	if(mysqli_num_rows($r) > 1) {
+    		$users = array();
+    		while ($results = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+    			$users[] = $results;
+    		}
+    	return $users;
+    	} else {
+    		return FALSE; //Nếu không có thông tin người dùng trong CSDL
+    	}
+	}

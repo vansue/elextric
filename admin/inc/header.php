@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+	ob_start();
+	if (!isset($_SESSION['user_level']) or $_SESSION['user_level'] != 2) {
+		header("Location: http://localhost:8080/elextric/admin/login.php");
+		exit();
+	}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -96,7 +103,7 @@
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="news.php" id="nav-new">Bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="contact.html" id="nav-user">Thành viên</a></li>
+				<li><a href="users.php" id="nav-user">Thành viên</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="contact.html" id="nav-comm">Bình luận</a></li>
 			</ul>

@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+	require_once('functions.php');
+	require_once('mysqli_connect.php');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -84,18 +88,15 @@
 			<ul>
 				<li><a href="index.php" id="nav-home">Trang chủ</a></li>
 				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-pro">Sản phẩm</a></li>
-				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-spe">Khuyến mại</a></li>
-				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="register.php" id="nav-acc">Tư vấn</a></li>
-				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="login.php" id="nav-sig">Đối tác</a></li>
-				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-shipping">Tuyển dụng</a></li>
-				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="contact.html" id="nav-con">Liên hệ</a></li>
-				<li><img src="images/menu_divider.gif" alt="menu-divider" /></li>
+				<?php
+					$q = "SELECT cat_id, cat_name FROM n_categories ORDER BY position LIMIT 6";
+					$r = mysqli_query($dbc, $q);
+						confirm_query($r, $q);
+					while($ncats = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+						echo "<li><a href='index.php?ncid=".$ncats['cat_id']."'>".$ncats['cat_name']."</a></li>";
+						echo "<li><img src='images/menu_divider.gif' alt='menu-divider' /></li>";
+					}
+				?>
 				<li id="nav-cur">Currencies
 					<form>
 						<select>

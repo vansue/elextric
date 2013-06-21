@@ -1,10 +1,8 @@
 <?php
-	ob_start();
 	include('inc/header.php');
-	include('../inc/functions.php');
-	include('../inc/mysqli_connect.php');
+	require_once('../inc/functions.php');
+	require_once('../inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
-	admin_success();
 ?>
 
 	<div id="main-content">
@@ -59,8 +57,8 @@
 		<div class="product-box">
 			<img src="../images/product_box_top.gif" alt="" class="top-prod-box" />
 			<div class="cen-prod-box">
-				<a href="#"><img src="../images/ab_user.png" alt=""></a>
-				<h4><a href="#">Quản lý thành viên</a></h4>
+				<a href="users.php"><img src="../images/ab_user.png" alt=""></a>
+				<h4><a href="users.php">Quản lý thành viên</a></h4>
 			</div>
 			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
 		</div><!--end .product-box-->
