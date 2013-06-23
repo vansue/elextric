@@ -63,10 +63,10 @@
 	<table>
     	<thead>
     		<tr>
-    			<th><a href="m-news.php?sort=page">Tên bài viết</a></th>
-                <th><a href="m-news.php?sort=pos">Vị trí</a></th>
-    			<th><a href="m-news.php?sort=date">Ngày tạo</a></th>
-    			<th><a href="m-news.php?sort=by">Người tạo</a></th>
+    			<th><a href="view-news.php?sort=page&ncid=<?php if(isset($ncid)) echo $ncid; ?>">Tên bài viết</a></th>
+                <th><a href="view-news.php?sort=pos&ncid=<?php if(isset($ncid)) echo $ncid; ?>">Vị trí</a></th>
+    			<th><a href="view-news.php?sort=date&ncid=<?php if(isset($ncid)) echo $ncid; ?>">Ngày tạo</a></th>
+    			<th><a href="view-news.php?sort=by&ncid=<?php if(isset($ncid)) echo $ncid; ?>">Người tạo</a></th>
                 <th>Edit</th>
                 <th>Delete</th>
     		</tr>

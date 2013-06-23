@@ -1,5 +1,5 @@
 <?php
-	$title = "Thêm mới bài viết | Elextronic";
+	$title = "Thêm mới, chỉnh sửa bài viết | Elextronic";
 	include('inc/header.php');
 	require_once('../inc/functions.php');
 	require_once('../inc/mysqli_connect.php');
@@ -9,6 +9,7 @@
 
 	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
 		$ncid = $_GET['ncid'];
+		//Kiểm tra xem danh mục có tồn tại không
 		$q = "SELECT cat_id FROM n_categories";
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);

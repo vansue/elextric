@@ -8,8 +8,23 @@
 <div id="main-content">
 
 <?php
-	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
+	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) :
 		$ncid = $_GET['ncid'];
+		$query = "SELECT cat_name FROM n_categories WHERE cat_id = {$ncid}";
+		$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+		if (mysqli_num_rows($result) == 1) {
+			list($ncat_name) = mysqli_fetch_array($result, MYSQLI_NUM);
+?>
+			<div class="title-content">
+				<p><?php echo $ncat_name; ?></p>
+			</div>
+<?php
+		} else {
+			//Không có danh mục tin, quay về trang chủ
+            redirect_to();
+		}
+
 		$q = "SELECT p.page_name, p.page_id, LEFT(p.content, 400) AS content, ";
 		$q .= " date_format(p.post_on, '%b %d, %y') AS date, ";
 		$q .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
@@ -21,7 +36,7 @@
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if(mysqli_num_rows($r) > 0) {
-            //Nếu có post thì hiển thi ra trình duyệt
+            //Nếu có post thì hiển thị ra trình duyệt
             while($pages = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
                 echo "
                     <div class='post'>
@@ -32,9 +47,9 @@
                 ";
             } //end while loop
         } else {
-            echo "<p>Chưa có bài viết nào trong mục này</p>";
+            echo "<p class='notice'>Chưa có bài viết nào trong mục này</p>";
         }
-	} else {
+	else :
 ?>
 	<div class="title-content">
 		<p>Sản phẩm mới</p>
@@ -184,10 +199,10 @@
 			<a href="#" class="detail-a">Chi tiết</a>
 		</div>
 	</div><!--end .product-box-->
+<?php endif; ?>
 </div><!--end #main-content-->
 
 <?php
-	}
 	include('inc/second-sidebar.php');
 	include('inc/footer.php');
 ?>

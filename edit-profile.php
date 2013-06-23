@@ -86,7 +86,7 @@
     			<img src="images/avatar/<?php echo (!isset($user['avatar']) ? "no_avatar.jpg" : $user['avatar']); ?>" alt="avatar" class="avatar">
     			<p>Chọn 1 ảnh JPEG hoặc PNG hoặc GIF có kích thước nhỏ hơn 512Kb để làm ảnh đại diện.</p>
     			<input type="hidden" name="MAX_FILE_SIZE" value="524288" />
-    			<input type="file" name="image" />
+    			<input type="file" name="image" id = "avatar" />
     			<p><input class="change" type="submit" name="upload" value="Lưu thay đổi" /></p>
     		</div>
     	</fieldset>
