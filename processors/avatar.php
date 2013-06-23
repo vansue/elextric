@@ -14,7 +14,7 @@
 			$errors = array();
 
 			//Tạo một array để kiểm tra xem file upload có thuộc dạng cho phép
-			$allowed = array('image/jpeg', 'image/jpg', 'image/png', 'image/x-png', 'image/gif');
+			$allowed = array('image/jpeg', 'image/jpg', 'image/png', 'image/x-png');
 			//Kiểm tra xem file upload có nằm trong định dạng cho phép
 			if (in_array(strtolower($_FILES['image']['type']), $allowed)) {
 				//Nếu có trong định dạng cho phép, tách lấy phần mở rộng
@@ -26,7 +26,7 @@
 					$errors[] = "<p>Server problem.</p>";
 				}
 			} else {
-				$errors[] = "<p>Your file is not a valid type. Please choose a JPG or PNG or GIF image to upload.</p>";
+				$errors[] = "<p>Your file is not a valid type. Please choose a JPG or PNG image to upload.</p>";
 			}
 		}// end isset $_FILES
 

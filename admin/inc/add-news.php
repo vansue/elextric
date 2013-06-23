@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 	if (isset($_FILES['image'])) {
 
 		//Tạo một array để kiểm tra xem file upload có thuộc dạng cho phép
-		$allowed = array('image/jpeg', 'image/jpg', 'image/png', 'image/x-png', 'image/gif');
+		$allowed = array('image/jpeg', 'image/jpg', 'image/png', 'image/x-png');
 		//Kiểm tra xem file upload có nằm trong định dạng cho phép
 		if (in_array(strtolower($_FILES['image']['type']), $allowed)) {
 			//Nếu có trong định dạng cho phép, tách lấy phần mở rộng
@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 				$errs[] = "<p class='notice'>Lỗi hệ thống.</p>";
 			}
 		} else {
-			$errs[] = "<p class='notice'>File của bạn không đúng định dạng. Chọn ảnh PNG hoặc JPG hoặc GIF để upload.</p>";
+			$errs[] = "<p class='notice'>File của bạn không đúng định dạng. Chọn ảnh PNG hoặc JPG để upload.</p>";
 		}
 	}// end isset $_FILES
 

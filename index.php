@@ -25,7 +25,7 @@
             redirect_to();
 		}
 
-		$q = "SELECT p.page_name, p.page_id, LEFT(p.content, 400) AS content, ";
+		$q = "SELECT p.page_name, p.page_id, p.intro_img, LEFT(p.content, 400) AS content, ";
 		$q .= " date_format(p.post_on, '%b %d, %y') AS date, ";
 		$q .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
 		$q .= " FROM pages AS p ";
@@ -40,6 +40,7 @@
             while($pages = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
                 echo "
                     <div class='post'>
+                    	<img src='images/news/{$pages['intro_img']}' alt='' />
                         <h2><a href='single.php?pnid={$pages['page_id']}'>{$pages['page_name']}</a></h2>
                         <p>".the_excerpt($pages['content'])." ... <a href='single.php?pnid={$pages['page_id']}'>Xem tiếp</a></p>
                         <p class='meta'><strong>Posted by:</strong> <a href='author.php?aid={$pages['user_id']}'> {$pages['name']}</a> | <strong>On: </strong> {$pages['date']} </p>

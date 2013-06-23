@@ -40,24 +40,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 	if (isset($_FILES['image'])) {
 
 		//Tạo một array để kiểm tra xem file upload có thuộc dạng cho phép
-		$allowed = array('image/jpeg', 'image/jpg', 'image/png', 'image/x-png', 'image/gif');
+		$allowed = array('image/jpeg', 'image/jpg', 'image/png', 'image/x-png', '');
 		//Kiểm tra xem file upload có nằm trong định dạng cho phép
 		if (in_array(strtolower($_FILES['image']['type']), $allowed)) {
 			//Nếu có trong định dạng cho phép, tách lấy phần mở rộng
 			$ext = end(explode('.', $_FILES['image']['name']));
 			$renamed = uniqid(rand(), true).'.'."$ext";
 
+			if($_FILES['image']['error'] != 4) {
 			//Đổi tên file
-			if(!move_uploaded_file($_FILES['image']['tmp_name'], "../images/news/".$renamed)) {
-				$errs[] = "<p class='notice'>Lỗi hệ thống.</p>";
+				if(!move_uploaded_file($_FILES['image']['tmp_name'], "../images/news/".$renamed)) {
+					$errs[] = "<p class='notice'>Lỗi hệ thống.</p>";
+				}
 			}
 		} else {
-			$errs[] = "<p class='notice'>File của bạn không đúng định dạng. Chọn ảnh PNG hoặc JPG hoặc GIF để upload.</p>";
+			$errs[] = "<p class='notice'>File của bạn không đúng định dạng. Chọn ảnh PNG hoặc JPG để upload.</p>";
 		}
 	}// end isset $_FILES
 
 	//Kiểm tra lỗi
-	if ($_FILES['image']['error'] > 0) {
+	if ($_FILES['image']['error'] > 0 && $_FILES['image']['error'] != 4) {
 		$errs[] = "<p class='notice'>File không thể upload do: <strong>";
 
 		//In thông báo dựa vào lỗi
@@ -71,10 +73,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 
 			case 3:
 				$errs[] .= "The file was partially uploaded";
-				break;
-
-			case 4:
-				$renamed = $eimage;
 				break;
 
 			case 6:
@@ -93,12 +91,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 				break;
 		}//end switch
 		$errs[] .= ".</strong></p>";
-	}//end if error
+	} elseif($_FILES['image']['error'] == 4) {//end if error
+		$renamed = $eimage;
+	}
 
 	// Xóa file đã được upload và tồn tại trong thư mục tạm
 	if (isset($_FILES['image']['tmp_name']) && is_file($_FILES['image']['tmp_name']) && file_exists($_FILES['image']['tmp_name'])) {
 		unlink($_FILES['image']['tmp_name']);
 	}
+
+
 
 	if(empty($errors) && empty($errs)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
 		$q = "UPDATE pages ";
@@ -110,7 +112,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 		if (mysqli_affected_rows($dbc) == 1) {
 			redirect_to('admin/view-news.php?ncid='.$ncid.'&msg=4');
 		} else {
-			$messages = "<p class='notice'>Không thể thêm bài viết vào CSDL do lỗi hệ thống.</p>";
+			$messages = "<p class='notice'>Không thể thêm bài viết vào CSDL do lỗi hệ thống.</p>".$q;
 		}
 	} else {
 		$messages = "<p class='notice'>Điền đầy đủ dữ liệu cho các trường.</p>";
@@ -126,7 +128,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 		if (!empty($messages)) echo $messages;
 	?>
 	<div>
-		<form id="add-news" action="" method="post" class="add-form">
+		<form id="add-news" action="" method="post" class="add-form" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Chỉnh sửa bài viết</legend>
 
@@ -144,7 +146,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 				</label> <br />
     			<input type="hidden" name="MAX_FILE_SIZE" value="524288" class="hidden" />
     			<input type="file" name="image" />
-    			<img src="../images/news/<?php echo (!isset($eimage) ? "no_avatar.jpg" : $eimage); ?>" alt="intro-image" class="intro-image">
+    			<img src="../images/news/<?php if(isset($eimage)) echo $eimage; ?>" alt="intro-image" class="intro-image">
 
 				<label for="position">Vị trí: <span class="required">*</span>
 					<?php

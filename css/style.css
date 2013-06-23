@@ -190,3 +190,10 @@ thead {background: #55909a; font-weight: bold; color: #fff;}
 thead a {color: #fff;}
 tbody td.delete {text-align: center;}
 tbody td.edit {text-align: center;}
+
+.post {font-size: 12px;}
+.post h2 {margin: 8px 0px 0px 158px; font-size: 14px;}
+.post h2 a:hover {text-decoration: underline;}
+.post img {float: left; margin: 0px 15px;}
+.post p {margin-left: 158px;}
+.post .meta {display: block; margin: 15px 0px; border-top: 1px solid #bcd4da; border-bottom: 1px solid #bcd4da; padding: 5px;}
