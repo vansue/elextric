@@ -8,6 +8,7 @@
 <div id="main-content">
 
 <?php
+	//Hiển thị danh mục bài viết
 	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) :
 		$ncid = $_GET['ncid'];
 		$query = "SELECT cat_name FROM n_categories WHERE cat_id = {$ncid}";
@@ -16,6 +17,8 @@
 		if (mysqli_num_rows($result) == 1) {
 			list($ncat_name) = mysqli_fetch_array($result, MYSQLI_NUM);
 ?>
+
+
 			<div class="title-content">
 				<p><?php echo $ncat_name; ?></p>
 			</div>
@@ -24,15 +27,26 @@
 			//Không có danh mục tin, quay về trang chủ
             redirect_to();
 		}
+?>
 
-		$q = "SELECT p.page_name, p.page_id, p.intro_img, LEFT(p.content, 400) AS content, ";
+<?php
+	//Phân trang danh mục bài viết
+	//Đặt số trang muốn hiển thị ra trình duyệt
+	$display = 5;
+	//Xác định vị trí bắt đầu
+	$start = (isset($_GET['s']) && filter_var($_GET['s'], FILTER_VALIDATE_INT, array('min_range' => 1))) ? $_GET['s'] : 0;
+?>
+
+<?php
+
+		$q = "SELECT p.page_name, p.page_id, p.intro_img, p.content, ";
 		$q .= " date_format(p.post_on, '%b %d, %y') AS date, ";
 		$q .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
 		$q .= " FROM pages AS p ";
 		$q .= " INNER JOIN users AS u ";
 		$q .= " USING (user_id) ";
 		$q .= " WHERE p.cat_id={$ncid} ";
-		$q .= " ORDER BY date ASC LIMIT 0, 10";
+		$q .= " ORDER BY date DESC LIMIT {$start}, {$display}";
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if(mysqli_num_rows($r) > 0) {
@@ -42,14 +56,17 @@
                     <div class='post'>
                     	<img src='images/news/{$pages['intro_img']}' alt='' />
                         <h2><a href='single.php?pnid={$pages['page_id']}'>{$pages['page_name']}</a></h2>
-                        <p>".the_excerpt($pages['content'])." ... <a href='single.php?pnid={$pages['page_id']}'>Xem tiếp</a></p>
-                        <p class='meta'><strong>Posted by:</strong> <a href='author.php?aid={$pages['user_id']}'> {$pages['name']}</a> | <strong>On: </strong> {$pages['date']} </p>
+                        <div>".the_excerpt($pages['content'])." ... <a href='single.php?pnid={$pages['page_id']}'>Xem tiếp</a></div>
+                        <p class='meta'><strong>Viết bởi:</strong> <a href='author.php?aid={$pages['user_id']}'> {$pages['name']}</a> | <strong>Ngày: </strong> {$pages['date']} </p>
                     </div>
                 ";
             } //end while loop
+
         } else {
             echo "<p class='notice'>Chưa có bài viết nào trong mục này</p>";
         }
+
+        pagination($ncid, $display);
 	else :
 ?>
 	<div class="title-content">

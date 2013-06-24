@@ -78,13 +78,14 @@ body.admin #nav-menu ul {width: 982px;}
 #nav-menu ul li img {width: 2px; height: 100%;}
 #nav-menu ul li a, #nav-menu ul li a:visited {display: block; float: left;padding: 0 8px 0 20px; margin:0 14px; height: 100%; color: #676d77;}
 #nav-menu ul li a:active, #nav-menu ul li a:hover {color: #333;}
-/*#nav-home {background: url(../images/home.png) no-repeat left;}
-#nav-pro {background: url(../images/services.png) no-repeat left;}
-#nav-spe {background: url(../images/favs.png) no-repeat left;}
-#nav-acc, #nav-sig {background: url(../images/user_add.png) no-repeat left;}
-#nav-sig {background: url(../images/sig.png) no-repeat left;}
-#nav-shipping {background: url(../images/car.png) no-repeat left;}
-#nav-con {background: url(../images/contact-new.png) no-repeat left;}*/
+#nav-home {background: url(../images/home.png) no-repeat left;}
+#nav-1 {background: url(../images/services.png) no-repeat left;}
+#nav-5 {background: url(../images/favs.png) no-repeat left;}
+#nav-15 {background: url(../images/user_add.png) no-repeat left;}
+#nav-24 {background: url(../images/sig.png) no-repeat left;}
+#nav-25 {background: url(../images/car.png) no-repeat left;}
+#nav-32 {background: url(../images/contact-new.png) no-repeat left;}
+
 #nav-cur {width: 180px; float: left; padding: 0 0 0 15px; color: #676d77;}
 #nav-pro-cat {background: url(../images/a_pro_cat.png) no-repeat left;}
 #nav-a-pro {background: url(../images/a_pro.png) no-repeat left;}
@@ -184,7 +185,7 @@ input.change {width: 100px;}
 .intro-image {display: block; width: 80px; height: 60px;margin: 10px 25px 0px 0px; border:1px solid #c1c1c1; padding: 3px; background-color: white;}
 
 /****** TABLE LAYOUT ******/
-table {margin-left: 12px; border-collapse: collapse; width: 560px;}
+table {margin: 0 0 10px 12px; border-collapse: collapse; width: 560px;}
 td, th {padding: 5px 10px; border: 1px #ccc solid; }
 thead {background: #55909a; font-weight: bold; color: #fff;}
 thead a {color: #fff;}
@@ -192,8 +193,13 @@ tbody td.delete {text-align: center;}
 tbody td.edit {text-align: center;}
 
 .post {font-size: 12px;}
-.post h2 {margin: 8px 0px 0px 158px; font-size: 14px;}
+.post h2 a {margin: 0px 0px 5px 5px; font-size: 14px; color: #609AA5; font-weight: bold;}
 .post h2 a:hover {text-decoration: underline;}
-.post img {float: left; margin: 0px 15px;}
-.post p {margin-left: 158px;}
-.post .meta {display: block; margin: 15px 0px; border-top: 1px solid #bcd4da; border-bottom: 1px solid #bcd4da; padding: 5px;}
+.post img {float: left; margin: 0px 10px 0 0; width: 140px; height: 105px;}
+.post div {margin: 5px 0 5px 158px;}
+.post .meta {display: block; float: left; width: 545px; margin: 15px 10px 10px 0px; border-top: 1px solid #bcd4da; border-bottom: 1px solid #bcd4da; padding: 5px;}
+.pagination {display: block; font-size: 12px; margin-left: 10px;}
+.pagination a {color: black;}
+.pagination a:hover {text-decoration: underline;}
+.pagination li {display: inline; padding-right: 5px;}
+.current {font-weight: bold; color: red;}

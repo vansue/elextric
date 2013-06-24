@@ -7,6 +7,13 @@
 ?>
 <!-- VALIDATE BIẾN $_GET -->
 <?php
+
+    //Phân trang danh mục bài viết
+    //Đặt số trang muốn hiển thị ra trình duyệt
+    $display = 5;
+    //Xác định vị trí bắt đầu
+    $start = (isset($_GET['s']) && filter_var($_GET['s'], FILTER_VALIDATE_INT, array('min_range' => 1))) ? $_GET['s'] : 0;
+
 	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
 		$ncid = $_GET['ncid'];
         $q = "SELECT cat_name FROM n_categories WHERE cat_id={$ncid}";
@@ -43,7 +50,7 @@
                 echo "<p class='notice success'>Chỉnh sửa bài viết thành công.</p>";
                 break;
             default:
-                redirect_to('admin/index.php');
+                echo "dds";
                 break;
         }
     }
@@ -99,8 +106,9 @@
     		$q = "SELECT p.page_id, p.page_name, p.position, p.post_on, p.cat_id, p.user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name ";
     		$q .= " FROM pages AS p ";
     		$q .= " JOIN users AS u USING(user_id) ";
-    		$q .= " WHERE cat_id = {$ncid}";
-    		$q .= " ORDER BY {$order_by} ASC";
+    		$q .= " WHERE cat_id = {$ncid} ";
+    		$q .= " ORDER BY {$order_by} ASC ";
+            $q .= " LIMIT {$start}, {$display}";
     		$r = mysqli_query($dbc, $q);
     			confirm_query($r, $q);
     		while ($pages = mysqli_fetch_array($r, MYSQLI_ASSOC)) :
@@ -116,6 +124,7 @@
         <?php endwhile; ?>
     	</tbody>
     </table>
+    <?php pagination($ncid, $display, 'view-news.php'); ?>
 </div><!--end #main-content-->
 <?php
 	include('inc/second-sidebar.php');

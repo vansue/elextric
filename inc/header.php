@@ -93,7 +93,7 @@
 					$r = mysqli_query($dbc, $q);
 						confirm_query($r, $q);
 					while($ncats = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-						echo "<li><a href='index.php?ncid=".$ncats['cat_id']."'>".$ncats['cat_name']."</a></li>";
+						echo "<li><a href='index.php?ncid=".$ncats['cat_id']."' id='nav-".$ncats['cat_id']."'>".$ncats['cat_name']."</a></li>";
 						echo "<li><img src='images/menu_divider.gif' alt='menu-divider' /></li>";
 					}
 				?>

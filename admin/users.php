@@ -8,6 +8,11 @@
 
 <!-- VALIDATE BIẾN $_GET -->
 <?php
+    //Phân trang danh mục bài viết
+    //Đặt số trang muốn hiển thị ra trình duyệt
+    $display = 5;
+    //Xác định vị trí bắt đầu
+    $start = (isset($_GET['s']) && filter_var($_GET['s'], FILTER_VALIDATE_INT, array('min_range' => 1))) ? $_GET['s'] : 0;
 	if (isset($_GET['euid'])) {
 		if(filter_var($_GET['euid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
 			include('inc/edit-users.php');
