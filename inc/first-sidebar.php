@@ -12,32 +12,13 @@
 					while($pcats = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
 						$i++;
 						if ($i%2 == 0) {
-							echo "<li><a href='products.php?pcid=".$pcats['cat_id']."' class='old'>".$pcats['cat_name']."</a></li>";
+							echo "<li><a href='index.php?pcid=".$pcats['cat_id']."' class='old'>".$pcats['cat_name']."</a></li>";
 						} else {
-							echo "<li><a href='products.php?pcid=".$pcats['cat_id']."' class='even'>".$pcats['cat_name']."</a></li>";
+							echo "<li><a href='index.php?pcid=".$pcats['cat_id']."' class='even'>".$pcats['cat_name']."</a></li>";
 						}
 					}
 				?>
 			</ul>
-		</div>
-
-		<div class="typical">
-			<h3><a href="#">Sản phẩm nổi bật</a></h3>
-			<div class="box">
-				<h4><a href="#">Motorola 156 MK-VL</a></h4>
-				<a href="#"><img src="images/laptop.png" alt=""></a>
-				<p class="price"><span>350$</span> 270$</p>
-			</div>
-		</div>
-
-		<div class="typical">
-			<h3>Newsletter</h3>
-			<div class="box">
-				<form>
-					<input type="text" name="txtnewsletter" id="txtnewsletter" value="your email" />
-					<a href="#">Đăng ký</a>
-				</form>
-			</div>
 		</div>
 
 		<div class="banner-adds">

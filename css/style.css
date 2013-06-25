@@ -127,7 +127,9 @@ p.price span {text-decoration: line-through; color: #999;}
 .product-box {width: 173px; height: auto; float: left; padding: 10px 10px 10px 11px; text-align: center; overflow: hidden;}
 .top-prod-box {width: 100%; height: 12px; float: left;}
 .bot-prod-box {width: 100%; height: 12px; float: left;}
-.cen-prod-box {width: 100%; height: auto; float: left; background: url(../images/product_box_center.gif) repeat-y;}
+.cen-prod-box {width: 100%; height: 165px; float: left; background: url(../images/product_box_center.gif) repeat-y;}
+.cen-prod-box h4 {height: 40px;}
+.cen-prod-box img {display: block; width: 110px; height: 100px; padding-left: 30px;}
 .prod-detail-tab {width: 100%; height: 31px; float: left; margin: 3px 0 0 0; background: url(../images/products_details_bg.gif) no-repeat center;}
 .prod-detail-tab a {float: left; padding: 6px 0 0 6px;}
 .prod-detail-tab a.detail-a { display: block; width: 35px; float: left; padding: 0 0 0 20px; background: url(../images/square-blue-add.gif) no-repeat left; margin: 7px 0 0 38px; color: #0fa0dd;}
@@ -194,12 +196,12 @@ tbody td.delete {text-align: center;}
 tbody td.edit {text-align: center;}
 
 .post {font-size: 12px;}
-.post h2 a {margin: 0px 0px 5px 5px; font-size: 14px; color: #609AA5; font-weight: bold;}
+.post h2 a {margin: 0px 0px 5px 0px; font-size: 14px; color: #609AA5; font-weight: bold;}
 .post h2 a:hover {text-decoration: underline;}
 .post img {float: left; margin: 0px 10px 0 0; width: 140px; height: 105px;}
-.post div {margin: 5px 0 5px 158px;}
+.post div, .post h2 {margin: 5px 0 5px 158px;}
 .post .meta {display: block; float: left; width: 545px; margin: 15px 10px 10px 0px; border-top: 1px solid #bcd4da; border-bottom: 1px solid #bcd4da; padding: 5px;}
-.pagination {display: block; font-size: 12px; margin-left: 10px;}
+.pagination {display: block; font-size: 12px; margin-left: 10px; width: 560px; float: left;}
 .pagination a {color: black;}
 .pagination a:hover {text-decoration: underline;}
 .pagination li {display: inline; padding-right: 5px;}

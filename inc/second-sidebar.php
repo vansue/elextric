@@ -14,19 +14,27 @@
 
 		<?php endif; ?>
 
-		<div class="typical">
-			<h3><a href="#">Sản phẩm mới</a></h3>
-			<div class="box">
-				<h4><a href="#">Motorola 156 MK-VL</a></h4>
-				<a href="#"><img src="images/p2.gif" alt=""></a>
-				<p class="price"><span>350$</span> 270$</p>
-			</div>
-		</div>
-
 		<div class='typical'>
 			<h3><a href="#">Electronix's News</a></h3>
 			<div class="box" id="boxnews">
-				<div>
+
+			<?php
+				$q = "SELECT page_id, page_name, content, date_format(post_on, '%b %d, %y') AS date FROM pages ORDER BY post_on DESC LIMIT 3";
+				$r = mysqli_query($dbc, $q);
+					confirm_query($r, $q);
+					if (mysqli_num_rows($r) > 0) {
+						while ($pages = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+							echo "
+								<div>
+									<p class='date'>{$pages['date']}</p>
+									<h4><a href='single.php?pnid={$pages['page_id']}' class='newstitle'>{$pages['page_name']}</a></h4>
+									<p>".the_excerpt($pages['content'], 150)."</p>
+								</div>
+							";
+						}
+					}
+			?>
+				<!--<div>
 					<p class='date'>August 20, 2012</p>
 					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -42,7 +50,7 @@
 					<p class='date'>August 20, 2012</p>
 					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
+				</div>-->
 			</div>
 		</div>
 
