@@ -206,3 +206,6 @@ tbody td.edit {text-align: center;}
 .pagination a:hover {text-decoration: underline;}
 .pagination li {display: inline; padding-right: 5px;}
 .current {font-weight: bold; color: red;}
+.block {display: block; float: left;}
+.p-post {font-size: 12px; margin-left: 15px; width: 560px;}
+.p-post .meta {display: block; float: right; margin-top: 5px;}

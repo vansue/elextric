@@ -11,6 +11,7 @@
 	//Hiển thị danh mục bài viết==========================================================================
 	if (isset($_GET['ncid']) && filter_var($_GET['ncid'], FILTER_VALIDATE_INT, array('min_range'=>1))) :
 		$ncid = $_GET['ncid'];
+		$pcid = NULL;
 		$query = "SELECT cat_name FROM n_categories WHERE cat_id = {$ncid}";
 		$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -72,6 +73,7 @@
     //Hiển thị danh mục sản phẩm===========================================================================
     elseif(isset($_GET['pcid']) && filter_var($_GET['pcid'], FILTER_VALIDATE_INT, array('min_range'=>1))) :
     		$pcid = $_GET['pcid'];
+    		$ncid = NULL;
 		$query = "SELECT cat_name FROM p_categories WHERE cat_id = {$pcid}";
 		$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -133,6 +135,8 @@
 <?php
 	//Trang chủ=====================================================================================================
 	else :
+		$ncid = NULL;
+		$pcid = NULL;
 ?>
 	<div class="title-content">
 		<p>Sản phẩm mới</p>
@@ -194,7 +198,7 @@
         } //end while loop
 
     } else {
-        echo "<p class='notice'>Chưa có bài viết nào trong mục này</p>";
+        echo "<p class='notice block'>Chưa có bài viết nào trong mục này</p>";
     }
 ?>
 
