@@ -3,11 +3,11 @@
 $epid = $_GET['epid'];
 $dpid = NULL;
 //Lấy dữ liệu từ CSDL. Kiểm tra sản phẩm có trong CSDL không
-$q = "SELECT page_name, intro_img, position, intro_text, details, price, garanrie FROM products WHERE pro_id = {$epid}";
+$q = "SELECT pro_name, intro_img, position, intro_text, details, price, garantie FROM products WHERE pro_id = {$epid}";
 $r = mysqli_query($dbc, $q);
 	confirm_query($r, $q);
 if (mysqli_num_rows($r) == 1) {//Nếu sản phẩm tồn tại trong CSDL, xuất dữ liệu ra ngoài trình duyệt
-	list($epage_name, $eimage, $eposition, $eintro_text, $edetails, $eprice, $egarantie) = mysqli_fetch_array($r, MYSQLI_NUM);
+	list($epro_name, $eimage, $eposition, $eintro_text, $edetails, $eprice, $egarantie) = mysqli_fetch_array($r, MYSQLI_NUM);
 } else {//Nếu epid không hợp lệ
 	redirect_to('admin/view-products.php?pcid='.$pcid.'&msg=2');
 }
@@ -122,13 +122,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 
 	if(empty($errors) && empty($errs)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
 		$q = "UPDATE products ";
-		$q .= " SET pro_name = '{$pro_name}', intro_img = '{$renamed}', position = $position, details = '{$details}', intro_text = '{$intro-text}', cat_id = $pcid, price = $price, garantie = $garantie ";
+		$q .= " SET pro_name = '{$pro_name}', intro_img = '{$renamed}', position = $position, details = '{$details}', intro_text = '{$intro_text}', cat_id = $pcid, price = $price, garantie = $garantie ";
 		$q .= " WHERE pro_id = {$epid}";
 
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if (mysqli_affected_rows($dbc) == 1) {
-			redirect_to('admin/view-products.php?ncid='.$ncid.'&msg=4');
+			redirect_to('admin/view-products.php?pcid='.$pcid.'&msg=4');
 		} else {
 			$messages = "<p class='notice'>Không thể thêm sản phẩm vào CSDL do lỗi hệ thống.</p>";
 		}
@@ -150,14 +150,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 			<fieldset>
 				<legend>Chỉnh sửa sản phẩm</legend>
 
-				<label for="page">Tên sản phẩm: <span class="required">*</span>
+				<label for="pro-name">Tên sản phẩm: <span class="required">*</span>
 					<?php
-					if(isset($errors) && in_array('page-name', $errors)) {
+					if(isset($errors) && in_array('pro name', $errors)) {
 						echo "<p class='notice'>Điền tên sản phẩm.</p>";
 					}
 				?>
 				</label>
-				<input type="text" name="page-name" id="page-name" value="<?php if (isset($epage_name)) echo $epage_name; ?>" size="20" maxlength="100" tabindex="1" />
+				<input type="text" name="pro-name" id="pro-name" value="<?php if (isset($epro_name)) echo $epro_name; ?>" size="20" maxlength="100" tabindex="1" />
 
 				<label for="image">Ảnh sản phẩm: <span class="required">*</span>
 					<?php if(isset($errs)) report_error($errs); ?>
@@ -182,7 +182,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 						list($num) = mysqli_fetch_array($r, MYSQLI_NUM);
 						for ($i=1; $i <= $num+1; $i++) {//Tạo vòng for để tạo ra option, cộng thêm một giá trị cho position
 							echo "<option value='{$i}'";
-								if(isset($eposition]) && $eposition == $i) echo "selected='selected'";
+								if(isset($eposition) && $eposition == $i) echo "selected='selected'";
 							echo ">".$i."</option>";
 						}
 					}
@@ -201,7 +201,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 				<label for="garantie">Bảo hành: <span class="required">*</span>
 					<?php
 						if(isset($errors) && in_array('garantie', $errors)) {
-							echo "<p class='notice'>Điền giá thời gian bảo hành.</p>";
+							echo "<p class='notice'>Điền thời gian bảo hành.</p>";
 						}
 					?>
 				</label>
