@@ -1,15 +1,15 @@
 <?php
-/**************************** EDIT DANH SÁCH BÀI VIẾT **********************************/
+/**************************** EDIT DANH SÁCH SẢN PHẨM **********************************/
 $epid = $_GET['epid'];
 $dpid = NULL;
-//Lấy dữ liệu từ CSDL. Kiểm tra bài viết có trong CSDL không
-$q = "SELECT page_name, intro_img, position, content FROM pages WHERE page_id = {$epid}";
+//Lấy dữ liệu từ CSDL. Kiểm tra sản phẩm có trong CSDL không
+$q = "SELECT page_name, intro_img, position, intro_text, details, price, garanrie FROM products WHERE pro_id = {$epid}";
 $r = mysqli_query($dbc, $q);
 	confirm_query($r, $q);
-if (mysqli_num_rows($r) == 1) {//Nếu bài viết tồn tại trong CSDL, xuất dữ liệu ra ngoài trình duyệt
-	list($epage_name, $eimage, $eposition, $econtent) = mysqli_fetch_array($r, MYSQLI_NUM);
+if (mysqli_num_rows($r) == 1) {//Nếu sản phẩm tồn tại trong CSDL, xuất dữ liệu ra ngoài trình duyệt
+	list($epage_name, $eimage, $eposition, $eintro_text, $edetails, $eprice, $egarantie) = mysqli_fetch_array($r, MYSQLI_NUM);
 } else {//Nếu epid không hợp lệ
-	redirect_to('admin/view-news.php?ncid='.$ncid.'&msg=2');
+	redirect_to('admin/view-products.php?pcid='.$pcid.'&msg=2');
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
@@ -18,10 +18,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 	//Tạo một array trống cho biến $errs
 	$errs = array();
 
-	if(empty($_POST['page-name'])) {
-		$errors[] = "page-name";
+	if(empty($_POST['pro-name'])) {
+		$errors[] = "pro name";
 	} else {
-		$page_name = mysqli_real_escape_string($dbc, strip_tags($_POST['page-name']));
+		$pro_name = mysqli_real_escape_string($dbc, strip_tags($_POST['pro-name']));
 	}
 
 	if(isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {//Kiểm tra giá trị nhập vào
@@ -30,10 +30,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 		$errors[] = "position";
 	}
 
-	if(empty($_POST['content'])) {
-		$errors[] = "content";
+	if(empty($_POST['price'])) {
+		$errors[] = "price";
 	} else {
-		$content = mysqli_real_escape_string($dbc, $_POST['content']);
+		$price = mysqli_real_escape_string($dbc, strip_tags($_POST['price']));
+	}
+
+	if(empty($_POST['garantie'])) {
+		$errors[] = "garantie";
+	} else {
+		$garantie = mysqli_real_escape_string($dbc, strip_tags($_POST['garantie']));
+	}
+
+	if(empty($_POST['intro-text'])) {
+		$errors[] = "intro text";
+	} else {
+		$intro_text = mysqli_real_escape_string($dbc, $_POST['intro-text']);
+	}
+
+	if(empty($_POST['details'])) {
+		$errors[] = "details";
+	} else {
+		$details = mysqli_real_escape_string($dbc, $_POST['details']);
 	}
 
 	//Upload ảnh đại diện
@@ -49,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 
 			if($_FILES['image']['error'] != 4) {
 			//Đổi tên file
-				if(!move_uploaded_file($_FILES['image']['tmp_name'], "../images/news/".$renamed)) {
+				if(!move_uploaded_file($_FILES['image']['tmp_name'], "../images/products/".$renamed)) {
 					$errs[] = "<p class='notice'>Lỗi hệ thống.</p>";
 				}
 			}
@@ -103,16 +121,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 
 
 	if(empty($errors) && empty($errs)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
-		$q = "UPDATE pages ";
-		$q .= " SET page_name = '{$page_name}', intro_img = '{$renamed}', position = $position, content = '{$content}', cat_id = $ncid ";
-		$q .= " WHERE page_id = {$epid}";
+		$q = "UPDATE products ";
+		$q .= " SET pro_name = '{$pro_name}', intro_img = '{$renamed}', position = $position, details = '{$details}', intro_text = '{$intro-text}', cat_id = $pcid, price = $price, garantie = $garantie ";
+		$q .= " WHERE pro_id = {$epid}";
 
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if (mysqli_affected_rows($dbc) == 1) {
-			redirect_to('admin/view-news.php?ncid='.$ncid.'&msg=4');
+			redirect_to('admin/view-products.php?ncid='.$ncid.'&msg=4');
 		} else {
-			$messages = "<p class='notice'>Không thể thêm bài viết vào CSDL do lỗi hệ thống.</p>";
+			$messages = "<p class='notice'>Không thể thêm sản phẩm vào CSDL do lỗi hệ thống.</p>";
 		}
 	} else {
 		$messages = "<p class='notice'>Điền đầy đủ dữ liệu cho các trường.</p>";
@@ -122,7 +140,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 
 <div id="main-content">
 	<div class="title-content">
-		<p>Chỉnh sửa bài viết</p>
+		<p>Chỉnh sửa sản phẩm</p>
 	</div>
 	<?php
 		if (!empty($messages)) echo $messages;
@@ -130,57 +148,84 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 	<div>
 		<form id="add-news" action="" method="post" class="add-form" enctype="multipart/form-data">
 			<fieldset>
-				<legend>Chỉnh sửa bài viết</legend>
+				<legend>Chỉnh sửa sản phẩm</legend>
 
-				<label for="page">Tên bài viết: <span class="required">*</span>
+				<label for="page">Tên sản phẩm: <span class="required">*</span>
 					<?php
 					if(isset($errors) && in_array('page-name', $errors)) {
-						echo "<p class='notice'>Điền tên bài viết.</p>";
+						echo "<p class='notice'>Điền tên sản phẩm.</p>";
 					}
 				?>
 				</label>
 				<input type="text" name="page-name" id="page-name" value="<?php if (isset($epage_name)) echo $epage_name; ?>" size="20" maxlength="100" tabindex="1" />
 
-				<label for="image">Ảnh đại diện: <span class="required">*</span>
+				<label for="image">Ảnh sản phẩm: <span class="required">*</span>
 					<?php if(isset($errs)) report_error($errs); ?>
 				</label> <br />
     			<input type="hidden" name="MAX_FILE_SIZE" value="524288" class="hidden" />
     			<input type="file" name="image" />
-    			<img src="../images/news/<?php if(isset($eimage)) echo $eimage; ?>" alt="intro-image" class="intro-image">
+    			<img src="../images/products/<?php if(isset($eimage)) echo $eimage; ?>" alt="intro-image" class="intro-image">
 
 				<label for="position">Vị trí: <span class="required">*</span>
 					<?php
 					if(isset($errors) && in_array('position', $errors)) {
-						echo "<p class='notice'>Chọn vị trí bài viết.</p>";
+						echo "<p class='notice'>Chọn vị trí sản phẩm.</p>";
 					}
 				?>
 				</label>
 				<select name="position">
 					<?php
-					$q = "SELECT count(page_id) AS count FROM pages";
+					$q = "SELECT count(pro_id) AS count FROM products WHERE cat_id={$pcid}";
 					$r = mysqli_query($dbc, $q);
 						confirm_query($r, $q);
 					if(mysqli_num_rows($r) == 1) {
 						list($num) = mysqli_fetch_array($r, MYSQLI_NUM);
 						for ($i=1; $i <= $num+1; $i++) {//Tạo vòng for để tạo ra option, cộng thêm một giá trị cho position
 							echo "<option value='{$i}'";
-								if(isset($eposition) && $eposition == $i) echo "selected='selected'";
+								if(isset($eposition]) && $eposition == $i) echo "selected='selected'";
 							echo ">".$i."</option>";
 						}
 					}
 				?>
 				</select>
 
-				<label for="page-content">Nội dung bài viết: <span class="required">*</span>
+				<label for="price">Giá: <span class="required">*</span>
 					<?php
-					if(isset($errors) && in_array('content', $errors)) {
-						echo "<p class='notice'>Nhập nội dung bài viết.</p>";
+						if(isset($errors) && in_array('price', $errors)) {
+							echo "<p class='notice'>Điền giá sản phẩm.</p>";
+						}
+					?>
+				</label>
+				<input type="text" name="price" id="price" value="<?php if (isset($eprice))	echo strip_tags($eprice); ?>" size="20" maxlength="100" tabindex="6" />
+
+				<label for="garantie">Bảo hành: <span class="required">*</span>
+					<?php
+						if(isset($errors) && in_array('garantie', $errors)) {
+							echo "<p class='notice'>Điền giá thời gian bảo hành.</p>";
+						}
+					?>
+				</label>
+				<input type="text" name="garantie" id="garantie" value="<?php if (isset($egarantie)) echo strip_tags($egarantie); ?>" size="20" maxlength="100" tabindex="6" />
+
+				<label for="intro-text">Mô tả sản phẩm: <span class="required">*</span>
+					<?php
+					if(isset($errors) && in_array('intro text', $errors)) {
+						echo "<p class='notice'>Nhập mô tả sản phẩm.</p>";
 					}
 				?>
 				</label>
-				<textarea name="content" cols="50" rows="20"><?php if (isset($econtent)) echo $econtent; ?></textarea>
+				<textarea name="intro-text" cols="50" rows="10" class="short"><?php if(isset($eintro_text)) echo $eintro_text; ?></textarea>
 
-				<p><input type="submit" name="submit" value="Cập nhật bài viết" /></p>
+				<label for="details">Đặc điểm kỹ thuật: <span class="required">*</span>
+					<?php
+					if(isset($errors) && in_array('details', $errors)) {
+						echo "<p class='notice'>Nhập đặc điểm kỹ thuật của sản phẩm.</p>";
+					}
+				?>
+				</label>
+				<textarea name="details" cols="50" rows="10" class="short"><?php if(isset($edetails)) echo $edetails; ?></textarea>
+
+				<p><input type="submit" name="submit" value="Cập nhật sản phẩm" /></p>
 			</fieldset>
 		</form>
 	</div>

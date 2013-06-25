@@ -89,13 +89,13 @@
     	}
 	}
 
-	function pagination($ncid, $display = 5, $url = 'index.php') {
+	function pagination($ncid, $display = 5, $url = 'index.php', $link = 'ncid', $id = 'page_id', $tbl = 'pages') {
 		global $dbc; global $start;
 		if (isset($_GET['p']) && filter_var($_GET['p'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
 			$page = $_GET['p'];
 		} else {
 			//Nếu biến p không có, sẽ truy vấn CSDL để tìm xem có bao nhiêu page để hiển thị
-			$q = "SELECT COUNT(page_id) FROM pages WHERE cat_id = {$ncid}";
+			$q = "SELECT COUNT({$id}) FROM {$tbl} WHERE cat_id = {$ncid}";
 			$r = mysqli_query($dbc, $q); confirm_query($r, $q);
 			list($record) = mysqli_fetch_array($r, MYSQLI_NUM);
 
@@ -113,13 +113,13 @@
 
 				//Nếu không phải ở trang đầu (hoặc 1) thì sẽ hiển thị Trang trước
 				if($current_page != 1) {
-					echo "<li><a href='{$url}?ncid={$ncid}&s=".($start - $display)."&p={$page}'>Trang trước</a></li>";
+					echo "<li><a href='{$url}?{$link}={$ncid}&s=".($start - $display)."&p={$page}'>Trang trước</a></li>";
 				}
 
 				//Hiển thị phần số còn lại của trang
 				for ($i=1; $i <=$page ; $i++) {
 					if ($i != $current_page) {
-						echo "<li><a href='{$url}?ncid={$ncid}&s=".($display*($i-1))."&p={$page}'>{$i}</a></li>";
+						echo "<li><a href='{$url}?{$link}={$ncid}&s=".($display*($i-1))."&p={$page}'>{$i}</a></li>";
 					} else {
 						echo "<li class='current'>{$i}</li>";
 					}
@@ -127,7 +127,7 @@
 
 				//Nếu không phải trang cuối thì hiển thị trang kế
 				if ($current_page != $page) {
-					echo "<li><a href='{$url}?ncid={$ncid}&s=".($start + $display)."&p={$page}'>Trang sau</a></li>";
+					echo "<li><a href='{$url}?{$link}={$ncid}&s=".($start + $display)."&p={$page}'>Trang sau</a></li>";
 				}
 			}
 		echo "</ul>";

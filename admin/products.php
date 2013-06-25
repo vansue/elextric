@@ -24,8 +24,8 @@
 		<div class="product-box">
 			<img src="../images/product_box_top.gif" alt="" class="top-prod-box" />
 			<div class="cen-prod-box">
-				<a href="<?php echo BASE_URL.'admin/view-news.php?pcid='.$cats['cat_id']?>"><img src="../images/news.png" alt=""></a>
-				<h4><a href="<?php echo BASE_URL.'admin/view-news.php?pcid='.$cats['cat_id']?>"><?php echo $cats['cat_name']; ?></a></h4>
+				<a href="<?php echo BASE_URL.'admin/view-products.php?pcid='.$cats['cat_id']?>"><img src="../images/news.png" alt=""></a>
+				<h4><a href="<?php echo BASE_URL.'admin/view-products.php?pcid='.$cats['cat_id']?>"><?php echo $cats['cat_name']; ?></a></h4>
 			</div>
 			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
 		</div><!--end .product-box-->

@@ -50,7 +50,7 @@
                 echo "<p class='notice success'>Chỉnh sửa bài viết thành công.</p>";
                 break;
             default:
-                echo "dds";
+                redirect_to('admin/index.php');
                 break;
         }
     }

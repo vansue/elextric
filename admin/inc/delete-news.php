@@ -1,5 +1,5 @@
 <?php
-/**************************** XÓA DANH MỤC BÀI VIẾT **********************************/
+/**************************** XÓA BÀI VIẾT **********************************/
 $dpid = $_GET['dpid'];
 $epid = NULL;
 $q = "DELETE FROM pages WHERE page_id = {$dpid} LIMIT 1";
