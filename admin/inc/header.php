@@ -43,49 +43,7 @@
 		<!--===== TOP =====-->
 		<div id="top">
 			<p><a href="index.php">Administration Site</a></p>
-			<div id="language">
-				<h3>Languages: </h3>
-				<a href="#"><img src="../images/vi.gif" alt="VI" /></a>
-				<a href="#"><img src="../images/en.png" alt="EN" /></a>
-			</div>
-
-			<div id="search">
-				<a href="#">Advanced Search</a>
-				<form action="search.html" method="post" name="fsearch" id="fsearch">
-					<input type="text" name="txtSearch" id="txtSearch" />
-					<input type="image" src="../images/search.gif" name="imgSearch" id="imgSearch" alt="imgSearch" />
-				</form>
-			</div>
 		</div><!--end #top-->
-
-		<!--===== HEADER =====-->
-		<div id="header">
-			<h1 id="logo"><a href="../index.php">Electronix</a></h1>
-			<div id="slider">
-				<img src="../images/slide_divider.png" alt="" class="slide-divider" />
-				<div id="slide-content">
-					<img src="../images/laptop.png" alt="" />
-
-					<div id="slide-detail">
-						<h3><a href="#">Samsung GX 2004 LM</a></h3>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do iusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim eniam, quis nostrud exercitation ullamco
-						</p>
-						<a href="#" id="detail">Xem tiếp</a>
-					</div>
-
-					<div class="group"></div>
-					<div id="pagination">
-						<a href="#" class="active">1</a>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-					</div>
-				</div><!--slide-content-->
-				<img src="../images/slide_divider.png" alt="" class="slide-divider" />
-			</div><!--end #slider-->
-		</div><!--end #header-->
 
 		<!--===== NAV MENU =====-->
 		<div id="nav-menu" class="group">
@@ -109,8 +67,3 @@
 			</ul>
 			<img src="../images/menu_right.gif" alt="right-menu" />
 		</div><!--end #nav-menu-->
-
-		<!--===== NAVIGATION =====-->
-		<div id="navigation">
-			Navigation: <a href="#" class="current">Home</a>
-		</div>

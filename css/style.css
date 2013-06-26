@@ -69,7 +69,7 @@ a {text-decoration: none;}
 #pagination a {display: block; width: 22px; height: 22px; float: left; margin-right: 5px; line-height: 23px; text-align: center; background: url(../images/pag_bg.gif) no-repeat top center; color: #9d8b8b;}
 
 /****** NAV MENU ******/
-#nav-menu {width: 100%; height: 50px;}
+#nav-menu {width: 100%; height: 50px; margin-bottom: 10px;}
 #nav-menu img {display: block; width: 9px; height: 100%; float: left;}
 #nav-menu ul {width: 982px; float: left; background: url(../images/menu_bg.gif) repeat-x;}
 body.admin #nav-menu ul {width: 982px;}
@@ -95,10 +95,6 @@ body.admin #nav-menu ul {width: 982px;}
 #nav-user {background: url(../images/a_user.png) no-repeat left;}
 #nav-comm {background: url(../images/a_comm.png) no-repeat left;}
 
-/****** NAVIGATION ******/
-#navigation {width: 970px; height: 15px; padding: 10px 10px 0 20px; color: #333; background: url(../images/navbullet.png) no-repeat top left; background-position: 5px 11px;}
-.current {color: #0fa0dd;}
-
 /****** FIRST SIDEBAR ******/
 #content {width: 100%; overflow: hidden;}
 #first-sidebar {width: 196px; float: left;}
@@ -120,20 +116,26 @@ p.price span {text-decoration: line-through; color: #999;}
 #tm {display: block; font-size: 20px;}
 
 /****** MAIN CONTENT ******/
-#main-content {width: 585px; float: left; padding: 10px 10px; overflow: hidden;}
+#main-content {width: 585px; float: left; padding: 10px 10px 10px 10px; overflow: hidden;}
 .add-form {float: left; width: 560px; margin: 0 0 10px 12px;}
 .title-content {width: 520px; height: 33px; float: left; background: url(../images/bar_bg.gif) no-repeat center; padding-left: 40px; line-height: 33px; margin: 0 0 10px 12px; font-weight: bold; color: #847676;}
 .post {width: 560px; float: left; margin: 0 0 10px 12px;}
 .product-box {width: 173px; height: auto; float: left; padding: 10px 10px 10px 11px; text-align: center; overflow: hidden;}
-.top-prod-box {width: 100%; height: 12px; float: left;}
-.bot-prod-box {width: 100%; height: 12px; float: left;}
+.top-prod-box, .bot-prod-box, .top-prod-box-big, .bot-prod-box-big {width: 100%; height: 12px; float: left;}
 .cen-prod-box {width: 100%; height: 165px; float: left; background: url(../images/product_box_center.gif) repeat-y;}
 .cen-prod-box h4 {height: 40px;}
 .cen-prod-box img {display: block; width: 110px; height: 100px; padding-left: 30px;}
+.product-box-big {width: 554px; height: auto; float: left; padding: 0px 10px 10px 15px; overflow: hidden;}
+.cen-prod-box-big {width: 100%; height: auto; float: left; background: url(../images/details_box_center.gif) repeat; font-size: 12px;}
+.cen-prod-box-big img {display: block; float: left; width: 140px; height: 160px; margin: 0px 0 0 10px;}
+.cen-prod-box-big h4 {margin: 0px 0 10px 200px; font-weight: bold; color: red; text-decoration: underline; font-size: 14px;}
+.cen-prod-box-big div {margin: 0 5px 5px 200px}
 .prod-detail-tab {width: 100%; height: 31px; float: left; margin: 3px 0 0 0; background: url(../images/products_details_bg.gif) no-repeat center;}
 .prod-detail-tab a {float: left; padding: 6px 0 0 6px;}
 .prod-detail-tab a.detail-a { display: block; width: 35px; float: left; padding: 0 0 0 20px; background: url(../images/square-blue-add.gif) no-repeat left; margin: 7px 0 0 38px; color: #0fa0dd;}
 #qmk a {display: block; float: left; margin-top: 10px; width: 100%;}
+a.addtocard {display: block; float: left; width: 74px; height: 27px; padding-left: 33px; margin-left: 200px; background: url(../images/addtocart.gif) no-repeat left; line-height: 27px; color: #1c4a52;}
+div.details {margin: 0 5px 0 20px;}
 
 /****** TOOLTIP ******/
 .tooltip {background-color: #707070; position: absolute; text-align: center; padding: 5px; width: auto; color: white;}

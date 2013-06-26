@@ -43,8 +43,6 @@
 					} else {
 						//Nếu không có SESSION
 						echo "
-							<li><a href='index.php'>Trang chủ</a></li>
-							<li><a href='index.php'>Giới thiệu</a></li>
 							<li><a href='register.php'>Đăng ký</a></li>
 							<li><a href='login.php'>Đăng nhập</a></li>
 						";

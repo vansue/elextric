@@ -60,8 +60,3 @@
 			</ul>
 			<img src="images/menu_right.gif" alt="right-menu" />
 		</div><!--end #nav-menu-->
-
-		<!--===== NAVIGATION =====-->
-		<div id="navigation">
-			Navigation: <a href="#" class="current">Home</a>
-		</div>

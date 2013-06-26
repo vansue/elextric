@@ -3,11 +3,11 @@
 $epid = $_GET['epid'];
 $dpid = NULL;
 //Lấy dữ liệu từ CSDL. Kiểm tra sản phẩm có trong CSDL không
-$q = "SELECT pro_name, intro_img, position, intro_text, details, price, garantie FROM products WHERE pro_id = {$epid}";
+$q = "SELECT pro_name, intro_img, position, intro_text, details, price, garantie, promotion FROM products WHERE pro_id = {$epid}";
 $r = mysqli_query($dbc, $q);
 	confirm_query($r, $q);
 if (mysqli_num_rows($r) == 1) {//Nếu sản phẩm tồn tại trong CSDL, xuất dữ liệu ra ngoài trình duyệt
-	list($epro_name, $eimage, $eposition, $eintro_text, $edetails, $eprice, $egarantie) = mysqli_fetch_array($r, MYSQLI_NUM);
+	list($epro_name, $eimage, $eposition, $eintro_text, $edetails, $eprice, $egarantie, $epromotion) = mysqli_fetch_array($r, MYSQLI_NUM);
 } else {//Nếu epid không hợp lệ
 	redirect_to('admin/view-products.php?pcid='.$pcid.'&msg=2');
 }
@@ -52,6 +52,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 		$errors[] = "details";
 	} else {
 		$details = mysqli_real_escape_string($dbc, $_POST['details']);
+	}
+
+	if (empty($_POST['promotion'])) {
+		$promotion = 'Không có';
+	} else {
+		$promotion = mysqli_real_escape_string($dbc, $_POST['promotion']);
 	}
 
 	//Upload ảnh đại diện
@@ -122,7 +128,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 
 	if(empty($errors) && empty($errs)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
 		$q = "UPDATE products ";
-		$q .= " SET pro_name = '{$pro_name}', intro_img = '{$renamed}', position = $position, details = '{$details}', intro_text = '{$intro_text}', cat_id = $pcid, price = $price, garantie = $garantie ";
+		$q .= " SET pro_name = '{$pro_name}', intro_img = '{$renamed}', position = $position, details = '{$details}', intro_text = '{$intro_text}', cat_id = $pcid, price = $price, garantie = $garantie, promotion = '{$promotion}' ";
 		$q .= " WHERE pro_id = {$epid}";
 
 		$r = mysqli_query($dbc, $q);
@@ -224,6 +230,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 				?>
 				</label>
 				<textarea name="details" cols="50" rows="10" class="short"><?php if(isset($edetails)) echo $edetails; ?></textarea>
+
+				<label for="promotion">Khuyến mãi: </label>
+				<textarea name="promotion" cols="50" rows="10" class="short"><?php if(isset($epromotion)) echo $epromotion; ?></textarea>
 
 				<p><input type="submit" name="submit" value="Cập nhật sản phẩm" /></p>
 			</fieldset>

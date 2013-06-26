@@ -43,6 +43,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 		$details = mysqli_real_escape_string($dbc, $_POST['details']);
 	}
 
+	if (empty($_POST['promotion'])) {
+		$promotion = 'Không có';
+	} else {
+		$promotion = mysqli_real_escape_string($dbc, $_POST['promotion']);
+	}
+
 	//Upload ảnh đại diện
 	if (isset($_FILES['image'])) {
 
@@ -108,8 +114,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 	}
 
 	if(empty($errors) && empty($errs)) { //Nếu không có lỗi xảy ra thì chèn vào CSDL
-		$q = "INSERT INTO products (user_id, cat_id, pro_name, intro_img, intro_text, price, garantie, details, position, post_on) ";
-		$q .= " VALUES (1, $pcid, '{$pro_name}', '{$renamed}', '{$intro_text}', $price, $garantie, '{$details}', $position, NOW())";
+		$q = "INSERT INTO products (user_id, cat_id, pro_name, intro_img, intro_text, price, garantie, details, position, post_on, promotion) ";
+		$q .= " VALUES (1, $pcid, '{$pro_name}', '{$renamed}', '{$intro_text}', $price, $garantie, '{$details}', $position, NOW(), '{$promotion}')";
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if (mysqli_affected_rows($dbc) == 1) {
@@ -210,6 +216,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được s
 				?>
 				</label>
 				<textarea name="details" cols="50" rows="10" class="short"><?php if(isset($_POST['details'])) echo $_POST['details']; ?></textarea>
+
+				<label for="promotion">Khuyến mãi: </label>
+				<textarea name="promotion" cols="50" rows="10" class="short"><?php if(isset($_POST['promotion'])) echo $_POST['promotion']; ?></textarea>
 
 				<p><input type="submit" name="submit" value="Thêm mới sản phẩm" /></p>
 			</fieldset>
