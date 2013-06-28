@@ -1,15 +1,21 @@
 	<div id="second-sidebar">
 		<?php
 			if(isset($_SESSION['last_name'])) :
+				$max = count($_SESSION['cart']);
+				for ($i=0; $i < $max; $i++) {
+					$sum_qty += $_SESSION['cart'][$i]['qty'];
+					$sum_price += $_SESSION['cart'][$i]['price']*$_SESSION['cart'][$i]['qty'];
+				}
 		?>
 		<div id="shopping-cart" class="group">
-			<h2><a href="#">Xin chào <?php echo $_SESSION['last_name']; ?> </a></h2>
+			<h2><a href="cart.php">Xin chào <?php echo $_SESSION['last_name']; ?> </a></h2>
 			<div id="cart-details">
-				<p>3 sản phẩm</p>
+				<p>
+				<?php echo $sum_qty;	?> sản phẩm</p>
 				<div id="border-cart"></div>
-				<p>Tổng cộng: <span>350$</span></p>
+				<p>Tổng: <span><?php echo number_format($sum_price,0,',','.'); ?></span> đ</p>
 			</div>
-			<a href="#" data-tooltip="Checkout" class="tool"><img src="images/shoppingcart.png" alt="Checkout" /></a>
+			<a href="cart.php" data-tooltip="Giỏ hàng của bạn" class="tool"><img src="images/shoppingcart.png" alt="Checkout" /></a>
 		</div>
 
 		<?php endif; ?>

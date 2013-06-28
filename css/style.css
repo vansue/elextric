@@ -211,3 +211,5 @@ tbody td.edit {text-align: center;}
 .block {display: block; float: left;}
 .p-post {font-size: 12px; margin-left: 15px; width: 560px;}
 .p-post .meta {display: block; float: right; margin-top: 5px;}
+.pay {margin-left: 400px;}
+.pay a:hover {color:#55909a;};

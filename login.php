@@ -26,14 +26,15 @@
 
 		if (empty($errors)) {
 			//Bắt đầu truy vấn CSDL để lấy thông tin người dùng
-			$q = "SELECT user_id, last_name, user_level FROM users WHERE (email = '{$e}' AND pass = SHA1('$p')) AND active IS NULL LIMIT 1";
+			$q = "SELECT user_id, last_name, first_name, user_level FROM users WHERE (email = '{$e}' AND pass = SHA1('$p')) AND active IS NULL LIMIT 1";
 			$r = mysqli_query($dbc, $q);
 				confirm_query($r, $q);
 			if (mysqli_num_rows($r) == 1) {
 				//Nếu tìm thấy thông tin người dùng trong CSDL, sẽ chuyển hướng người dùng về trang thích hợp
-				list($uid, $ln, $user_level) = mysqli_fetch_array($r, MYSQLI_NUM);
+				list($uid, $ln, $fn, $user_level) = mysqli_fetch_array($r, MYSQLI_NUM);
 				$_SESSION['uid'] = $uid;
 				$_SESSION['last_name'] = $ln;
+				$_SESSION['first_name'] = $fn;
 				$_SESSION['user_level'] = $user_level;
 
 				redirect_to();

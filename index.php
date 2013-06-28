@@ -116,9 +116,9 @@
 						</div>
 						<img src='images/product_box_bottom.gif' alt='' class='bot-prod-box' />
 						<div class='prod-detail-tab group'>
-							<a href='#' data-tooltip='Add to cart' class='tool'><img src='images/cart.gif' alt='' /></a>
-							<a href='#' data-tooltip='Khuyến mãi: ".strip_tags($products['promotion'])."' class='tool'><img src='images/favs.gif' alt='' /></a>
-							<a href='#' data-tooltip='Bảo hành: {$products['garantie']} tháng' class='tool'><img src='images/favorites.gif' alt='' /></a>
+							<a href='cart.php?pid={$products['pro_id']}' data-tooltip='Add to cart' class='tool'><img src='images/cart.gif' alt='' /></a>
+							<a href='' data-tooltip='Khuyến mãi: ".strip_tags($products['promotion'])."' class='tool'><img src='images/favs.gif' alt='' /></a>
+							<a href='' data-tooltip='Bảo hành: {$products['garantie']} tháng' class='tool'><img src='images/favorites.gif' alt='' /></a>
 							<a href='single.php?ppid={$products['pro_id']}' class='detail-a'>Chi tiết</a>
 						</div>
 					</div>
@@ -150,9 +150,9 @@
 						</div>
 						<img src='images/product_box_bottom.gif' alt='' class='bot-prod-box' />
 						<div class='prod-detail-tab group'>
-							<a href='#' data-tooltip='Add to cart' class='tool'><img src='images/cart.gif' alt='' /></a>
-							<a href='#' data-tooltip='Khuyến mãi: ".strip_tags($products['promotion'])."' class='tool'><img src='images/favs.gif' alt='' /></a>
-							<a href='#' data-tooltip='Bảo hành: {$products['garantie']} tháng' class='tool'><img src='images/favorites.gif' alt='' /></a>
+							<a href='cart.php?pid={$products['pro_id']}' data-tooltip='Add to cart' class='tool'><img src='images/cart.gif' alt='' /></a>
+							<a href='' data-tooltip='Khuyến mãi: ".strip_tags($products['promotion'])."' class='tool'><img src='images/favs.gif' alt='' /></a>
+							<a href='' data-tooltip='Bảo hành: {$products['garantie']} tháng' class='tool'><img src='images/favorites.gif' alt='' /></a>
 							<a href='single.php?ppid={$products['pro_id']}' class='detail-a'>Chi tiết</a>
 						</div>
 					</div>
