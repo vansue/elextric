@@ -82,7 +82,7 @@
 					<div><strong>Bảo hành: </strong><?php echo $post['garantie']; ?> tháng</div>
 					<div><strong>Khuyến mãi: </strong><?php echo strip_tags($post['promotion']); ?></div>
 
-					<a href="#" class='addtocard'>Add to card</a>
+					<a href="cart.php?pid=<?php echo $ppid;?>" class='addtocard'>Add to card</a>
 				</div>
 				<img src='images/details_box_bottom.gif' alt='' class='bot-prod-box-big' />
 			</div>

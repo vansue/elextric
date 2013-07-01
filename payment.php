@@ -26,6 +26,20 @@
 	        <p><input type="submit" name="submit" value="Mua hàng" /></p>
 		</fieldset>
 	</form>
+	<?php
+		//DELETE CART============================================================
+		if (isset($_GET['did']) && filter_var($_GET['did'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
+			$did = $_GET['did'];
+			$dmax = count($_SESSION['cart']);//Số sản phẩm khác nhau trong giỏ hàng
+			for ($i=0; $i < $dmax; $i++) {
+				if ($_SESSION['cart'][$i]['productid'] == $did) {
+					unset($_SESSION['cart'][$i]);
+					break;
+				}
+			}
+			$_SESSION['cart'] = array_values($_SESSION['cart']);
+		}
+	?>
 
 	<!--VIEW CART-->
 			<div class='title-content'>
@@ -53,7 +67,7 @@
                 <td><?php echo number_format($_SESSION['cart'][$i]['price'],0,',','.'); ?></td>
                 <td><?php echo $_SESSION['cart'][$i]['qty']; ?></td>
                 <td><?php echo number_format($_SESSION['cart'][$i]['price']*$_SESSION['cart'][$i]['qty'],0,',','.'); ?></td>
-                <td class='delete'><a href="cart.php?did=<?php echo $_SESSION['cart'][$i]['productid']; ?>"><img src="images/b_drop.png" alt="drop"></a></td>
+                <td class='delete'><a href="payment.php?did=<?php echo $_SESSION['cart'][$i]['productid']; ?>"><img src="images/b_drop.png" alt="drop"></a></td>
             </tr>
 <?php
 			endfor;
