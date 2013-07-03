@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	ob_start();
 	$title = "Giỏ hàng | Elextronic";
 	require_once('inc/functions.php');
@@ -25,7 +24,7 @@
 
 			//ADD TO CART================================================
 			//Kiểm tra xem trong giỏ hàng đã có sản phẩm chưa
-			if (is_array($_SESSION['cart'])) {
+			if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
 				//Nếu có rồi
 				$max = count($_SESSION['cart']);//Số sản phẩm khác nhau trong giỏ hàng
 				$flag = TRUE;
@@ -75,32 +74,36 @@
 			<div class='title-content'>
 				<p>Giỏ hàng của <?php echo $_SESSION['last_name']; ?></p>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Số thứ tự</th>
-						<th>Sản phẩm</th>
-						<th>Giá</th>
-						<th>Số lượng</th>
-						<th>Thành tiền</th>
-						<th>Xóa</th>
-					</tr>
-				</thead>
-				<tbody>
 <?php
-			$smax = count($_SESSION['cart']);//Số sản phẩm khác nhau trong giỏ hàng
-			for ($i=0; $i < $smax; $i++) :
+			if(isset($_SESSION['cart'])) :
+?>	
+				<table>
+					<thead>
+						<tr>
+							<th>Số thứ tự</th>
+							<th>Sản phẩm</th>
+							<th>Giá</th>
+							<th>Số lượng</th>
+							<th>Thành tiền</th>
+							<th>Xóa</th>
+						</tr>
+					</thead>
+					<tbody>
+<?php
+				$smax = count($_SESSION['cart']);//Số sản phẩm khác nhau trong giỏ hàng
+				for ($i=0; $i < $smax; $i++) :
 ?>
-			<tr>
-				<td><?php echo $i+1; ?></td>
-                <td><?php echo $_SESSION['cart'][$i]['name']; ?></td>
-                <td><?php echo number_format($_SESSION['cart'][$i]['price'],0,',','.'); ?></td>
-                <td><?php echo $_SESSION['cart'][$i]['qty']; ?></td>
-                <td><?php echo number_format($_SESSION['cart'][$i]['price']*$_SESSION['cart'][$i]['qty'],0,',','.'); ?></td>
-                <td class='delete'><a href="cart.php?did=<?php echo $_SESSION['cart'][$i]['productid']; ?>"><img src="images/b_drop.png" alt="drop"></a></td>
-            </tr>
+				<tr>
+					<td><?php echo $i+1; ?></td>
+	                <td><?php echo $_SESSION['cart'][$i]['name']; ?></td>
+	                <td><?php echo number_format($_SESSION['cart'][$i]['price'],0,',','.'); ?></td>
+	                <td><?php echo $_SESSION['cart'][$i]['qty']; ?></td>
+	                <td><?php echo number_format($_SESSION['cart'][$i]['price']*$_SESSION['cart'][$i]['qty'],0,',','.'); ?></td>
+	                <td class='delete'><a href="cart.php?did=<?php echo $_SESSION['cart'][$i]['productid']; ?>"><img src="images/b_drop.png" alt="drop"></a></td>
+	            </tr>
 <?php
-			endfor;
+				endfor;
+
 ?>
 				</tbody>
 			</table>
@@ -108,6 +111,11 @@
 				<a href="payment.php">Thanh toán</a> | 
 				<a href="index.php">Tiếp tục mua sắm</a>
 			</div>
+<?php
+			else :
+				echo "<p class='notice'>Giỏ hàng chưa có sản phẩm.</p>";
+			endif;
+?>
 
 </div><!--end #main-content-->
 <?php

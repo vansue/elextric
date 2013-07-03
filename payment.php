@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	ob_start();
 	$title = "Thanh toán | Elextronic";
 	require_once('inc/functions.php');

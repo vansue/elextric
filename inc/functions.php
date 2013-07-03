@@ -1,6 +1,6 @@
 <?php
 	//Xác định hằng số cho địa chỉ tuyệt đối
-	define('BASE_URL', 'http://localhost:8080/elextric/');
+	define('BASE_URL', 'http://localhost/elextric/');
 
 	//Kiểm tra xem kết quả trả về có đúng hay không
 	function confirm_query($result, $query) {

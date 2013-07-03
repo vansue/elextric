@@ -2,7 +2,7 @@
 	session_start();
 	ob_start();
 	if (!isset($_SESSION['user_level']) or $_SESSION['user_level'] != 2) {
-		header("Location: http://localhost:8080/elextric/admin/login.php");
+		header("Location: http://localhost/elextric/admin/login.php");
 		exit();
 	}
 ?>

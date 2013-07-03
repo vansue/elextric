@@ -26,7 +26,7 @@
             //Nếu có post thì hiển thị ra trình duyệt
             $pages = mysqli_fetch_array($r, MYSQLI_ASSOC);
             $title = $pages['page_name']." | Elextronic";
-            $posts[] = array('page_name'=>$pages['page_name'], 'content'=>$pages['content'], 'name'=>$pages['name'], 'date'=>$pages['date']);
+            $posts[] = array('user_id'=>$pages['user_id'], 'page_name'=>$pages['page_name'], 'content'=>$pages['content'], 'name'=>$pages['name'], 'date'=>$pages['date']);
         } else {
             echo "<p class='notice'>Bài viết không tồn tại.</p>";
         }
