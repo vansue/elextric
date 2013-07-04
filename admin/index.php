@@ -31,8 +31,8 @@
 		<div class="product-box">
 			<img src="../images/product_box_top.gif" alt="" class="top-prod-box" />
 			<div class="cen-prod-box">
-				<a href="#"><img src="../images/ab_ord.png" alt=""></a>
-				<h4><a href="#">Quản lý đơn hàng</a></h4>
+				<a href="order.php"><img src="../images/ab_ord.png" alt=""></a>
+				<h4><a href="order.php">Quản lý đơn hàng</a></h4>
 			</div>
 			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
 		</div><!--end .product-box-->

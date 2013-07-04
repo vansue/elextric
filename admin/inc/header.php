@@ -55,7 +55,7 @@
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="products.php" id="nav-a-pro">Sản phẩm</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="#" id="nav-ord">Đơn hàng</a></li>
+				<li><a href="order.php" id="nav-ord">Đơn hàng</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="n-categories.php" id="nav-new-cat">Danh mục bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>

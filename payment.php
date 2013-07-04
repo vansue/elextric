@@ -6,20 +6,95 @@
 	include('inc/header.php');
 	include('inc/first-sidebar.php');
 ?>
+<?php
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
+		$errors = array();
+		//Mặc định cho các trường nhập liệu là FALSE
+		$add = $phone = FALSE;
+
+		// Check for address
+		if (!empty($_POST['address'])) {
+			$add = mysqli_real_escape_string($dbc, strip_tags($_POST['address']));
+		} else {
+			$errors[] = "address";
+		}
+
+        // Check for phone
+        if (isset($_POST['phone']) && preg_match('/^[\d]{8,12}$/', $_POST['phone'])) {
+			$phone = mysqli_real_escape_string($dbc, strip_tags($_POST['phone']));
+		} else {
+			$errors[] = "phone";
+		}
+
+		if ($add && $phone) {
+			if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+				//Chèn giá trị vào CSDL
+				$q = "INSERT INTO orders(user_id, address, phone, buy_date, status) ";
+				$q .= " VALUES ({$_SESSION['uid']}, '{$add}', '{$phone}',  NOW(),  1)";
+				$r = mysqli_query($dbc, $q);
+				$order_id = mysqli_insert_id($dbc);
+					confirm_query($r, $q);
+				if (mysqli_affected_rows($dbc) == 1) {
+
+					$flag = FALSE;
+					$umax = count($_SESSION['cart']);//Số sản phẩm khác nhau trong giỏ hàng
+					for ($i=0; $i < $umax; $i++) {
+						$pro_id = $_SESSION['cart'][$i]['productid'];
+						$qty = $_SESSION['cart'][$i]['qty'];
+						$price = $_SESSION['cart'][$i]['price'];
+						$q = "INSERT INTO order_details(order_id, pro_id, qty, price) ";
+						$q .= " VALUES ($order_id, $pro_id, $qty,  $price)";
+						$r = mysqli_query($dbc, $q);
+							confirm_query($r, $q);
+						if (mysqli_affected_rows($dbc) == 1) {
+							$flag = TRUE;
+						}
+					}
+
+					if ($flag) {
+						$message = "<p class='notice success'>Mua hàng thành công. Hàng sẽ được gửi đến địa chỉ của bạn trong vòng 1 tuần trước ngày ".date('d-m-Y', time()+(7 * 24 * 60 * 60)).".</p>";
+						unset($_SESSION['cart']);
+					} else {
+						$message = "<p class='notice'>Mua hàng thất bại do lỗi hệ thống.</p>";
+					}
+				} else {
+					$message = "<p class='notice'>Mua hàng thất bại do lỗi hệ thống.</p>";
+				}
+			} else {
+				$message = "<p class='notice'>Không có sản phẩm nào trong giỏ hàng.</p>";
+			}
+
+		} else {
+			$message = "<p class='notice'>Điền đầy đủ các trường.</p>";
+		}
+	}
+?>
 	<div id="main-content">
 		<div class='title-content'>
 		<p>Thanh toán</p>
 	</div>
-
+	<?php if(!empty($message)) echo $message; ?>
 	<form action="" method="POST" id="add-n-cat" class="add-form">
 		<fieldset>
 			<legend>Thanh toán giỏ hàng</legend>
 			<p><strong>Khách hàng:</strong> <?php echo $_SESSION['first_name']." ".$_SESSION['last_name'];?></p>
 
-			<label for="address">Địa chỉ:</label>
+			<label for="address">Địa chỉ: <span class="required">*</span>
+				<?php
+					if(isset($errors) && in_array('address', $errors)) {
+						echo "<p class='notice'>Điền địa chỉ giao hàng.</p>";
+					}
+				?>
+			</label>
 	        <input type="text" name="address" value="<?php if(isset($_POST['address'])) echo $_POST['address']; ?>" size="20" maxlength="80" tabindex='1' />
 
-	        <label for="phone">Điện thoại:</label>
+	        <label for="phone">Điện thoại: <span class="required">*</span>
+				<?php
+					if(isset($errors) && in_array('phone', $errors)) {
+						echo "<p class='notice'>Điền số điện thoại hợp lệ của bạn.</p>";
+					}
+				?>
+	        </label>
 	        <input type="text" name="phone" value="<?php if(isset($_POST['phone'])) echo $_POST['phone']; ?>" size="20" maxlength="40" tabindex='8' />
 
 	        <p><input type="submit" name="submit" value="Mua hàng" /></p>
@@ -57,6 +132,7 @@
 				</thead>
 				<tbody>
 <?php
+		if(isset($_SESSION['cart'])) {
 			$smax = count($_SESSION['cart']);//Số sản phẩm khác nhau trong giỏ hàng
 			for ($i=0; $i < $smax; $i++) :
 ?>
@@ -70,6 +146,7 @@
             </tr>
 <?php
 			endfor;
+		}
 ?>
 				</tbody>
 			</table>
