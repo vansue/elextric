@@ -186,6 +186,7 @@ input[type="submit"] {margin: 10px 350px 0 0; float: right; padding: 2px 10px;}
 .avai {color: blue; font-weight: bold;}
 .avatar { width: 60px; height: 60px;float: left;margin: 0 25px 0px 0px; border:1px solid #c1c1c1; padding: 3px; background-color: white;}
 input.change {width: 100px;}
+#cn {margin: 0; padding: 0;}
 .in-form {margin-bottom: 10px;}
 .intro-image {display: block; width: 80px; height: 60px;margin: 10px 25px 0px 0px; border:1px solid #c1c1c1; padding: 3px; background-color: white;}
 .short {height: 100px;}
@@ -212,5 +213,5 @@ tbody td.edit {text-align: center;}
 .block {display: block; float: left;}
 .p-post {font-size: 12px; margin-left: 15px; width: 560px;line-height: 20px;}
 .p-post .meta {display: block; float: right; margin-top: 5px;}
-.pay {margin-left: 400px;}
+.pay {margin-left: 230px;}
 .pay a:hover {color:#55909a;};

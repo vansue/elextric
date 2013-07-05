@@ -8,11 +8,40 @@
 <!-- VALIDATE BIẾN $_GET -->
 <?php
 
-    //Phân trang danh sách đơn hàng
-    //Đặt số trang muốn hiển thị ra trình duyệt
-    $display = 5;
-    //Xác định vị trí bắt đầu
-    $start = (isset($_GET['s']) && filter_var($_GET['s'], FILTER_VALIDATE_INT, array('min_range' => 1))) ? $_GET['s'] : 0;
+    if(isset($_GET['oid']) && filter_var($_GET['oid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
+        $oid = $_GET['oid'];
+        $status = FALSE;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['status']) && filter_var($_POST['status'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
+                $status = $_POST['status'];
+            }
+
+            $q = "UPDATE orders SET status = {$status} WHERE order_id = {$oid}";
+            $r = mysqli_query($dbc, $q); confirm_query($r, $q);
+            if (mysqli_affected_rows($dbc) == 1) {
+                $messages = "<p class='notice success'>Cập nhật trạng thái thành công.</p>";
+            } else {
+                $messages = "<p class='notice'>Cập nhật trạng thái thất bại do lỗi hệ thống.</p>";
+            }
+        }
+    }
+
+    if (isset($_GET['doid']) && filter_var($_GET['doid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
+        $doid = $_GET['doid'];
+        $q = "DELETE FROM orders WHERE order_id = {$doid}";
+        $r = mysqli_query($dbc, $q); confirm_query($r, $q);
+        if (mysqli_affected_rows($dbc) == 1) {
+            $query = "DELETE FROM order_details WHERE order_id = {$doid}";
+            $result = mysqli_query($dbc, $query); confirm_query($result, $query);
+            if (mysqli_affected_rows($dbc) > 0) {
+                $messages = "<p class='notice success'>Xóa đơn hàng thành công.</p>";
+            } else {
+                $messages = "<p class='notice'>Xóa đơn hàng thất bại do lỗi hệ thống1.</p>";
+            }
+        } else {
+            $messages = "<p class='notice'>Xóa đơn hàng thất bại do lỗi hệ thống.</p>";
+        }
+    }
 
 ?>
 
@@ -20,6 +49,9 @@
 	<div class="title-content">
 		<p>Danh sách đơn hàng</p>
 	</div>
+    <?php
+        if (!empty($messages)) echo $messages;
+    ?>
 	<table>
     	<thead>
     		<tr>
@@ -29,7 +61,7 @@
     			<th>Điện thoại</th>
                 <th><a href="order.php?sort=date">Ngày mua</a></th>
                 <th><a href="order.php?sort=status">Trạng thái</a></th>
-                <th>Ghi chú</th>
+                <th>Xóa</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -56,29 +88,43 @@
     		} else {
     			$order_by = 'order_id';
     		}
-    		//Truy xuất CSDL để hiển thị pages
-    		$q = "SELECT o.order_id, p.page_name, p.position, p.post_on, p.cat_id, p.user_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name ";
-    		$q .= " FROM pages AS p ";
+    		//Truy xuất CSDL để hiển thị orders
+    		$q = "SELECT o.order_id, o.address, o.phone, o.buy_date, o.status, CONCAT_WS(' ', u.first_name, u.last_name) AS name ";
+    		$q .= " FROM orders AS o ";
     		$q .= " JOIN users AS u USING(user_id) ";
-    		$q .= " WHERE cat_id = {$ncid} ";
-    		$q .= " ORDER BY {$order_by} ASC ";
-            $q .= " LIMIT {$start}, {$display}";
+    		$q .= " ORDER BY {$order_by} DESC ";
     		$r = mysqli_query($dbc, $q);
     			confirm_query($r, $q);
-    		while ($pages = mysqli_fetch_array($r, MYSQLI_ASSOC)) :
+    		while ($orders = mysqli_fetch_array($r, MYSQLI_ASSOC)) :
     	?>
             <tr>
-                <td><?php echo $pages['page_name']; ?></td>
-                <td><?php echo $pages['position']; ?></td>
-                <td><?php echo $pages['post_on']; ?></td>
-                <td><?php echo $pages['name']; ?></td>
-                <td class='edit'><a href="m-news.php?ncid=<?php echo $ncid; ?>&epid=<?php echo $pages['page_id']; ?>"><img src="../images/b_edit.png" alt="edit"></a></td>
-                <td class='delete'><a href="m-news.php?ncid=<?php echo $ncid; ?>&dpid=<?php echo $pages['page_id']; ?>"><img src="../images/b_drop.png" alt="drop"></a></td>
+                <td><a href="details.php?oid=<?php echo $orders['order_id']; ?>" data-tooltip="Chi tiết đơn hàng <?php echo "#ĐH".$orders['order_id']; ?>" class="tool"><?php echo "#ĐH".$orders['order_id']; ?></a></td>
+                <td><?php echo $orders['name']; ?></td>
+                <td><?php echo $orders['address']; ?></td>
+                <td><?php echo $orders['phone']; ?></td>
+                <td><?php echo $orders['buy_date']; ?></td>
+                <td>
+                    <form action="order.php?oid=<?php echo $orders['order_id']; ?>" method="post">
+                        <select name="status">
+                        <?php
+                            // Set up array for roles
+                            $roles = array(1 => 'Chờ', 2 => 'Xong');
+                            foreach ($roles as $key => $role) {
+                                echo "<option value='{$key}'";
+                                    if($key == $orders['status']) {echo "selected='selected'";}
+                                echo ">".$role."</option>";
+                            }
+                            //echo $orders['status'];
+                        ?>
+                        </select>
+                        <p><input type="submit" name="submit" value="Cập nhật" id="cn" /></p>
+                    </form>
+                </td>
+                <td class='delete'><a href="order.php?doid=<?php echo $orders['order_id']; ?>"><img src="../images/b_drop.png" alt="drop"></a></td>
             </tr>
         <?php endwhile; ?>
     	</tbody>
     </table>
-    <?php pagination($ncid, $display, 'view-news.php'); ?>
 </div><!--end #main-content-->
 <?php
 	include('inc/second-sidebar.php');

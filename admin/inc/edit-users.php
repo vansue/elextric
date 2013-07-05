@@ -69,7 +69,7 @@
                         if($upd_stmt = mysqli_prepare($dbc, $query)) {
 
                             // Gan tham so
-                            mysqli_stmt_bind_param($upd_stmt, 'sssiisss', $fn, $ln, $e, $ul, $p, $add, $phone, $euid);
+                            mysqli_stmt_bind_param($upd_stmt, 'sssiisss', $fn, $ln, $e, $ul, SHA1($p), $add, $phone, $euid);
 
                             // Cho chay cau lenh
                             mysqli_stmt_execute($upd_stmt) or die("Mysqli Error: $query ". mysqli_stmt_error($upd_stmt));
