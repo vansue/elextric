@@ -134,7 +134,7 @@ p.price span {text-decoration: line-through; color: #999;}
 .prod-detail-tab {width: 100%; height: 31px; float: left; margin: 3px 0 0 0; background: url(../images/products_details_bg.gif) no-repeat center;}
 .prod-detail-tab a {float: left; padding: 6px 0 0 6px;}
 .prod-detail-tab a.detail-a { display: block; width: 35px; float: left; padding: 0 0 0 20px; background: url(../images/square-blue-add.gif) no-repeat left; margin: 7px 0 0 38px; color: #0fa0dd;}
-#qmk a {display: block; float: left; margin-top: 10px; width: 100%;}
+.linkdn a {display: block; float: left; margin-top: 10px; width: 100%;}
 a.addtocard {display: block; float: left; width: 74px; height: 27px; padding-left: 33px; margin-left: 200px; background: url(../images/addtocart.gif) no-repeat left; line-height: 27px; color: #1c4a52;}
 div.details {margin: 0 5px 0 20px;}
 
@@ -212,6 +212,6 @@ tbody td.edit {text-align: center;}
 .current {font-weight: bold; color: red;}
 .block {display: block; float: left;}
 .p-post {font-size: 12px; margin-left: 15px; width: 560px;line-height: 20px;}
-.p-post .meta {display: block; float: right; margin-top: 5px;}
+.p-post .meta {display: block; float: right; margin: 5px 0 10px 0}
 .pay {margin-left: 230px;}
 .pay a:hover {color:#55909a;};

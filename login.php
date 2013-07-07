@@ -51,6 +51,11 @@
     <div class="title-content">
         <p>Đăng nhập</p>
     </div>
+<?php
+	if (isset($_GET['msg']) && $_GET['msg'] == 1) {
+		echo "<p class='notice'>ĐĂNG NHẬP ĐỂ MUA HÀNG.</p>";
+	}
+?>
 
     <div>
 		<?php if(!empty($mesage)) echo $mesage; ?>
@@ -75,7 +80,8 @@
 				</label>
 				<input type="password" name="pass" id="pass" value="" size="20" maxlength="20" tabindex="2" />
 
-				<p id="qmk"><a href="retrieve-pass.php">Quên mật khẩu?</a></p>
+				<p class="linkdn"><a href="retrieve-pass.php">Quên mật khẩu?</a></p>
+				<p class="linkdn"><a href="register.php">Đăng ký</a></p>
 				<p><input type="submit" name="submit" value="Đăng nhập" /></p>
 
 			</fieldset>

@@ -1,7 +1,7 @@
 <?php
 	//Kết nối CSDL (server, user, pass, database)
 	$dbc = mysqli_connect('localhost', 'root', '', 'elextric');
-	$mysqli = new mysqli('localhost', 'root', '', 'elextric');
+
 
 	//Kiểm tra xem kết nối có thành công không. Nếu không thành công báo lỗi ra trình duyệt và dừng thực thi phần lệnh tiếp theo
 	if (!$dbc) {

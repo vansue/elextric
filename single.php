@@ -106,6 +106,12 @@
 		redirect_to();
 	}
 ?>
+	<div class='title-content'>
+		<p>Bình luận</p>
+	</div>
+<?php
+	include('inc/comment_form.php');
+?>
 </div><!--end #main-content-->
 
 <?php
