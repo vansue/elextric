@@ -29,7 +29,7 @@
 		}
 
 		//Validate captcha question
-		if (isset($_POST['captcha']) && trim($_POST['captcha']) != 5) {
+		if (isset($_POST['captcha']) && trim($_POST['captcha']) != $_SESSION['q']['answer']) {
 			$errors[] = "wrong";
 		}
 
@@ -40,17 +40,42 @@
 				//thành công
 				$messages = "<p class='notice success'>Cảm ơn bạn đã bình luận.</p>";
 			} else {
-				$mesages = "<p class='notice'>Bình luận của bạn không thể đăng do lỗi hệ thống.</p>";
+				$messages = "<p class='notice'>Bình luận của bạn không thể đăng do lỗi hệ thống.</p>";
 			}
 		} else {
-			$mesages = "<p class='notice'>Điền đầy đủ các trường.</p>";
+			$messages = "<p class='notice'>Điền đầy đủ các trường.</p>";
 		}
 	}
 ?>
+<?php
+	//Hiển thị comment từ CSDL
+	$q = "SELECT comment_id, author, comment, DATE_FORMAT(comment_date, '%b %d, %y') AS date FROM comments WHERE page_id = {$pid}";
+	$r = mysqli_query($dbc, $q); confirm_query($r, $q);
+	if (mysqli_num_rows($r)>0) {
+		//Nếu có comment hiển thi ra trình duyệt
+		echo "<ol id='disscuss'>";
+		while(list($comment_id, $author, $comment, $date) = mysqli_fetch_array($r, MYSQLI_NUM)) {
+			echo "<li class='comment-wrap'>
+				<p class='author'>{$author}</p>
+				<p class='comment-sec'>{$comment}</p>";
+				if (isset($_SESSION['user_level']) && ($_SESSION['user_level'] == 2)) {
+					echo "<a id='{$comment_id}' class='remove'>Delete</a>";
+				}
+				echo "<p class='date'>{$date}</p></li>";
+		}
+		echo "</ol>";
+	} else {
+		//Nếu không có comment, thì sẽ báo ra trình duyệt
+		$notice = "<p class='notice success'>Hãy là người đầu tiên bình luận cho bài viết này</p>";
+	}
+?>
+
 <div>
 <form id="comment-form" action="" method="post" class="add-form">
 	<fieldset>
 		<legend>Bình luận</legend>
+			<?php if(!empty($notice)) echo $notice; ?>
+			<?php if(!empty($messages)) echo $messages; ?>
 		<div>
 			<label for="name">Tên: <span class="required">*</span>
 			<?php if(isset($errors) && in_array('name', $errors)) echo "<p class='notice'>Điền tên của bạn.</p>"; ?>
@@ -70,7 +95,7 @@
 			<div id="comment"><textarea name="comment" rows="20" cols="50" tabindex="3"><?php if(isset($_POST['comment'])) echo htmlentities($_POST['comment']); ?></textarea></div>
 		</div>
 		<div>
-			<label>Trả lời câu hỏi: một cộng bốn <span class="required">*</span>
+			<label>Trả lời câu hỏi: <?php echo captcha(); ?> <span class="required">*</span>
 			<?php if(isset($errors) && in_array('wrong', $errors)) echo "<p class='notice'>Trả lời câu hỏi.</p>"; ?>
 			</label>
 			<input type="text" name="captcha" id="captcha" value="" size="20" maxlength="5" tabindex="4" />

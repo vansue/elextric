@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src='js/tooltip.js'></script>
 	<script type="text/javascript" src='js/check-ajax.js'></script>
+	<script type="text/javascript" src='js/delete-comment.js'></script>
 	<script type="text/javascript" src="js/tinymce/tiny_mce.js"></script>
 	<script type="text/javascript">
 	tinyMCE.init({

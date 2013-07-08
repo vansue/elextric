@@ -89,6 +89,22 @@
     	}
 	}
 
+	function captcha() {
+		$qna = array(
+			1 => array('question' => 'một cộng một', 'answer' => 2),
+			2 => array('question' => 'ba trừ hai', 'answer' => 1),
+			3 => array('question' => 'ba nhân năm', 'answer' => 15),
+			4 => array('question' => 'sáu chia hai', 'answer' => 3),
+			5 => array('question' => 'nàng bạch tuyết và ... chú lùn', 'answer' => 7),
+			6 => array('question' => 'Alibaba và ... tên cướp', 'answer' => 40),
+			7 => array('question' => '... con giáp', 'answer' => 12),
+			8 => array('question' => 'chiến thắng Điện Biên Phủ năm ...', 'answer' => 1954),
+			);
+		$rand_key = array_rand($qna); //Lấy ngẫu nhiên một trong các array 1,2,4,...
+		$_SESSION['q'] = $qna[$rand_key];
+		return $question = $qna[$rand_key]['question'];
+	}
+
 	function pagination($ncid, $display = 5, $url = 'index.php', $link = 'ncid', $id = 'page_id', $tbl = 'pages') {
 		global $dbc; global $start;
 		if (isset($_GET['p']) && filter_var($_GET['p'], FILTER_VALIDATE_INT, array('min_range' => 1))) {

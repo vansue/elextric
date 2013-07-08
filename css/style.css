@@ -138,6 +138,14 @@ p.price span {text-decoration: line-through; color: #999;}
 a.addtocard {display: block; float: left; width: 74px; height: 27px; padding-left: 33px; margin-left: 200px; background: url(../images/addtocart.gif) no-repeat left; line-height: 27px; color: #1c4a52;}
 div.details {margin: 0 5px 0 20px;}
 
+/****** COMMENT SECTION ******/
+#disscuss {float: left; width: 560px; margin: 0 0 10px 12px; }
+#disscuss li {border: 1px solid #55909A; background-color: #C5EAF2; padding: 5px 10px; border-radius: 5px; margin: 20px 0px; overflow: hidden; }
+#disscuss .author {font-weight: bold;}
+#disscuss li p.date {float: right; padding: 0px 5px; font-size: 11px;}
+.comment-wrap {position: relative;}
+a.remove {position: absolute; top: 5px; right: 5px; cursor: pointer; color: red;}
+
 /****** TOOLTIP ******/
 .tooltip {background-color: #707070; position: absolute; text-align: center; padding: 5px; width: auto; color: white;}
 
@@ -215,3 +223,5 @@ tbody td.edit {text-align: center;}
 .p-post .meta {display: block; float: right; margin: 5px 0 10px 0}
 .pay {margin-left: 230px;}
 .pay a:hover {color:#55909a;};
+
+
