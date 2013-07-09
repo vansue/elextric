@@ -2,8 +2,6 @@
 	ob_start();
 	$title = "Thông tin người dùng | Elextronic";
 	include('inc/header.php');
-	require_once('inc/functions.php');
-	require_once('inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
 	//Kiểm tra xem người dùng đã login chưa?
 	is_logged_in();

@@ -1,15 +1,26 @@
+	<?php
+		$q = "SELECT COUNT(order_id) FROM orders WHERE status = 1";
+		$r = mysqli_query($dbc,$q); confirm_query($r, $q);
+		if (mysqli_num_rows($r) > 0) {
+			list($record) = mysqli_fetch_array($r, MYSQLI_NUM);
+			$msg = $record." đơn hàng chờ";
+		} else {
+			$msg = "0 đơn hàng chờ";
+		}
+
+	?>
 	<div id="second-sidebar">
 		<div id="shopping-cart" class="group">
-			<h2><a href="#">Xin chào <?php echo $_SESSION['last_name'];?>!</a></h2>
+			<h2><a href="../edit-profile.php">Xin chào <?php echo $_SESSION['last_name'];?>!</a></h2>
 			<div id="cart-details">
-				<a href="#" id="red">3 đơn hàng mới</a>
-				<a href="#">2 bình luận mới</a>
+				<a href="order.php" id="red"><?php echo $msg;?></a>
+				<a href='logout.php'>Đăng xuất</a>
 			</div>
-			<a href="#" data-tooltip="Admin" class="tool"><img src="../images/a_avatar.png" alt="Checkout" /></a>
+			<a href="../edit-profile.php" data-tooltip="<?php echo $_SESSION['last_name'];?>" class="tool"><img src="../images/a_avatar.png" alt="Admin" /></a>
 		</div>
 
 		<div class='typical'>
-			<h3><a href="#">Bình luận mới</a></h3>
+			<h3>Bình luận mới</h3>
 			<div class="box" id="boxnews">
 				<div>
 					<p class='date'>August 20, 2012</p>

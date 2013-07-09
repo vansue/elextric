@@ -25,7 +25,7 @@
 		<?php endif; ?>
 
 		<div class='typical'>
-			<h3><a href="#">Electronix's News</a></h3>
+			<h3>Electronix's News</h3>
 			<div class="box" id="boxnews">
 
 			<?php

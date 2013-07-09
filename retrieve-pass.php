@@ -1,8 +1,6 @@
 <?php
 	$title = "Quên mật khẩu | Elextronic";
 	include('inc/header.php');
-	require_once('inc/functions.php');
-	require_once('inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
 ?>
 

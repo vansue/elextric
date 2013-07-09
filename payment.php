@@ -1,8 +1,6 @@
 <?php
 	ob_start();
 	$title = "Thanh toán | Elextronic";
-	require_once('inc/functions.php');
-	require_once('inc/mysqli_connect.php');
 	include('inc/header.php');
 	include('inc/first-sidebar.php');
 ?>

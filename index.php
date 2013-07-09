@@ -75,7 +75,7 @@
                     	<img src='images/news/{$pages['intro_img']}' alt='' />
                         <h2><a href='single.php?pnid={$pages['page_id']}'>{$pages['page_name']}</a></h2>
                         <div>".the_excerpt($pages['content'])." ... <a href='single.php?pnid={$pages['page_id']}'>Xem tiếp</a></div>
-                        <p class='meta'><strong>Viết bởi:</strong> <a href='author.php?aid={$pages['user_id']}'> {$pages['name']}</a> | <strong>Ngày: </strong> {$pages['date']} </p>
+                        <p class='meta'><strong>Viết bởi:</strong>  {$pages['name']} | <strong>Ngày: </strong> {$pages['date']} </p>
                     </div>
                 ";
             } //end while loop

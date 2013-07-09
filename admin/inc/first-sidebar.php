@@ -3,7 +3,7 @@
 	<div id="first-sidebar">
 
 		<div class="typical">
-			<h3><a href="#">Thời gian</a></h3>
+			<h3>Thời gian</h3>
 			<div class="box">
 				<img src="../images/alarm.png" alt="alarm">
 				<span id="tm"></span>

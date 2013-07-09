@@ -13,9 +13,8 @@
 			<div id="right-footer">
 				<ul>
 					<li><a href='index.php'>Admin CP</a></li><li>
-					<a href='../edit-profile.php'>Thông tin người dùng</a></li>
+					<a href='../edit-profile.php'>Hồ sơ cá nhân</a></li>
 					<li><a href='../change-pass.php'>Đổi mật khẩu</a></li>
-					<li><a href='../logout.php'>Đăng xuất</a></li>
 				</ul>
 			</div>
 		</div><!--end #footer-->

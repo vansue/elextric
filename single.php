@@ -61,7 +61,7 @@
 			</div>
             <div class='p-post'>
                 <div>".$post['content']."</div>
-                <p class='meta'><strong>Viết bởi:</strong> <a href='author.php?aid={$post['user_id']}'> {$post['name']}</a> | <strong>Ngày: </strong> {$post['date']} </p>
+                <p class='meta'><strong>Viết bởi:</strong>  {$post['name']} | <strong>Ngày: </strong> {$post['date']} </p>
             </div>
         ";
 		}

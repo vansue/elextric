@@ -63,15 +63,6 @@
 			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
 		</div><!--end .product-box-->
 
-		<div class="product-box">
-			<img src="../images/product_box_top.gif" alt="" class="top-prod-box" />
-			<div class="cen-prod-box">
-				<a href="#"><img src="../images/ab_comm.png" alt=""></a>
-				<h4><a href="#">Quản lý bình luận</a></h4>
-			</div>
-			<img src="../images/product_box_bottom.gif" alt="" class="bot-prod-box" />
-		</div><!--end .product-box-->
-
 	</div><!--end #main-content-->
 <?php
 	include('inc/second-sidebar.php');

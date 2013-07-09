@@ -43,15 +43,9 @@ a {text-decoration: none;}
 
 /****** TOP ******/
 #wrapper {margin: 0px auto; width: 1000px;}
-#top {width: 100%; height: 38px; background-color: #4a4a4a; overflow: hidden;}
+body.admin #top {width: 100%; height: 38px; background-color: #4a4a4a; overflow: hidden;}
+#top {width: 100%; height: 30px; background-color: #4a4a4a; overflow: hidden;}
 #top p a {display: block; float: left; text-transform: uppercase; font-weight: bold; color: #b3adad; font-size: 14px; padding: 8px;}
-#language {float: right; width: 150px; padding-top: 8px; overflow: hidden;}
-#language h3 {float: left; color: #b3adad; padding: 0 5px 0 0;}
-#language a {display: block; float: left; padding: 0 5px;}
-#search {width: 370px; height: 32px; float: right; background: url(../images/top_search_bg.gif) no-repeat center top; margin-right: 20px; overflow: hidden;}
-#search a {display: block; float: left; width: 110px; color: #999; padding: 8px 0 0 15px;}
-#txtSearch {width: 182px; height: 18px; margin-top: 5px; float: left; padding: 0; border: 1px solid #dbdbdb; border-bottom-color: white; border-right-color: white; }
-#imgSearch {float: left; padding: 2px 0 0 15px;}
 
 /****** HEADER ******/
 #header {background: url(../images/header_bg.jpg) no-repeat top center; width: 100%; height: 173px; overflow: hidden;}
@@ -67,6 +61,11 @@ a {text-decoration: none;}
 #pagination {padding-top: 10px; margin: 5px; text-align: center; float: left;}
 #pagination a.active, #pagination a:hover, #pagination a:active {background: url(../images/pag_bg_a.gif) no-repeat top center; color: #ad1614;}
 #pagination a {display: block; width: 22px; height: 22px; float: left; margin-right: 5px; line-height: 23px; text-align: center; background: url(../images/pag_bg.gif) no-repeat top center; color: #9d8b8b;}
+
+#right-header {float: right; padding: 10px 10px 0 0; color: white; font-weight: bold;}
+#right-header ul li {display: inline; padding-right: 5px;}
+#right-header ul li a {color: white; font-weight: bold;}
+#right-header ul li a:hover {text-decoration: underline;}
 
 /****** NAV MENU ******/
 #nav-menu {width: 100%; height: 50px; margin-bottom: 10px;}

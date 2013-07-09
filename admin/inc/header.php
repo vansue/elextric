@@ -62,8 +62,6 @@
 				<li><a href="news.php" id="nav-new">Bài viết</a></li>
 				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
 				<li><a href="users.php" id="nav-user">Thành viên</a></li>
-				<li><img src="../images/menu_divider.gif" alt="menu-divider" /></li>
-				<li><a href="contact.html" id="nav-comm">Bình luận</a></li>
 			</ul>
 			<img src="../images/menu_right.gif" alt="right-menu" />
 		</div><!--end #nav-menu-->

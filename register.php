@@ -1,16 +1,13 @@
 <?php
 	$title = "Đăng ký tài khoản | Elextronic";
 	include('inc/header.php');
-	require_once('inc/functions.php');
-	require_once('inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
 ?>
 <div id="main-content">
 	<?php
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {//Nếu đúng -> Form đã được submit -> xử lý form
 			$errors = array();
-			//Mặc định cho các trường nhập liệu là FALSE
-			$fn = $ln = $e = $p = FALSE;
+
 			if (preg_match('/^[\w\'.-]{2,20}$/i', trim($_POST['first-name']))) {
 				$fn = mysqli_real_escape_string($dbc, trim($_POST['first-name']));
 			} else {
@@ -37,6 +34,11 @@
 				}
 			} else {
 				$errors[] = "password";
+			}
+
+			//Validate captcha question
+			if (isset($_POST['captcha']) && trim($_POST['captcha']) != $_SESSION['q']['answer']) {
+				$errors[] = "wrong";
 			}
 
 			// Check for address (not required)
@@ -74,7 +76,7 @@
 				$bio = NULL;
 			}
 
-			if ($fn && $ln && $e && $p) {
+			if (empty($errors)) {
 				//Nếu các biến đều có giá trị, truy vấn CSDL
 				$q = "SELECT user_id FROM users WHERE email = '{$e}'";
 				$r = mysqli_query($dbc, $q);
@@ -126,6 +128,7 @@
 						  	$mesage = "<p class='notice'>Có lỗi khi gửi mail: " . $mail->ErrorInfo."</p>";
 						} else {
 						  	$mesage = "<p class='notice success'>Tài khoản của bạn đã được đăng ký thành công. Email đã được gửi tới địa chỉ của bạn. Bạn phải nhấn vào link để kích hoạt tài khoản trước khi sử dụng nó.</p>";
+						  	$_POST = array();
 						}
 					} else {
 						$mesage = "<p class='notice'>Xin lỗi, đăng ký của bạn không thể thực hiện được do lỗi hệ thống.</p>";
@@ -209,6 +212,13 @@
 
 				<label for="bio">Giới thiệu:</label>
 				<textarea cols="50" rows="20" name="bio"><?php if(isset($_POST['bio'])) echo htmlentities($_POST['bio'], ENT_COMPAT, 'UTF-8'); ?></textarea>
+
+				<div>
+					<label>Trả lời câu hỏi: <?php echo captcha(); ?> <span class="required">*</span>
+					<?php if(isset($errors) && in_array('wrong', $errors)) echo "<p class='notice'>Trả lời câu hỏi.</p>"; ?>
+					</label>
+					<input type="text" name="captcha" id="captcha" value="" size="20" maxlength="5" tabindex="4" />
+				</div>
 
 				<p><input type="submit" name="submit" value="Đăng ký" /></p>
 			</fieldset>

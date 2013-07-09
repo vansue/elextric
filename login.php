@@ -1,8 +1,6 @@
 <?php
 	ob_start();
 	include('inc/header.php');
-	require_once('inc/functions.php');
-	require_once('inc/mysqli_connect.php');
 	include('inc/first-sidebar.php');
 ?>
 

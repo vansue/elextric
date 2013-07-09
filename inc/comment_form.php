@@ -39,6 +39,7 @@
 			if (mysqli_affected_rows($dbc) == 1) {
 				//thành công
 				$messages = "<p class='notice success'>Cảm ơn bạn đã bình luận.</p>";
+				$_POST = array();
 			} else {
 				$messages = "<p class='notice'>Bình luận của bạn không thể đăng do lỗi hệ thống.</p>";
 			}
