@@ -38,29 +38,13 @@
 								<div>
 									<p class='date'>{$pages['date']}</p>
 									<h4><a href='single.php?pnid={$pages['page_id']}' class='newstitle'>{$pages['page_name']}</a></h4>
-									<p>".the_excerpt($pages['content'], 150)."</p>
+									<p>".the_excerpt($pages['content'], 150)." ... <a href='single.php?pnid={$pages['page_id']}'>Xem tiếp</a></p>
 								</div>
 							";
 						}
 					}
 			?>
-				<!--<div>
-					<p class='date'>August 20, 2012</p>
-					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
 
-				<div class="news">
-					<p class='date'>August 20, 2012</p>
-					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
-
-				<div class="news">
-					<p class='date'>August 20, 2012</p>
-					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>-->
 			</div>
 		</div>
 

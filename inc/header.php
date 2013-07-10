@@ -49,7 +49,7 @@
 								echo "
 									<li><a href='edit-profile.php'>".$_SESSION['first_name']." ".$_SESSION['last_name']."</a></li>
 									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
-									<li><a href='logout.php'>Đăng xuất</a></li>
+									<li><a href='logout.php'>Thoát</a></li>
 								";
 								break;
 
@@ -57,7 +57,7 @@
 								echo "
 									<li><a href='edit-profile.php'> Xin chào ".$_SESSION['first_name']." ".$_SESSION['last_name']."</a></li>
 									<li><a href='change-pass.php'>Đổi mật khẩu</a></li>
-									<li><a href='logout.php'>Đăng xuất</a></li>
+									<li><a href='logout.php'>Thoát</a></li>
 									<li><a href='admin/index.php' target='bank'>Admin CP</a></li>
 								";
 								break;

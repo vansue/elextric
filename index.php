@@ -64,7 +64,7 @@
 		$q .= " INNER JOIN users AS u ";
 		$q .= " USING (user_id) ";
 		$q .= " WHERE p.cat_id={$ncid} ";
-		$q .= " ORDER BY date DESC LIMIT {$start}, {$display}";
+		$q .= " ORDER BY post_on DESC LIMIT {$start}, {$display}";
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if(mysqli_num_rows($r) > 0) {
@@ -102,7 +102,7 @@
 		//Xác định vị trí bắt đầu
 		$start = (isset($_GET['s']) && filter_var($_GET['s'], FILTER_VALIDATE_INT, array('min_range' => 1))) ? $_GET['s'] : 0;
 
-		$q = "SELECT * FROM products WHERE cat_id = {$pcid} ORDER BY post_on ASC LIMIT {$start}, {$display}";
+		$q = "SELECT * FROM products WHERE cat_id = {$pcid} ORDER BY post_on DESC LIMIT {$start}, {$display}";
 		$r = mysqli_query($dbc, $q); confirm_query($r, $q);
 		if (mysqli_num_rows($r) > 0) {
 			while ($products = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
@@ -136,7 +136,7 @@
 			<p>Sản phẩm mới</p>
 		</div>
 <?php
-		$q = "SELECT * FROM products ORDER BY post_on ASC LIMIT 6";
+		$q = "SELECT * FROM products ORDER BY post_on DESC LIMIT 6";
 		$r = mysqli_query($dbc, $q); confirm_query($r, $q);
 		if (mysqli_num_rows($r) > 0) {
 			while ($products = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
@@ -171,7 +171,7 @@
 		$q .= " INNER JOIN users AS u ";
 		$q .= " USING (user_id) ";
 		$q .= " WHERE p.cat_id=5 ";
-		$q .= " ORDER BY date DESC LIMIT 1";
+		$q .= " ORDER BY post_on DESC LIMIT 1";
 		$r = mysqli_query($dbc, $q);
 			confirm_query($r, $q);
 		if(mysqli_num_rows($r) > 0) {

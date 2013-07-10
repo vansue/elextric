@@ -5,6 +5,8 @@
 		header("Location: http://localhost/elextric/admin/login.php");
 		exit();
 	}
+	require_once('../inc/functions.php');
+	require_once('../inc/mysqli_connect.php');
 ?>
 <!DOCTYPE html>
 <html>

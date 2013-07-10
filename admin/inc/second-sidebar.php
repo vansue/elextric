@@ -22,17 +22,28 @@
 		<div class='typical'>
 			<h3>Bình luận mới</h3>
 			<div class="box" id="boxnews">
-				<div>
-					<p class='date'>August 20, 2012</p>
-					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
-
-				<div class="news">
-					<p class='date'>August 20, 2012</p>
-					<h4><a href='#' class="newstitle">Lorem ipsum dolor sit amet</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Virtutes timidiores. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				</div>
+			<?php
+			$q = "SELECT p.page_name, c.page_id, c.author, c.comment, c.comment_date FROM comments AS c JOIN pages AS p USING(page_id) ORDER BY comment_date DESC LIMIT 4";
+			$r = mysqli_query($dbc, $q);
+				confirm_query($r, $q);
+				date_default_timezone_set('Asia/Ho_Chi_Minh');
+				if (mysqli_num_rows($r) > 0) {
+					while ($coms = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+						if (strlen(strip_tags($coms['comment'])) > 400) {
+							$comment = the_excerpt($coms['comment'], 150)." ...";
+						} else {
+							$comment = strip_tags($coms['comment']);
+						}
+						echo "
+							<div>
+								<h4 class='newstitle'><strong>{$coms['author']}</strong></h4>
+								<p>".$comment."</p>
+								<p class='date'><a href='../single.php?pnid={$coms['page_id']}'>{$coms['page_name']}</a>   ".show_time($coms['comment_date'])."</p>
+							</div>
+						";
+					}
+				}
+			?>
 			</div>
 		</div>
 	</div><!--end #second-sidebar-->

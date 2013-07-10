@@ -162,6 +162,7 @@ body.admin #cart-details a:hover {color: #ea2222; text-decoration: underline;}
 #cart-details p span {color: #ea2222;}
 #boxnews p {text-align: left; color: #504b4b;}
 #boxnews p.date {text-decoration: underline; color: #676d77; text-align: right; font-size: 11px;}
+body.admin #boxnews p.date {text-decoration: none;}
 #boxnews h4 a {text-align: left;}
 .newstitle {text-align: left;}
 .news {margin-top: 5px; border-top: 1px solid #6da6b1; padding-top: 5px;}

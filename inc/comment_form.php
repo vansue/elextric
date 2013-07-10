@@ -1,9 +1,4 @@
 <?Php
-	if (isset($_GET['pnid']) && filter_var($_GET['pnid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
-		$pid = $_GET['pnid'];
-	} elseif (isset($_GET['ppid']) && filter_var($_GET['ppid'], FILTER_VALIDATE_INT, array('min_range'=>1))) {
-		$pid = $_GET['ppid'];
-	}
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$errors = array();
@@ -34,7 +29,7 @@
 		}
 
 		if (empty($errors)) {
-			$q = "INSERT INTO comments (page_id, author, email, comment, comment_date) VALUES ({$pid}, '{$name}', '{$e}', '{$comment}', NOW())";
+			$q = "INSERT INTO comments (page_id, author, email, comment, comment_date) VALUES ({$pnid}, '{$name}', '{$e}', '{$comment}', NOW())";
 			$r = mysqli_query($dbc, $q); confirm_query($r, $q);
 			if (mysqli_affected_rows($dbc) == 1) {
 				//thành công
@@ -50,7 +45,7 @@
 ?>
 <?php
 	//Hiển thị comment từ CSDL
-	$q = "SELECT comment_id, author, comment, DATE_FORMAT(comment_date, '%b %d, %y') AS date FROM comments WHERE page_id = {$pid}";
+	$q = "SELECT comment_id, author, comment, DATE_FORMAT(comment_date, '%b %d, %y') AS date FROM comments WHERE page_id = {$pnid}";
 	$r = mysqli_query($dbc, $q); confirm_query($r, $q);
 	if (mysqli_num_rows($r)>0) {
 		//Nếu có comment hiển thi ra trình duyệt

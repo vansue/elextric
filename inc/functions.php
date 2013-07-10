@@ -149,3 +149,33 @@
 		echo "</ul>";
 
 	}
+
+	function show_time($time) {
+	    $s = strtotime("now") - strtotime($time);
+	    if ($s <= 60) { // if < 60 seconds
+	        return 'Khoảng 1 phút trước';
+	    } else {
+	        $t = intval($s / 60);
+	        if ($t >= 60) {
+	            $t = intval($t / 60);
+	            if ($t >= 24) {
+	                $t = intval($t / 24);
+	                if ($t >= 30) {
+	                    $t = intval($t / 30);
+	                    if ($t >= 12) {
+	                        $t = intval($t / 12);
+	                        return $t . ' năm trước';
+	                    } else {
+	                        return $t . ' tháng trước';
+	                    }
+	                } else {
+	                    return $t . ' ngày trước';
+	                }
+	            } else {
+	                return $t . ' giờ trước';
+	            }
+	        } else {
+	            return $t . ' phút trước';
+	        }
+	    }
+	}
