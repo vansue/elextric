@@ -8,6 +8,8 @@
 			$msg = "0 đơn hàng chờ";
 		}
 
+		//Truy xuất CSDL để hiển thị thông tin người dùng
+    	$user = fetch_user($_SESSION['uid']);
 	?>
 	<div id="second-sidebar">
 		<div id="shopping-cart" class="group">
@@ -16,7 +18,7 @@
 				<a href="order.php" id="red"><?php echo $msg;?></a>
 				<a href='logout.php'>Đăng xuất</a>
 			</div>
-			<a href="../edit-profile.php" data-tooltip="<?php echo $_SESSION['last_name'];?>" class="tool"><img src="../images/a_avatar.png" alt="Admin" /></a>
+			<a href="../edit-profile.php" data-tooltip="<?php echo $_SESSION['last_name'];?>" class="tool"><img src="../images/avatar/<?php echo (!isset($user['avatar']) ? "no_avatar.jpg" : $user['avatar']); ?>" alt="Admin" class="avatar1" /></a>
 		</div>
 
 		<div class='typical'>
