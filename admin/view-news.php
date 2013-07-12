@@ -107,7 +107,7 @@
     		$q .= " FROM pages AS p ";
     		$q .= " JOIN users AS u USING(user_id) ";
     		$q .= " WHERE cat_id = {$ncid} ";
-    		$q .= " ORDER BY {$order_by} ASC ";
+    		$q .= " ORDER BY {$order_by} DESC ";
             $q .= " LIMIT {$start}, {$display}";
     		$r = mysqli_query($dbc, $q);
     			confirm_query($r, $q);

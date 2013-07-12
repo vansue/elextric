@@ -31,8 +31,8 @@
 				date_default_timezone_set('Asia/Ho_Chi_Minh');
 				if (mysqli_num_rows($r) > 0) {
 					while ($coms = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-						if (strlen(strip_tags($coms['comment'])) > 400) {
-							$comment = the_excerpt($coms['comment'], 150)." ...";
+						if (strlen(strip_tags($coms['comment'])) > 200) {
+							$comment = the_excerpt($coms['comment'], 200)." ...";
 						} else {
 							$comment = strip_tags($coms['comment']);
 						}
